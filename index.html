@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mój Dekoder TV</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Kanały</h2>
+  <button onclick="loadChannel('TVP 1')">TVP 1</button>
+  <button onclick="loadChannel('TVP 2')">TVP 2</button>
+  <button onclick="loadChannel('Polsat')">Polsat</button>
+  <button onclick="loadChannel('TVN')">TVN</button>
+</div>
+
+<div class="player">
+  <h1 id="title">Wybierz kanał</h1>
+  <video id="video" controls autoplay width="100%"></video>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
