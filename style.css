@@ -220,48 +220,102 @@ video{
 }
 
 
-/* RESPONSYWNOŚĆ */
+/* RESPONSYWNOŚĆ DLA TELEFONÓW I TABLETÓW */
 
 @media(max-width:1200px){
-
-.container{
-
-grid-template-columns:180px 1fr;
-
-}
-
-.channels{
-
-display:none;
-
-}
-
+    .container{
+        grid-template-columns:180px 1fr;
+    }
+    .channels{
+        display:none;
+    }
 }
 
 @media(max-width:800px){
+    body {
+        height: auto;
+        overflow: auto;
+    }
 
-.container{
+    header {
+        height: auto;
+        padding: 12px 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-grid-template-columns:1fr;
+    .logo {
+        font-size: 22px;
+    }
 
-}
+    #search {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 14px;
+    }
 
-.sidebar{
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
 
-display:none;
+    /* Pasek kategorii jako poziomy przewijany suwak na telefonie */
+    .sidebar {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        padding: 10px 15px;
+        border-right: none;
+        border-bottom: 1px solid #1f2937;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 
-}
+    .category {
+        width: auto;
+        margin-bottom: 0;
+        padding: 8px 14px;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
 
-#search{
+    .content {
+        padding: 10px;
+        gap: 15px;
+        overflow: visible;
+    }
 
-width:180px;
+    .player {
+        border-radius: 12px;
+    }
 
-}
+    video {
+        height: 220px;
+    }
 
-video{
+    .epg {
+        border-radius: 12px;
+        padding: 15px;
+    }
 
-height:250px;
+    /* Przywrócenie listy kanałów pod odtwarzaczem na telefonie w atrakcyjnej formie */
+    .channels {
+        display: block;
+        background: #0f172a;
+        border-left: none;
+        border-top: 1px solid #1f2937;
+        padding: 15px;
+        max-height: none;
+    }
 
-}
+    .channel {
+        padding: 10px;
+        border-radius: 12px;
+    }
 
+    .channel img {
+        width: 60px;
+        height: 38px;
+    }
 }
