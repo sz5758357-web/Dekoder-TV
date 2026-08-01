@@ -1,7 +1,6 @@
-// ============================================================
 // 📺 LISTA KANAŁÓW – wpisz tutaj swoje działające linki M3U
 // ============================================================
-const PLAYLIST = `#EXTM3U
+const PLAYLIST = `https://iptv-org.github.io/iptv/countries/pl.m3u`;
 
 #EXTINF:-1 group-title="TVP",TVP 1 HD
 https://ec06-krk3.cache.orange.pl/dai4/org1/vb/104/tvp1hd/index.m3u8
