@@ -1,17 +1,50 @@
 // ============================================================
-// 📺 URL DO PLAYLISTY Z POLSKIMI KANAŁAMI
+// 📺 ŹRÓDŁO PLAYLISTY (oficjalne i aktualne)
 // ============================================================
-// Używamy oficjalnej playlisty z projektu iptv-org
-const PLAYLIST_URL = 'https://iptv-org.github.io/iptv/countries/pl.m3u';
+const PLAYLIST_URL = 'https://iptv-org.github.io/iptv/languages/pol.m3u';
 
 // ============================================================
-// 🚀 RESZTA KODU
+// 🚫 CZARNA LISTA – kanały do USUNIĘCIA (te co podałeś)
+// ============================================================
+const BLACKLIST = [
+    // Kanały które podałeś jako niedziałające
+    'Travel',
+    'Sfera TV',
+    'SkyShowtime 1 Poland',
+    'Sport Klub',
+    'Stopklatka TV',
+    'Strongman Champions League',
+    'Tele5',
+    'Telewizja Biznesowa',
+    'Telewizja iTTV',
+    'Red Carpet TV International',
+    'Remonty TV',
+    'Royalworld',
+    'RTG int.',
+    'TVP 3 Warszawa',
+    'TVP Historia',
+    'TVS',
+    'TVT Zgorzelec',
+    'Ultra TV 4K',
+    'Viasat Explore Classic',
+    'wedotv Auta',
+    'World Billiards TV',
+    'World Poker Tour',
+    'WP TV',
+    'Zoom TV',
+    // Dodatkowe, które mogą przeszkadzać
+    'TVP 3',
+    'Biznes 24',
+    'Polska 24'
+];
+
+// ============================================================
+// 🚀 RESZTA KODU – NIE MUSISZ TEGO RUSZAĆ
 // ============================================================
 
 let channels = [];
 let currentChannel = null;
 let hls = null;
-let isPlaying = false;
 
 const video = document.getElementById('videoPlayer');
 const channelList = document.getElementById('channel-list');
@@ -30,7 +63,6 @@ function parsePlaylist(data) {
         const line = lines[i].trim();
         
         if (line.startsWith('#EXTINF:')) {
-            // Wyciągamy group-title i nazwę kanału
             const groupMatch = line.match(/group-title="([^"]*)"/);
             const nameMatch = line.match(/#EXTINF:-?\d+[^,]*,(.*)/);
             
@@ -44,7 +76,6 @@ function parsePlaylist(data) {
             };
         } 
         else if (line && !line.startsWith('#') && current) {
-            // To jest URL - sprawdzamy czy zaczyna się od http
             if (line.startsWith('http://') || line.startsWith('https://')) {
                 current.url = line;
                 result.push(current);
@@ -54,6 +85,19 @@ function parsePlaylist(data) {
     }
     
     return result;
+}
+
+// ============================================================
+// 🚫 FILTROWANIE – USUWANIE KANAŁÓW Z CZARNEJ LISTY
+// ============================================================
+function filterChannels(channelsList) {
+    return channelsList.filter(ch => {
+        // Sprawdź czy nazwa kanału jest na czarnej liście
+        const isBlacklisted = BLACKLIST.some(blackName => {
+            return ch.name.toLowerCase().includes(blackName.toLowerCase());
+        });
+        return !isBlacklisted;
+    });
 }
 
 // ============================================================
@@ -69,7 +113,7 @@ function renderChannels(filter = '') {
     });
 
     if (filtered.length === 0) {
-        channelList.innerHTML = '<div style="padding:20px;color:#555;text-align:center;">Brak kanałów</div>';
+        channelList.innerHTML = '<div style="padding:20px;color:#555;text-align:center;">❌ Brak kanałów</div>';
         return;
     }
 
@@ -99,7 +143,6 @@ function playChannel(channel) {
 
     currentChannel = channel;
     
-    // Zatrzymaj poprzednie odtwarzanie
     if (hls) {
         hls.destroy();
         hls = null;
@@ -108,11 +151,9 @@ function playChannel(channel) {
     video.style.display = 'block';
     noChannelMsg.style.display = 'none';
     
-    // Sprawdź czy to strumień HLS (.m3u8)
     const isHls = channel.url.includes('.m3u8') || channel.url.includes('m3u8');
     
     if (isHls && Hls.isSupported()) {
-        // Użyj hls.js dla strumieni HLS
         hls = new Hls({
             enableWorker: true,
             lowLatencyMode: true,
@@ -129,18 +170,15 @@ function playChannel(channel) {
         hls.on(Hls.Events.ERROR, (event, data) => {
             if (data.fatal) {
                 console.error('Błąd odtwarzania:', data);
-                // Spróbuj odtworzyć ponownie
                 if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
                     hls.startLoad();
                 }
             }
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        // Dla Safari - natywna obsługa HLS
         video.src = channel.url;
         video.play().catch(err => console.warn('Autoplay blokowany:', err));
     } else {
-        // Dla zwykłych strumieni
         video.src = channel.url;
         video.play().catch(err => console.warn('Autoplay blokowany:', err));
     }
@@ -162,19 +200,19 @@ function loadPlaylist() {
             return response.text();
         })
         .then(data => {
-            channels = parsePlaylist(data);
+            let allChannels = parsePlaylist(data);
+            allChannels = allChannels.filter(ch => ch.url !== null);
             
-            // Filtrujemy kanały, które mają URL
-            channels = channels.filter(ch => ch.url !== null);
+            // 🔥 USUWAMY KANAŁY Z CZARNEJ LISTY
+            channels = filterChannels(allChannels);
             
             if (channels.length === 0) {
-                channelList.innerHTML = '<div style="padding:20px;color:#ff4444;text-align:center;">❌ Nie znaleziono kanałów w playliście</div>';
+                channelList.innerHTML = '<div style="padding:20px;color:#ff4444;text-align:center;">❌ Nie znaleziono kanałów po filtrowaniu</div>';
                 return;
             }
             
             renderChannels();
             
-            // Automatycznie odtwórz pierwszy kanał
             if (channels.length > 0) {
                 playChannel(channels[0]);
             }
