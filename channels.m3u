@@ -20,6 +20,9 @@ https://dash2.antik.sk/live/test_tvp_polonia/playlist.m3u8
 #EXTINF:-1 group-title="Informacje",WPolsce24
 https://lowa8026-cmyk.github.io/WPolscePL.m3u8
 
+#EXTINF:-1 group-title="Informacje",TV Republika
+https://redir.cache.orange.pl/jupiter/o1-cl7/ssl/live/tvrepublika/live.m3u8
+
 # =========================
 # MUZYKA
 # =========================
