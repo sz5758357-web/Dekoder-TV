@@ -1,7 +1,7 @@
 // ============================================================
 // 📺 ŹRÓDŁO PLAYLISTY (oficjalne i aktualne)
 // ============================================================
-const PLAYLIST_URL = 'https://iptv-org.github.io/iptv/languages/pol.m3u';
+const PLAYLIST_URL = 'http://185.236.229.62:9981/playlist.m3u8';
 
 // ============================================================
 // 🚫 CZARNA LISTA – kanały do USUNIĘCIA (te co podałeś)
