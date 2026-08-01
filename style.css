@@ -1,321 +1,155 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Segoe UI,Arial,sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background:#0f172a;
-    color:#fff;
-    height:100vh;
-    overflow:hidden;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* HEADER */
-
-header{
-    height:70px;
-    background:#111827;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 25px;
-    border-bottom:1px solid #1f2937;
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px;
 }
 
-.logo{
-    font-size:28px;
-    font-weight:bold;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
 }
 
-#search{
-    width:320px;
-    padding:12px 18px;
-    border:none;
-    outline:none;
-    border-radius:12px;
-    background:#1f2937;
-    color:white;
-    font-size:16px;
+header h1 {
+    font-size: 24px;
+    color: #e50914;
 }
 
-#search::placeholder{
-    color:#888;
+#searchInput {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background: #333;
+    color: #fff;
+    width: 250px;
+    font-size: 14px;
 }
 
-
-/* GŁÓWNY UKŁAD */
-
-.container{
-    display:grid;
-    grid-template-columns:220px 1fr 340px;
-    height:calc(100vh - 70px);
+#searchInput:focus {
+    outline: 2px solid #e50914;
 }
 
-
-/* MENU */
-
-.sidebar{
-    background:#111827;
-    border-right:1px solid #1f2937;
-    padding:20px;
-    overflow:auto;
+main {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    min-height: 0;
 }
 
-.category{
-    width:100%;
-    padding:14px;
-    margin-bottom:10px;
-    background:#1f2937;
-    color:white;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    text-align:left;
-    font-size:16px;
-    transition:.25s;
+#channel-list {
+    width: 300px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    flex-shrink: 0;
 }
 
-.category:hover{
-    background:#2563eb;
+#channel-list::-webkit-scrollbar {
+    width: 6px;
 }
 
-.category.active{
-    background:#2563eb;
+#channel-list::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 10px;
 }
 
-
-/* ŚRODEK */
-
-.content{
-    display:flex;
-    flex-direction:column;
-    padding:20px;
-    gap:20px;
-    overflow:auto;
+.channel-item {
+    padding: 10px 15px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.player{
-    background:#000;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 10px 40px rgba(0,0,0,.45);
+.channel-item:hover {
+    background: #2a2a2a;
 }
 
-video{
-    width:100%;
-    height:560px;
-    background:black;
+.channel-item.active {
+    background: #e50914;
 }
 
-
-/* EPG */
-
-.epg{
-    background:#111827;
-    border-radius:18px;
-    padding:20px;
+.channel-item .group-badge {
+    font-size: 10px;
+    background: #333;
+    padding: 2px 8px;
+    border-radius: 10px;
+    color: #aaa;
 }
 
-.epg h3{
-    margin-bottom:15px;
+#player-container {
+    flex: 1;
+    background: #111;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 400px;
 }
 
-#epg{
-    color:#d1d5db;
-    line-height:30px;
+#videoPlayer {
+    width: 100%;
+    height: 100%;
+    max-height: 80vh;
+    border-radius: 10px;
+    display: none;
 }
 
-
-/* LISTA KANAŁÓW */
-
-.channels{
-    background:#111827;
-    border-left:1px solid #1f2937;
-    padding:20px;
-    overflow:auto;
+#no-channel-message {
+    color: #555;
+    font-size: 20px;
+    text-align: center;
 }
 
-#channels{
-    display:grid;
-    gap:14px;
-}
-
-
-/* KAFELEK */
-
-.channel{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    background:#1f2937;
-    border-radius:15px;
-    padding:12px;
-    cursor:pointer;
-    transition:.25s;
-}
-
-.channel:hover{
-    background:#2563eb;
-    transform:translateY(-2px);
-}
-
-.channel img{
-    width:70px;
-    height:45px;
-    object-fit:contain;
-    background:white;
-    border-radius:8px;
-    padding:4px;
-}
-
-.channel-info{
-    flex:1;
-}
-
-.channel-name{
-    font-size:16px;
-    font-weight:bold;
-}
-
-.channel-group{
-    color:#9ca3af;
-    font-size:13px;
-    margin-top:5px;
-}
-
-
-/* ULUBIONE */
-
-.favorite{
-    font-size:24px;
-    color:#777;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.favorite:hover{
-    color:gold;
-}
-
-.favorite.active{
-    color:gold;
-}
-
-
-/* SCROLL */
-
-::-webkit-scrollbar{
-    width:8px;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#374151;
-    border-radius:10px;
-}
-
-::-webkit-scrollbar-track{
-    background:#111827;
-}
-
-
-/* RESPONSYWNOŚĆ DLA TELEFONÓW I TABLETÓW */
-
-@media(max-width:1200px){
-    .container{
-        grid-template-columns:180px 1fr;
+/* Responsywność */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
     }
-    .channels{
-        display:none;
+    
+    #channel-list {
+        width: 100%;
+        height: 200px;
+        flex-shrink: 0;
     }
-}
-
-@media(max-width:800px){
-    body {
-        height: auto;
-        overflow: auto;
+    
+    #player-container {
+        min-height: 300px;
     }
-
+    
     header {
-        height: auto;
-        padding: 12px 15px;
         flex-direction: column;
         gap: 10px;
     }
-
-    .logo {
-        font-size: 22px;
-    }
-
-    #search {
+    
+    #searchInput {
         width: 100%;
-        padding: 10px 14px;
-        font-size: 14px;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-    }
-
-    /* Pasek kategorii jako poziomy przewijany suwak na telefonie */
-    .sidebar {
-        display: flex;
-        flex-direction: row;
-        gap: 8px;
-        padding: 10px 15px;
-        border-right: none;
-        border-bottom: 1px solid #1f2937;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    .category {
-        width: auto;
-        margin-bottom: 0;
-        padding: 8px 14px;
-        font-size: 14px;
-        flex-shrink: 0;
-    }
-
-    .content {
-        padding: 10px;
-        gap: 15px;
-        overflow: visible;
-    }
-
-    .player {
-        border-radius: 12px;
-    }
-
-    video {
-        height: 220px;
-    }
-
-    .epg {
-        border-radius: 12px;
-        padding: 15px;
-    }
-
-    /* Przywrócenie listy kanałów pod odtwarzaczem na telefonie w atrakcyjnej formie */
-    .channels {
-        display: block;
-        background: #0f172a;
-        border-left: none;
-        border-top: 1px solid #1f2937;
-        padding: 15px;
-        max-height: none;
-    }
-
-    .channel {
-        padding: 10px;
-        border-radius: 12px;
-    }
-
-    .channel img {
-        width: 60px;
-        height: 38px;
     }
 }
