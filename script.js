@@ -1,44 +1,7 @@
-// 📺 LISTA KANAŁÓW – wpisz tutaj swoje działające linki M3U
 // ============================================================
-const PLAYLIST = `https://iptv-org.github.io/iptv/countries/pl.m3u`;
-
-#EXTINF:-1 group-title="TVP",TVP 1 HD
-https://ec06-krk3.cache.orange.pl/dai4/org1/vb/104/tvp1hd/index.m3u8
-
-#EXTINF:-1 group-title="TVP",TVP 2 HD
-https://streams.polskieradio.pl:8443/tvp2.m3u8
-
-#EXTINF:-1 group-title="TVP",TVP Info
-https://dash4.antik.sk/live/test_tvp_info/playlist.m3u8
-
-#EXTINF:-1 group-title="TVP",TVP Sport
-https://streams.polskieradio.pl:8443/tvp_sport.m3u8
-
-#EXTINF:-1 group-title="TVP",TVP Kultura
-https://streams.polskieradio.pl:8443/tvp_kultura.m3u8
-
-#EXTINF:-1 group-title="TVP",TVP Seriale
-https://streams.polskieradio.pl:8443/tvp_seriale.m3u8
-
-#EXTINF:-1 group-title="Muzyka",4Fun TV
-https://stream.4fun.tv:8888/hls/4f_high/index.m3u8
-
-#EXTINF:-1 group-title="Muzyka",4Fun Kids
-https://stream.4fun.tv:8889/hls/4fk_high/index.m3u8
-
-#EXTINF:-1 group-title="Informacje",Telewizja Republika
-https://stream.telewizjarepublika.pl/live/republika.m3u8
-
-#EXTINF:-1 group-title="Informacje",wPolsce.pl
-https://wpolsce.pl/live.m3u8
-
-# ============================================================
-# 📌 DODAJ TUTAJ SWOJE WŁASNE KANAŁY
-# Wzór:
-# #EXTINF:-1 group-title="NAZWA_GRUPY",NAZWA_KANAŁU
-# https://link.do.strumienia.m3u8
-# ============================================================
-`;
+// 📺 URL DO PLAYLISTY Z POLSKIMI KANAŁAMI
+// ============================================================
+const PLAYLIST_URL = 'https://raw.githubusercontent.com/iptv-org/iptv/master/streams/pl.m3u';
 
 // ============================================================
 // 🚀 RESZTA KODU – NIE MUSISZ TEGO RUSZAĆ
@@ -69,8 +32,11 @@ function parsePlaylist(data) {
                 };
             }
         } else if (line && !line.startsWith('#') && current) {
-            current.url = line;
-            result.push(current);
+            // Sprawdź, czy to URL (zawiera http:// lub https://)
+            if (line.startsWith('http://') || line.startsWith('https://')) {
+                current.url = line;
+                result.push(current);
+            }
             current = null;
         }
     }
@@ -148,21 +114,36 @@ function playChannel(channel) {
     renderChannels(searchInput.value);
 }
 
-// Inicjalizacja
-function init() {
-    channels = parsePlaylist(PLAYLIST);
-    renderChannels();
+// Wczytanie playlisty z URL
+function loadPlaylistFromUrl() {
+    channelList.innerHTML = '<div style="padding:20px;color:#aaa;text-align:center;">⏳ Ładowanie listy kanałów...</div>';
     
-    // Wyszukiwanie
-    searchInput.addEventListener('input', (e) => {
-        renderChannels(e.target.value);
-    });
-
-    // Automatyczne odtworzenie pierwszego kanału
-    if (channels.length > 0) {
-        playChannel(channels[0]);
-    }
+    fetch(PLAYLIST_URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            channels = parsePlaylist(data);
+            renderChannels();
+            if (channels.length > 0) {
+                playChannel(channels[0]);
+            } else {
+                channelList.innerHTML = '<div style="padding:20px;color:#ff4444;text-align:center;">❌ Nie znaleziono kanałów w playliście</div>';
+            }
+        })
+        .catch(error => {
+            console.error('Błąd ładowania playlisty:', error);
+            channelList.innerHTML = `<div style="padding:20px;color:#ff4444;text-align:center;">❌ Nie udało się wczytać playlisty: ${error.message}</div>`;
+        });
 }
 
-// Start
-document.addEventListener('DOMContentLoaded', init);
+// Inicjalizacja
+document.addEventListener('DOMContentLoaded', loadPlaylistFromUrl);
+
+// Wyszukiwanie
+searchInput.addEventListener('input', (e) => {
+    renderChannels(e.target.value);
+});
