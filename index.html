@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PlayBoxTV Pro</title>
+<title>PlayBoxTV Pro — Web Player</title>
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,35 +13,35 @@
       <div class="logo">TV</div>
       <div>
         <div class="brandName">PlayBoxTV Pro</div>
-        <div class="brandSub">Wklej swoje legalne kanały i streamy</div>
+        <div class="brandSub">Nowoczesny odtwarzacz streamów</div>
       </div>
     </div>
 
     <input id="search" class="search" placeholder="Szukaj kanału..." />
 
     <div class="row">
-      <button class="btn" id="favBtn">Ulubione</button>
-      <button class="btn" id="allBtn">Wszystkie</button>
+      <button class="btn" id="favBtn">⭐ Ulubione</button>
+      <button class="btn" id="allBtn">📺 Wszystkie</button>
     </div>
 
     <div class="row">
-      <button class="btn" id="settingsBtn">Ustawienia</button>
-      <button class="btn" id="fullscreenBtn">Pełny ekran</button>
+      <button class="btn" id="settingsBtn">⚙️ Ustawienia</button>
+      <button class="btn" id="fullscreenBtn">⛶ Pełny ekran</button>
     </div>
 
-    <div class="sectionLabel">JSON / M3U</div>
+    <div class="sectionLabel">Źródła (JSON / M3U)</div>
     <textarea id="jsonInput" class="textarea" placeholder='Wklej JSON kanałów albo URL do pliku JSON'></textarea>
 
     <div class="row">
       <button class="btn" id="loadJsonBtn">Wczytaj JSON</button>
-      <button class="btn" id="sampleBtn">Wklej przykład</button>
+      <button class="btn" id="sampleBtn">Wklej przykłady</button>
     </div>
 
-    <input id="m3uUrl" class="search" placeholder="URL do M3U / M3U8" />
+    <input id="m3uUrl" class="search" placeholder="URL do playlisty M3U / M3U8" />
 
     <div class="row">
       <button class="btn" id="loadM3uBtn">Wczytaj M3U</button>
-      <button class="btn" id="fileBtn">Plik M3U</button>
+      <button class="btn" id="fileBtn">📁 Plik z dysku</button>
     </div>
 
     <input id="fileInput" type="file" accept=".m3u,.m3u8,.json" hidden />
@@ -61,7 +61,7 @@
         <div class="badge">LIVE</div>
         <div>
           <div id="nowName" class="nowName">Brak kanału</div>
-          <div id="nowInfo" class="nowInfo">Wybierz kanał</div>
+          <div id="nowInfo" class="nowInfo">Wybierz kanał z listy po lewej</div>
         </div>
       </div>
       <div class="clock" id="clock"></div>
@@ -72,8 +72,8 @@
 
       <div class="centerCard" id="welcome">
         <div class="card">
-          <h1>Witaj</h1>
-          <p>Wklej swoje kanały do JSON lub załaduj playlistę M3U. To miejsce jest tylko na Twoje legalne źródła.</p>
+          <h1>Witaj w PlayBoxTV Pro</h1>
+          <p>Wybierz kanał z załadowanej listy lub wklej własne legalne źródła strumieniowe HLS / M3U / JSON.</p>
           <div class="grid">
             <div><b>Enter</b> odtwarzanie</div>
             <div><b>↑ ↓</b> nawigacja</div>
@@ -86,19 +86,19 @@
       </div>
 
       <div class="box info" id="infoBox">
-        <div class="boxTitle">Informacje</div>
+        <div class="boxTitle">Informacje o kanale</div>
         <div id="infoContent"></div>
       </div>
 
       <div class="box epg" id="epgBox">
-        <div class="boxTitle">EPG</div>
+        <div class="boxTitle">Przewodnik EPG</div>
         <div id="epgContent"></div>
       </div>
 
       <div class="box settings" id="settingsBox">
-        <div class="boxTitle">Ustawienia</div>
+        <div class="boxTitle">Ustawienia aplikacji</div>
         <label class="toggle"><span>Autostart ostatniego kanału</span><input type="checkbox" id="autostartToggle" /></label>
-        <div class="small">Ulubione i ustawienia zapisują się lokalnie.</div>
+        <div class="small">Ulubione i ustawienia zapisują się lokalnie w pamięci przeglądarki.</div>
       </div>
     </div>
   </main>
