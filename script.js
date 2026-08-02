@@ -1,25 +1,26 @@
-const channelsEl=document.getElementById('channels');
-const searchEl=document.getElementById('search');
-const m3uUrlEl=document.getElementById('m3uUrl');
-const video=document.getElementById('video');
-const countEl=document.getElementById('count');
-const activeGroupEl=document.getElementById('activeGroup');
-const nowName=document.getElementById('nowName');
-const nowInfo=document.getElementById('nowInfo');
-const clockEl=document.getElementById('clock');
-const welcome=document.getElementById('welcome');
-const infoBox=document.getElementById('infoBox');
-const epgBox=document.getElementById('epgBox');
-const settingsBox=document.getElementById('settingsBox');
-const infoContent=document.getElementById('infoContent');
-const epgContent=document.getElementById('epgContent');
-const autostartToggle=document.getElementById('autostartToggle');
-const fileInput=document.getElementById('fileInput');
+const channelsEl=document.getElementById('channels'),
+search=document.getElementById('search'),
+m3uUrl=document.getElementById('m3uUrl'),
+jsonInput=document.getElementById('jsonInput'),
+video=document.getElementById('video'),
+count=document.getElementById('count'),
+scope=document.getElementById('scope'),
+nowName=document.getElementById('nowName'),
+nowInfo=document.getElementById('nowInfo'),
+clock=document.getElementById('clock'),
+welcome=document.getElementById('welcome'),
+infoBox=document.getElementById('infoBox'),
+epgBox=document.getElementById('epgBox'),
+settingsBox=document.getElementById('settingsBox'),
+infoContent=document.getElementById('infoContent'),
+epgContent=document.getElementById('epgContent'),
+autostartToggle=document.getElementById('autostartToggle'),
+fileInput=document.getElementById('fileInput');
 
-let channels=[],filtered=[],current=-1,hls=null,started=false,showFav=false;
-let favs=JSON.parse(localStorage.getItem('favs')||'[]');
-let lastChannel=JSON.parse(localStorage.getItem('lastChannel')||'null');
-let autostart=localStorage.getItem('autostart')==='1';
+let channels=[],filtered=[],current=-1,hls=null,started=false,showFav=false,
+favs=JSON.parse(localStorage.getItem('favs')||'[]'),
+lastChannel=JSON.parse(localStorage.getItem('lastChannel')||'null'),
+autostart=localStorage.getItem('autostart')==='1';
 
 autostartToggle.checked=autostart;
 autostartToggle.onchange=()=>{
@@ -27,40 +28,38 @@ autostartToggle.onchange=()=>{
   localStorage.setItem('autostart',autostart?'1':'0');
 };
 
-function fmtTime(){
+function tick(){
   const d=new Date();
-  clockEl.textContent=d.toLocaleDateString('pl-PL',{weekday:'short',day:'2-digit',month:'2-digit'})+' · '+d.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});
+  clock.textContent=d.toLocaleDateString('pl-PL',{weekday:'short',day:'2-digit',month:'2-digit'})+' · '+d.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});
 }
-setInterval(fmtTime,1000);
-fmtTime();
+setInterval(tick,1000);
+tick();
 
 function saveFavs(){localStorage.setItem('favs',JSON.stringify(favs))}
 function saveLast(ch){localStorage.setItem('lastChannel',JSON.stringify(ch||null))}
-function epgFor(name){return{now:'Teraz: Program na żywo — '+name,next:'Następnie: Kolejny program — '+name}}
-function setWelcome(v){welcome.style.display=v?'flex':'none'}
 
 function render(list){
   filtered=list;
-  countEl.textContent=list.length+' kanałów';
-  activeGroupEl.textContent=showFav?'Ulubione':'Wszystkie';
+  count.textContent=list.length+' kanałów';
+  scope.textContent=showFav?'Ulubione':'Wszystkie';
   channelsEl.innerHTML='';
   list.forEach((ch,i)=>{
-    const row=document.createElement('div');
-    const isFav=favs.includes(ch.url);
-    row.className='channel'+(i===current?' active':'')+(isFav?' isfav':'');
-    row.innerHTML=`<div class='dot'></div><div class='num'>${ch.num||''}</div><div class='name'>${ch.name}</div><div class='fav'>★</div>`;
-    row.onclick=()=>{
+    const el=document.createElement('div');
+    const fav=favs.includes(ch.url);
+    el.className='item'+(i===current?' active':'')+(fav?' favOn':'');
+    el.innerHTML=`<div class='dot'></div><div class='num'>${ch.num||''}</div><div class='name'>${ch.name}</div><div class='fav'>★</div>`;
+    el.onclick=()=>{
       current=i;
       render(filtered);
       play(ch);
     };
-    row.ondblclick=()=>toggleFav(ch);
-    channelsEl.appendChild(row);
+    el.ondblclick=()=>toggleFav(ch);
+    channelsEl.appendChild(el);
   });
 }
 
 function applyFilter(){
-  const q=searchEl.value.trim().toLowerCase();
+  const q=search.value.trim().toLowerCase();
   let list=channels.slice();
   if(showFav) list=list.filter(c=>favs.includes(c.url));
   if(q) list=list.filter(c=>c.name.toLowerCase().includes(q));
@@ -70,22 +69,22 @@ function applyFilter(){
 function toggleFav(ch){
   if(!ch||!ch.url)return;
   const i=favs.indexOf(ch.url);
-  if(i>=0)favs.splice(i,1);
-  else favs.push(ch.url);
+  if(i>=0)favs.splice(i,1);else favs.push(ch.url);
   saveFavs();
   applyFilter();
 }
 
 function showInfo(ch){
-  infoContent.innerHTML=`<div><b>${ch.name||'Kanał'}</b></div><div class='muted'>${ch.url||''}</div><div class='muted'>Ulubiony: ${favs.includes(ch.url)?'tak':'nie'}</div><div class='muted'>Numer: ${ch.num||'—'}</div>`;
+  infoContent.innerHTML=`<div><b>${ch.name||'Kanał'}</b></div><div style='color:#8f9ab0'>${ch.url||''}</div><div style='color:#8f9ab0'>Ulubiony: ${favs.includes(ch.url)?'tak':'nie'}</div><div style='color:#8f9ab0'>Numer: ${ch.num||'—'}</div>`;
   infoBox.style.display='block';
   clearTimeout(showInfo.t);
   showInfo.t=setTimeout(()=>infoBox.style.display='none',2500);
 }
 
 function showEpg(ch){
-  const e=epgFor(ch.name||'Kanał');
-  epgContent.innerHTML=`<div><b>${ch.name||'Kanał'}</b></div><div>${e.now}</div><div class='muted'>${e.next}</div>`;
+  const now='Teraz: Program na żywo — '+(ch.name||'Kanał'),
+        next='Następnie: Kolejny program — '+(ch.name||'Kanał');
+  epgContent.innerHTML=`<div><b>${ch.name||'Kanał'}</b></div><div>${now}</div><div style='color:#8f9ab0'>${next}</div>`;
   epgBox.style.display='block';
   clearTimeout(showEpg.t);
   showEpg.t=setTimeout(()=>epgBox.style.display='none',2500);
@@ -94,16 +93,15 @@ function showEpg(ch){
 function play(ch){
   if(!ch)return;
   started=true;
-  setWelcome(false);
+  welcome.classList.add('hidden');
   nowName.textContent=ch.name;
   nowInfo.textContent='Kanał '+(ch.num||'');
   showInfo(ch);
   showEpg(ch);
   saveLast(ch);
   if(hls){hls.destroy();hls=null}
-  if(video.canPlayType('application/vnd.apple.mpegurl')){
-    video.src=ch.url;
-  }else{
+  if(video.canPlayType('application/vnd.apple.mpegurl'))video.src=ch.url;
+  else{
     hls=new Hls();
     hls.loadSource(ch.url);
     hls.attachMedia(video);
@@ -111,26 +109,57 @@ function play(ch){
   video.play().catch(()=>{});
 }
 
+async function loadJSONText(text){
+  const arr=JSON.parse(text);
+  channels=Array.isArray(arr)?arr:[];
+  applyFilter();
+  if(channels[0]){
+    nowName.textContent=channels[0].name;
+    nowInfo.textContent='Kanał '+(channels[0].num||'');
+  }
+}
+
 async function loadM3UText(text){
-  const lines=text.split(/\r?\n/);
+  const lines=text.split(/\\r?\\n/);
   const parsed=[];
   for(let i=0;i<lines.length;i++){
     const line=lines[i].trim();
     if(line.startsWith('#EXTINF:')){
       const name=(line.split(',').pop().trim()||'Kanał');
-      const numMatch=line.match(/tvg-chno="(.*?)"/i);
+      const numMatch=line.match(/tvg-chno=\"(.*?)\"/i);
       const num=numMatch?numMatch[1]:'';
       const next=(lines[i+1]||'').trim();
-      if(next&&!next.startsWith('#')) parsed.push({name,url:next,num});
+      if(next&&!next.startsWith('#'))parsed.push({name,url:next,num});
     }
   }
   channels=parsed;
   applyFilter();
-  if(parsed[0]) nowName.textContent=parsed[0].name;
+  if(parsed[0]){
+    nowName.textContent=parsed[0].name;
+    nowInfo.textContent='Kanał '+(parsed[0].num||'');
+  }
 }
 
-document.getElementById('loadUrlBtn').onclick=async()=>{
-  const url=m3uUrlEl.value.trim();
+document.getElementById('loadJsonBtn').onclick=async()=>{
+  const t=jsonInput.value.trim();
+  if(!t)return;
+  try{
+    if(t.startsWith('http://')||t.startsWith('https://')) await loadJSONText(await fetch(t).then(r=>r.text()));
+    else await loadJSONText(t);
+  }catch(e){
+    alert('Błędny JSON');
+  }
+};
+
+document.getElementById('sampleBtn').onclick=()=>{
+  jsonInput.value=JSON.stringify([
+    {num:'1',name:'Kanał 1',url:'https://twoj-stream-1.m3u8',logo:''},
+    {num:'2',name:'Kanał 2',url:'https://twoj-stream-2.m3u8',logo:''}
+  ],null,2);
+};
+
+document.getElementById('loadM3uBtn').onclick=async()=>{
+  const url=m3uUrl.value.trim();
   if(!url)return;
   const txt=await fetch(url).then(r=>r.text());
   await loadM3UText(txt);
@@ -140,7 +169,9 @@ document.getElementById('fileBtn').onclick=()=>fileInput.click();
 fileInput.onchange=async()=>{
   const f=fileInput.files[0];
   if(!f)return;
-  await loadM3UText(await f.text());
+  const ext=f.name.toLowerCase();
+  if(ext.endsWith('.json')) await loadJSONText(await f.text());
+  else await loadM3UText(await f.text());
 };
 
 document.getElementById('favBtn').onclick=()=>{
@@ -158,19 +189,18 @@ document.getElementById('settingsBtn').onclick=()=>{
 };
 
 document.getElementById('fullscreenBtn').onclick=()=>{
-  if(!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{});
+  if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});
   else document.exitFullscreen().catch(()=>{});
 };
 
-searchEl.addEventListener('input',applyFilter);
+search.addEventListener('input',applyFilter);
 
 document.addEventListener('click',()=>{
-  if(!started)setWelcome(false);
+  if(!started)welcome.classList.add('hidden');
 });
 
 document.addEventListener('keydown',e=>{
-  if(!started&&!['Shift','Control','Alt','Meta'].includes(e.key)) setWelcome(false);
-
+  if(!started&&!['Shift','Control','Alt','Meta'].includes(e.key))welcome.classList.add('hidden');
   if(e.key==='Enter'&&filtered[current>=0?current:0]){
     if(current<0)current=0;
     play(filtered[current]);
@@ -208,6 +238,5 @@ function playLast(){
   }
 }
 
-setWelcome(true);
 render([]);
-playLast();
+if(autostart)playLast();
