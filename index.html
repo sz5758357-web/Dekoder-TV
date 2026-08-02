@@ -1,101 +1,110 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PlayBoxTV Pro</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PlayBoxTV Pro</title>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="shell">
-    <aside class="sidebar">
-      <div class="brandRow">
-        <div class="brandMark">▶</div>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brandRow">
+      <div class="logo">TV</div>
+      <div>
+        <div class="brandName">PlayBoxTV Pro</div>
+        <div class="brandSub">Wklej swoje legalne kanały i streamy</div>
+      </div>
+    </div>
+
+    <input id="search" class="search" placeholder="Szukaj kanału..." />
+
+    <div class="row">
+      <button class="btn" id="favBtn">Ulubione</button>
+      <button class="btn" id="allBtn">Wszystkie</button>
+    </div>
+
+    <div class="row">
+      <button class="btn" id="settingsBtn">Ustawienia</button>
+      <button class="btn" id="fullscreenBtn">Pełny ekran</button>
+    </div>
+
+    <div class="sectionLabel">JSON / M3U</div>
+    <textarea id="jsonInput" class="textarea" placeholder='Wklej JSON kanałów albo URL do pliku JSON'></textarea>
+
+    <div class="row">
+      <button class="btn" id="loadJsonBtn">Wczytaj JSON</button>
+      <button class="btn" id="sampleBtn">Wklej przykład</button>
+    </div>
+
+    <input id="m3uUrl" class="search" placeholder="URL do M3U / M3U8" />
+
+    <div class="row">
+      <button class="btn" id="loadM3uBtn">Wczytaj M3U</button>
+      <button class="btn" id="fileBtn">Plik M3U</button>
+    </div>
+
+    <input id="fileInput" type="file" accept=".m3u,.m3u8,.json" hidden />
+
+    <div class="meta">
+      <span id="count">0 kanałów</span>
+      <span id="scope">Wszystkie</span>
+    </div>
+
+    <div class="list" id="channels"></div>
+    <div class="footer">↑ ↓ wybór · Enter odtwarzaj · F ulubione · I info · E EPG · S ustawienia</div>
+  </aside>
+
+  <main class="viewer">
+    <div class="top">
+      <div class="now">
+        <div class="badge">LIVE</div>
         <div>
-          <div class="brandName">PlayBoxTV Pro</div>
-          <div class="brandSub">Legal IPTV player</div>
+          <div id="nowName" class="nowName">Brak kanału</div>
+          <div id="nowInfo" class="nowInfo">Wybierz kanał</div>
         </div>
       </div>
+      <div class="clock" id="clock"></div>
+    </div>
 
-      <div class="sectionTitle">Kanały</div>
-      <input class="field" id="search" placeholder="Szukaj kanału..." />
-      <div class="actions">
-        <button id="favBtn">Ulubione</button>
-        <button id="allBtn">Wszystkie</button>
-        <button id="settingsBtn">Ustawienia</button>
-      </div>
-      <div class="importRow">
-        <input class="field" id="m3uUrl" placeholder="Wklej URL do M3U/M3U8" />
-        <button id="loadUrlBtn">Wczytaj</button>
-      </div>
-      <div class="importRow">
-        <button id="fileBtn">Wczytaj plik M3U</button>
-        <input id="fileInput" type="file" accept=".m3u,.m3u8" hidden />
-      </div>
+    <div class="stage">
+      <video id="video" controls autoplay></video>
 
-      <div class="listMeta">
-        <span id="count">0 kanałów</span>
-        <span id="activeGroup">Wszystkie</span>
-      </div>
-      <div class="channelList" id="channels"></div>
-      <div class="sidebarFooter">↑ ↓ wybór · Enter odtwarzaj · F ulubione · I info · E EPG</div>
-    </aside>
-
-    <main class="viewer">
-      <div class="topBar">
-        <div class="nowPlaying">
-          <span class="pill">LIVE</span>
-          <div>
-            <div id="nowName" class="nowName">Brak kanału</div>
-            <div id="nowInfo" class="nowInfo">Wybierz kanał z listy</div>
+      <div class="centerCard" id="welcome">
+        <div class="card">
+          <h1>Witaj</h1>
+          <p>Wklej swoje kanały do JSON lub załaduj playlistę M3U. To miejsce jest tylko na Twoje legalne źródła.</p>
+          <div class="grid">
+            <div><b>Enter</b> odtwarzanie</div>
+            <div><b>↑ ↓</b> nawigacja</div>
+            <div><b>F</b> ulubione</div>
+            <div><b>I</b> informacje</div>
+            <div><b>E</b> EPG</div>
+            <div><b>S</b> ustawienia</div>
           </div>
         </div>
-        <div class="topBarRight">
-          <div class="clock" id="clock"></div>
-          <button id="fullscreenBtn">Pełny ekran</button>
-        </div>
       </div>
 
-      <div class="stage">
-        <video id="video" controls autoplay></video>
-
-        <div class="welcome" id="welcome">
-          <div class="welcomeCard">
-            <div class="welcomeHeader">Witaj w PlayBoxTV Pro</div>
-            <div class="welcomeText">Profesjonalny odtwarzacz IPTV do legalnych playlist M3U / M3U8.</div>
-            <div class="keys">
-              <div><b>Enter</b> odtwarzaj</div>
-              <div><b>↑ ↓</b> nawigacja</div>
-              <div><b>F</b> ulubione</div>
-              <div><b>I</b> informacje</div>
-              <div><b>E</b> EPG</div>
-              <div><b>S</b> ustawienia</div>
-            </div>
-            <div class="welcomeHint">Kliknij lub naciśnij dowolny klawisz, aby zacząć</div>
-          </div>
-        </div>
-
-        <div class="overlayBox infoBox" id="infoBox">
-          <div class="overlayTitle">Informacje</div>
-          <div id="infoContent"></div>
-        </div>
-
-        <div class="overlayBox epgBox" id="epgBox">
-          <div class="overlayTitle">EPG</div>
-          <div id="epgContent"></div>
-        </div>
-
-        <div class="overlayBox settingsBox" id="settingsBox">
-          <div class="overlayTitle">Ustawienia</div>
-          <label class="toggleRow"><span>Autostart ostatniego kanału</span><input id="autostartToggle" type="checkbox" /></label>
-          <label class="toggleRow"><span>Zapisuj ulubione</span><input id="saveFavToggle" type="checkbox" checked disabled /></label>
-          <div class="smallNote">Wszystko zapisuje się lokalnie w przeglądarce.</div>
-        </div>
+      <div class="box info" id="infoBox">
+        <div class="boxTitle">Informacje</div>
+        <div id="infoContent"></div>
       </div>
-    </main>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script src="app.js"></script>
+      <div class="box epg" id="epgBox">
+        <div class="boxTitle">EPG</div>
+        <div id="epgContent"></div>
+      </div>
+
+      <div class="box settings" id="settingsBox">
+        <div class="boxTitle">Ustawienia</div>
+        <label class="toggle"><span>Autostart ostatniego kanału</span><input type="checkbox" id="autostartToggle" /></label>
+        <div class="small">Ulubione i ustawienia zapisują się lokalnie.</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="app.js"></script>
 </body>
 </html>
