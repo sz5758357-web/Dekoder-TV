@@ -47,7 +47,7 @@ function render(list){
     const el=document.createElement('div');
     const fav=favs.includes(ch.url);
     el.className='item'+(i===current?' active':'')+(fav?' favOn':'');
-    el.innerHTML=`<div class='dot'></div><div class='num'>${ch.num||''}</div><div class='name'>${ch.name}</div><div class='fav'>★</div>`;
+    el.innerHTML=`<div class='dot'></div><div class='num'>${ch.num||(i+1)}</div><div class='name'>${ch.name}</div><div class='fav'>★</div>`;
     el.onclick=()=>{
       current=i;
       render(filtered);
@@ -75,19 +75,19 @@ function toggleFav(ch){
 }
 
 function showInfo(ch){
-  infoContent.innerHTML=`<div><b>${ch.name||'Kanał'}</b></div><div style='color:#8f9ab0'>${ch.url||''}</div><div style='color:#8f9ab0'>Ulubiony: ${favs.includes(ch.url)?'tak':'nie'}</div><div style='color:#8f9ab0'>Numer: ${ch.num||'—'}</div>`;
+  infoContent.innerHTML=`<div style="font-weight:700;margin-bottom:4px;">${ch.name||'Kanał'}</div><div style='color:var(--muted);font-size:12px;word-break:break-all;'>${ch.url||''}</div><div style='color:var(--muted);font-size:12px;margin-top:4px;'>Ulubiony: ${favs.includes(ch.url)?'tak':'nie'}</div>`;
   infoBox.style.display='block';
   clearTimeout(showInfo.t);
-  showInfo.t=setTimeout(()=>infoBox.style.display='none',2500);
+  showInfo.t=setTimeout(()=>infoBox.style.display='none',3000);
 }
 
 function showEpg(ch){
-  const now='Teraz: Program na żywo — '+(ch.name||'Kanał'),
-        next='Następnie: Kolejny program — '+(ch.name||'Kanał');
-  epgContent.innerHTML=`<div><b>${ch.name||'Kanał'}</b></div><div>${now}</div><div style='color:#8f9ab0'>${next}</div>`;
+  const now='Program na żywo: Transmisja ciągła',
+        next='Następny program: Kolejne pasmo';
+  epgContent.innerHTML=`<div style="font-weight:700;margin-bottom:4px;">${ch.name||'Kanał'}</div><div style='font-size:12px;'>${now}</div><div style='color:var(--muted);font-size:12px;margin-top:2px;'>${next}</div>`;
   epgBox.style.display='block';
   clearTimeout(showEpg.t);
-  showEpg.t=setTimeout(()=>epgBox.style.display='none',2500);
+  showEpg.t=setTimeout(()=>epgBox.style.display='none',3000);
 }
 
 function play(ch){
@@ -95,16 +95,19 @@ function play(ch){
   started=true;
   welcome.classList.add('hidden');
   nowName.textContent=ch.name;
-  nowInfo.textContent='Kanał '+(ch.num||'');
+  nowInfo.textContent='Odtwarzanie strumienia HLS/M3U';
   showInfo(ch);
   showEpg(ch);
   saveLast(ch);
   if(hls){hls.destroy();hls=null}
-  if(video.canPlayType('application/vnd.apple.mpegurl'))video.src=ch.url;
-  else{
+  if(video.canPlayType('application/vnd.apple.mpegurl')){
+    video.src=ch.url;
+  }else if(Hls.isSupported()){
     hls=new Hls();
     hls.loadSource(ch.url);
     hls.attachMedia(video);
+  }else{
+    video.src=ch.url;
   }
   video.play().catch(()=>{});
 }
@@ -113,20 +116,20 @@ async function loadJSONText(text){
   const arr=JSON.parse(text);
   channels=Array.isArray(arr)?arr:[];
   applyFilter();
-  if(channels[0]){
+  if(channels[0] && !started){
     nowName.textContent=channels[0].name;
-    nowInfo.textContent='Kanał '+(channels[0].num||'');
+    nowInfo.textContent='Gotowy do startu';
   }
 }
 
 async function loadM3UText(text){
-  const lines=text.split(/\\r?\\n/);
+  const lines=text.split(/\r?\n/);
   const parsed=[];
   for(let i=0;i<lines.length;i++){
     const line=lines[i].trim();
     if(line.startsWith('#EXTINF:')){
       const name=(line.split(',').pop().trim()||'Kanał');
-      const numMatch=line.match(/tvg-chno=\"(.*?)\"/i);
+      const numMatch=line.match(/tvg-chno="(.*?)"/i);
       const num=numMatch?numMatch[1]:'';
       const next=(lines[i+1]||'').trim();
       if(next&&!next.startsWith('#'))parsed.push({name,url:next,num});
@@ -134,11 +137,18 @@ async function loadM3UText(text){
   }
   channels=parsed;
   applyFilter();
-  if(parsed[0]){
+  if(parsed[0] && !started){
     nowName.textContent=parsed[0].name;
-    nowInfo.textContent='Kanał '+(parsed[0].num||'');
+    nowInfo.textContent='Gotowy do startu';
   }
 }
+
+const defaultChannels = [
+  {num:"1", name:"NASA TV Public", url:"https://ntv1.nasa.gov/hls/live/576629/ntv-1/master.m3u8", logo:""},
+  {num:"2", name:"Big Buck Bunny (Test)", url:"https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8", logo:""},
+  {num:"3", name:"Sintel Trailer (HLS)", url:"https://bitmovin-a.akamaihd.net/content/sintel/hls/playlist.m3u8", logo:""},
+  {num:"4", name:"Tears of Steel (Test)", url:"https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8", logo:""}
+];
 
 document.getElementById('loadJsonBtn').onclick=async()=>{
   const t=jsonInput.value.trim();
@@ -147,22 +157,24 @@ document.getElementById('loadJsonBtn').onclick=async()=>{
     if(t.startsWith('http://')||t.startsWith('https://')) await loadJSONText(await fetch(t).then(r=>r.text()));
     else await loadJSONText(t);
   }catch(e){
-    alert('Błędny JSON');
+    alert('Błędny format JSON');
   }
 };
 
 document.getElementById('sampleBtn').onclick=()=>{
-  jsonInput.value=JSON.stringify([
-    {num:'1',name:'Kanał 1',url:'https://twoj-stream-1.m3u8',logo:''},
-    {num:'2',name:'Kanał 2',url:'https://twoj-stream-2.m3u8',logo:''}
-  ],null,2);
+  jsonInput.value=JSON.stringify(defaultChannels,null,2);
+  loadJSONText(jsonInput.value);
 };
 
 document.getElementById('loadM3uBtn').onclick=async()=>{
   const url=m3uUrl.value.trim();
   if(!url)return;
-  const txt=await fetch(url).then(r=>r.text());
-  await loadM3UText(txt);
+  try{
+    const txt=await fetch(url).then(r=>r.text());
+    await loadM3UText(txt);
+  }catch(e){
+    alert('Nie udało się pobrać playlisty M3U (sprawdź CORS lub URL)');
+  }
 };
 
 document.getElementById('fileBtn').onclick=()=>fileInput.click();
@@ -170,8 +182,9 @@ fileInput.onchange=async()=>{
   const f=fileInput.files[0];
   if(!f)return;
   const ext=f.name.toLowerCase();
-  if(ext.endsWith('.json')) await loadJSONText(await f.text());
-  else await loadM3UText(await f.text());
+  const text=await f.text();
+  if(ext.endsWith('.json')) await loadJSONText(text);
+  else await loadM3UText(text);
 };
 
 document.getElementById('favBtn').onclick=()=>{
@@ -195,8 +208,8 @@ document.getElementById('fullscreenBtn').onclick=()=>{
 
 search.addEventListener('input',applyFilter);
 
-document.addEventListener('click',()=>{
-  if(!started)welcome.classList.add('hidden');
+document.addEventListener('click',(e)=>{
+  if(!started && !e.target.closest('aside')) welcome.classList.add('hidden');
 });
 
 document.addEventListener('keydown',e=>{
@@ -209,24 +222,18 @@ document.addEventListener('keydown',e=>{
     current=Math.min(filtered.length-1,current+1);
     if(current<0)current=0;
     render(filtered);
+    if(filtered[current]) play(filtered[current]);
   }
   if(e.key==='ArrowUp'){
     current=Math.max(0,current-1);
     render(filtered);
+    if(filtered[current]) play(filtered[current]);
   }
   if(e.key.toLowerCase()==='f'&&filtered[current]) toggleFav(filtered[current]);
   if(e.key.toLowerCase()==='i'&&filtered[current]) showInfo(filtered[current]);
   if(e.key.toLowerCase()==='e'&&filtered[current]) showEpg(filtered[current]);
   if(e.key.toLowerCase()==='s') settingsBox.style.display=settingsBox.style.display==='block'?'none':'block';
   if(e.key.toLowerCase()==='m') video.muted=!video.muted;
-  if(e.key==='ArrowRight'&&filtered.length){
-    current=(current+1)%filtered.length;
-    render(filtered);
-  }
-  if(e.key==='ArrowLeft'&&filtered.length){
-    current=(current-1+filtered.length)%filtered.length;
-    render(filtered);
-  }
 });
 
 function playLast(){
@@ -235,8 +242,10 @@ function playLast(){
     filtered=[lastChannel];
     render(filtered);
     play(lastChannel);
+  } else {
+    channels=defaultChannels;
+    applyFilter();
   }
 }
 
-render([]);
-if(autostart)playLast();
+playLast();
