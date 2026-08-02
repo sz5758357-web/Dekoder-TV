@@ -1,82 +1,96 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PlayBoxTV Web</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PlayBoxTV Pro</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
+  <div class="shell">
     <aside class="sidebar">
-      <div class="topline"><span>PlayBoxTV</span><span id="count">0 pozycji</span></div>
-      <div class="title">Lista kanałów</div>
-      <input class="input" id="m3uUrl" placeholder="URL do M3U / M3U8" />
-      <div class="row">
-        <button id="loadBtn">Wczytaj URL</button>
-        <button id="fileBtn">Plik M3U</button>
-        <input id="fileInput" type="file" accept=".m3u,.m3u8" hidden>
+      <div class="brandRow">
+        <div class="brandMark">▶</div>
+        <div>
+          <div class="brandName">PlayBoxTV Pro</div>
+          <div class="brandSub">Legal IPTV player</div>
+        </div>
       </div>
-      <input class="input" id="search" placeholder="Szukaj kanału..." />
-      <div class="searchHint">Enter odtwarza · F ulubione · I info · E EPG · S ustawienia</div>
-      <div class="toolbar">
+
+      <div class="sectionTitle">Kanały</div>
+      <input class="field" id="search" placeholder="Szukaj kanału..." />
+      <div class="actions">
         <button id="favBtn">Ulubione</button>
         <button id="allBtn">Wszystkie</button>
-        <button id="clearFavBtn">Wyczyść</button>
+        <button id="settingsBtn">Ustawienia</button>
+      </div>
+      <div class="importRow">
+        <input class="field" id="m3uUrl" placeholder="Wklej URL do M3U/M3U8" />
+        <button id="loadUrlBtn">Wczytaj</button>
+      </div>
+      <div class="importRow">
+        <button id="fileBtn">Wczytaj plik M3U</button>
+        <input id="fileInput" type="file" accept=".m3u,.m3u8" hidden />
+      </div>
+
+      <div class="listMeta">
+        <span id="count">0 kanałów</span>
+        <span id="activeGroup">Wszystkie</span>
       </div>
       <div class="channelList" id="channels"></div>
-      <div class="footerHint">↑ ↓ wybór · ← → poprzedni/następny · dwuklik dodaje do ulubionych</div>
+      <div class="sidebarFooter">↑ ↓ wybór · Enter odtwarzaj · F ulubione · I info · E EPG</div>
     </aside>
 
-    <main class="player">
-      <div class="overlay">
-        <div class="brand"></div>
-        <div class="badge" id="status">brak kanału</div>
-      </div>
-
-      <video id="video" controls autoplay></video>
-
-      <div class="previewBox" id="previewBox">
-        <video id="previewVideo" muted></video>
-      </div>
-
-      <div class="settingsBox" id="settingsBox">
-        <h3>Ustawienia</h3>
-        <div class="switch">
-          <span>Autostart ostatniego kanału</span>
-          <input type="checkbox" id="autostartToggle">
-        </div>
-        <p>Wszystko zapisuje się lokalnie w przeglądarce.</p>
-      </div>
-
-      <div class="start" id="startScreen">
-        <div class="card">
-          <h1>Witaj w PlayBoxTV</h1>
-          <div class="help">
-            <div class="key">0–9</div><div>numer kanału</div>
-            <div class="key">← →</div><div>poprzedni / następny kanał</div>
-            <div class="key">↑ ↓</div><div>wybór kanału</div>
-            <div class="key">L</div><div>lista kanałów</div>
-            <div class="key">M</div><div>wyciszenie</div>
-            <div class="key">I</div><div>informacje o kanale</div>
-            <div class="key">E</div><div>podgląd programu (EPG)</div>
-            <div class="key">F</div><div>ulubione</div>
-            <div class="key">S</div><div>ustawienia</div>
+    <main class="viewer">
+      <div class="topBar">
+        <div class="nowPlaying">
+          <span class="pill">LIVE</span>
+          <div>
+            <div id="nowName" class="nowName">Brak kanału</div>
+            <div id="nowInfo" class="nowInfo">Wybierz kanał z listy</div>
           </div>
-          <div class="small">Naciśnij dowolny klawisz lub kliknij, aby zacząć</div>
+        </div>
+        <div class="topBarRight">
+          <div class="clock" id="clock"></div>
+          <button id="fullscreenBtn">Pełny ekran</button>
         </div>
       </div>
 
-      <div class="infoBox" id="infoBox">
-        <h3 id="infoTitle">Kanał</h3>
-        <p id="infoUrl"></p>
-        <p id="infoExtra">Brak danych EPG</p>
-      </div>
+      <div class="stage">
+        <video id="video" controls autoplay></video>
 
-      <div class="epgBox" id="epgBox">
-        <h3 id="epgTitle">EPG</h3>
-        <p id="epgNow">Teraz: —</p>
-        <p id="epgNext">Następnie: —</p>
+        <div class="welcome" id="welcome">
+          <div class="welcomeCard">
+            <div class="welcomeHeader">Witaj w PlayBoxTV Pro</div>
+            <div class="welcomeText">Profesjonalny odtwarzacz IPTV do legalnych playlist M3U / M3U8.</div>
+            <div class="keys">
+              <div><b>Enter</b> odtwarzaj</div>
+              <div><b>↑ ↓</b> nawigacja</div>
+              <div><b>F</b> ulubione</div>
+              <div><b>I</b> informacje</div>
+              <div><b>E</b> EPG</div>
+              <div><b>S</b> ustawienia</div>
+            </div>
+            <div class="welcomeHint">Kliknij lub naciśnij dowolny klawisz, aby zacząć</div>
+          </div>
+        </div>
+
+        <div class="overlayBox infoBox" id="infoBox">
+          <div class="overlayTitle">Informacje</div>
+          <div id="infoContent"></div>
+        </div>
+
+        <div class="overlayBox epgBox" id="epgBox">
+          <div class="overlayTitle">EPG</div>
+          <div id="epgContent"></div>
+        </div>
+
+        <div class="overlayBox settingsBox" id="settingsBox">
+          <div class="overlayTitle">Ustawienia</div>
+          <label class="toggleRow"><span>Autostart ostatniego kanału</span><input id="autostartToggle" type="checkbox" /></label>
+          <label class="toggleRow"><span>Zapisuj ulubione</span><input id="saveFavToggle" type="checkbox" checked disabled /></label>
+          <div class="smallNote">Wszystko zapisuje się lokalnie w przeglądarce.</div>
+        </div>
       </div>
     </main>
   </div>
