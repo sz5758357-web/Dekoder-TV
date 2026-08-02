@@ -1,23 +1,12 @@
 # PlayBoxTV Pro
 
-Profesjonalny frontend IPTV w HTML/CSS/JS.
+Wrzuć swoje legalne kanały do `channels.json` albo załaduj playlistę M3U/M3U8.
 
 ## Pliki
 - `index.html`
 - `styles.css`
 - `app.js`
-
-## Jak uruchomić
-Wrzuć pliki na GitHub Pages albo uruchom jako statyczną stronę.
-
-## Funkcje
-- lista kanałów
-- ulubione
-- wyszukiwarka
-- zapis ostatniego kanału
-- prosty EPG overlay
-- ustawienia
-- pełny ekran
+- `channels.json`
 
 ## Uwaga
-To jest odtwarzacz dla legalnych playlist M3U / M3U8.
+To jest szablon interfejsu, bez gotowych nieautoryzowanych streamów.
