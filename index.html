@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>IPTV Player</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Smart IPTV Box</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>IPTV Player</h1>
+<header>
+    <h1>📺 Smart IPTV Box</h1>
+</header>
 
-<input type="file" id="m3uFile" accept=".m3u,.m3u8">
+<div class="container">
 
-<select id="channels"></select>
+    <aside>
+        <input type="text" id="search" placeholder="🔍 Szukaj kanału">
 
-<video id="player" controls autoplay></video>
+        <select id="channels" size="20"></select>
+
+        <label class="upload">
+            📂 Wczytaj playlistę
+            <input type="file" id="m3uFile" accept=".m3u,.m3u8">
+        </label>
+    </aside>
+
+
+    <main>
+
+        <div class="screen">
+            <video id="player" controls autoplay></video>
+        </div>
+
+        <div class="info">
+            <h2 id="channelName">Wybierz kanał</h2>
+            <p>Smart IPTV Player</p>
+        </div>
+
+    </main>
+
+</div>
+
 
 <script src="script.js"></script>
+
 </body>
 </html>
