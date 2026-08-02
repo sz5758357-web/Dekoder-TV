@@ -105,4 +105,28 @@ c.name.toLowerCase().includes(value)
 
 showChannels(filtered);
 
-});
+});function clock(){
+
+let d=new Date();
+
+document.getElementById("clock").innerHTML =
+d.toLocaleTimeString("pl-PL");
+
+}
+
+setInterval(clock,1000);
+
+clock();
+
+
+
+document.getElementById("fullscreen")
+.onclick=function(){
+
+let video=document.getElementById("player");
+
+if(video.requestFullscreen){
+video.requestFullscreen();
+}
+
+};
