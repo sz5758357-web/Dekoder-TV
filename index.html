@@ -1,30 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📺 Dekoder TV</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PlayBoxTV Web</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="app">
-        <header>
-            <h1>📺 Dekoder TV</h1>
-            <div id="search-container">
-                <input type="text" id="searchInput" placeholder="🔍 Szukaj kanału...">
-            </div>
-        </header>
-        <main>
-            <div id="channel-list">
-                <div style="padding:20px;color:#aaa;text-align:center;">⏳ Ładowanie kanałów...</div>
-            </div>
-            <div id="player-container">
-                <video id="videoPlayer" controls></video>
-                <div id="no-channel-message">📺 Wybierz kanał z listy</div>
-            </div>
-        </main>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="script.js"></script>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="topline"><span>PlayBoxTV</span><span id="count">0 pozycji</span></div>
+      <div class="title">Lista kanałów</div>
+      <input class="input" id="m3uUrl" placeholder="URL do M3U / M3U8" />
+      <div class="row">
+        <button id="loadBtn">Wczytaj URL</button>
+        <button id="fileBtn">Plik M3U</button>
+        <input id="fileInput" type="file" accept=".m3u,.m3u8" hidden>
+      </div>
+      <input class="input" id="search" placeholder="Szukaj kanału..." />
+      <div class="searchHint">Enter odtwarza · F ulubione · I info · E EPG · S ustawienia</div>
+      <div class="toolbar">
+        <button id="favBtn">Ulubione</button>
+        <button id="allBtn">Wszystkie</button>
+        <button id="clearFavBtn">Wyczyść</button>
+      </div>
+      <div class="channelList" id="channels"></div>
+      <div class="footerHint">↑ ↓ wybór · ← → poprzedni/następny · dwuklik dodaje do ulubionych</div>
+    </aside>
+
+    <main class="player">
+      <div class="overlay">
+        <div class="brand"></div>
+        <div class="badge" id="status">brak kanału</div>
+      </div>
+
+      <video id="video" controls autoplay></video>
+
+      <div class="previewBox" id="previewBox">
+        <video id="previewVideo" muted></video>
+      </div>
+
+      <div class="settingsBox" id="settingsBox">
+        <h3>Ustawienia</h3>
+        <div class="switch">
+          <span>Autostart ostatniego kanału</span>
+          <input type="checkbox" id="autostartToggle">
+        </div>
+        <p>Wszystko zapisuje się lokalnie w przeglądarce.</p>
+      </div>
+
+      <div class="start" id="startScreen">
+        <div class="card">
+          <h1>Witaj w PlayBoxTV</h1>
+          <div class="help">
+            <div class="key">0–9</div><div>numer kanału</div>
+            <div class="key">← →</div><div>poprzedni / następny kanał</div>
+            <div class="key">↑ ↓</div><div>wybór kanału</div>
+            <div class="key">L</div><div>lista kanałów</div>
+            <div class="key">M</div><div>wyciszenie</div>
+            <div class="key">I</div><div>informacje o kanale</div>
+            <div class="key">E</div><div>podgląd programu (EPG)</div>
+            <div class="key">F</div><div>ulubione</div>
+            <div class="key">S</div><div>ustawienia</div>
+          </div>
+          <div class="small">Naciśnij dowolny klawisz lub kliknij, aby zacząć</div>
+        </div>
+      </div>
+
+      <div class="infoBox" id="infoBox">
+        <h3 id="infoTitle">Kanał</h3>
+        <p id="infoUrl"></p>
+        <p id="infoExtra">Brak danych EPG</p>
+      </div>
+
+      <div class="epgBox" id="epgBox">
+        <h3 id="epgTitle">EPG</h3>
+        <p id="epgNow">Teraz: —</p>
+        <p id="epgNext">Następnie: —</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="app.js"></script>
 </body>
 </html>
