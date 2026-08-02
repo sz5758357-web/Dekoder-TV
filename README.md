@@ -1,16 +1,23 @@
-# PlayBoxTV Web
+# PlayBoxTV Pro
 
-Prosty frontend IPTV w HTML/CSS/JS.
+Profesjonalny frontend IPTV w HTML/CSS/JS.
 
 ## Pliki
-- `index.html` — główny plik
-- `styles.css` — wygląd
-- `app.js` — logika
-- `sample-epg.xml` — przykładowy XMLTV
+- `index.html`
+- `styles.css`
+- `app.js`
 
-## Uruchomienie
-Najprościej wrzuć pliki na GitHub Pages lub odpal lokalnie przez dowolny serwer statyczny.
+## Jak uruchomić
+Wrzuć pliki na GitHub Pages albo uruchom jako statyczną stronę.
 
-## Uwagi
-- Aplikacja odtwarza tylko legalne źródła M3U/M3U8.
-- EPG w tej wersji jest prostym demo i można je rozbudować pod XMLTV.
+## Funkcje
+- lista kanałów
+- ulubione
+- wyszukiwarka
+- zapis ostatniego kanału
+- prosty EPG overlay
+- ustawienia
+- pełny ekran
+
+## Uwaga
+To jest odtwarzacz dla legalnych playlist M3U / M3U8.
