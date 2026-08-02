@@ -2,42 +2,75 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<title>Smart IPTV Box</title>
+<title>Smart IPTV Decoder</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-    <h1>📺 Smart IPTV Box</h1>
-</header>
-
-<div class="container">
-
-    <aside>
-        <input type="text" id="search" placeholder="🔍 Szukaj kanału">
-
-        <select id="channels" size="20"></select>
-
-        <label class="upload">
-            📂 Wczytaj playlistę
-            <input type="file" id="m3uFile" accept=".m3u,.m3u8">
-        </label>
-    </aside>
+<div class="top">
+<h1>📺 Smart IPTV Decoder</h1>
+<div id="clock"></div>
+</div>
 
 
-    <main>
+<div class="layout">
 
-        <div class="screen">
-            <video id="player" controls autoplay></video>
-        </div>
+<aside>
 
-        <div class="info">
-            <h2 id="channelName">Wybierz kanał</h2>
-            <p>Smart IPTV Player</p>
-        </div>
+<h3>Kategorie</h3>
 
-    </main>
+<button onclick="category('all')">Wszystkie</button>
+<button onclick="category('sport')">⚽ Sport</button>
+<button onclick="category('film')">🎬 Film</button>
+<button onclick="category('music')">🎵 Muzyka</button>
+<button onclick="category('kids')">🧸 Dzieci</button>
+
+
+<input id="search" placeholder="🔍 Szukaj">
+
+
+<select id="channels" size="25"></select>
+
+
+<input type="file" id="m3uFile">
+
+</aside>
+
+
+
+<section>
+
+<div class="tv">
+
+<video id="player" controls></video>
+
+<button id="fullscreen">
+⛶ Pełny ekran
+</button>
+
+</div>
+
+
+<div class="info">
+
+<h2 id="channelName">
+Wybierz kanał
+</h2>
+
+<p id="program">
+Brak informacji o programie
+</p>
+
+<p>
+Smart IPTV Decoder • HD Player
+</p>
+
+</div>
+
+
+</section>
+
 
 </div>
 
