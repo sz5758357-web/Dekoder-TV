@@ -1,81 +1,67 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<title>Smart IPTV Decoder</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Prosty IPTV Player</title>
 </head>
-
 <body>
 
-<div class="top">
-<h1>📺 Smart IPTV Decoder</h1>
-<div id="clock"></div>
-</div>
+    <input type="file" id="m3uFile" accept=".m3u,.m3u8">
+    <select id="channelList" style="width: 300px; margin-top: 10px;">
+        <option value="">Wybierz kanał...</option>
+    </select>
+    
+    <br><br>
+    <video id="videoPlayer" controls width="600"></video>
 
+    <script>
+        document.getElementById('m3uFile').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
 
-<div class="layout">
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                parseM3U(content);
+            };
+            reader.readAsText(file);
+        });
 
-<aside>
+        function parseM3U(data) {
+            const lines = data.split('\n');
+            const select = document.getElementById('channelList');
+            select.innerHTML = '<option value="">Wybierz kanał...</option>';
 
-<h3>Kategorie</h3>
+            let currentTitle = '';
 
-<button onclick="category('all')">Wszystkie</button>
-<button onclick="category('sport')">⚽ Sport</button>
-<button onclick="category('film')">🎬 Film</button>
-<button onclick="category('music')">🎵 Muzyka</button>
-<button onclick="category('kids')">🧸 Dzieci</button>
+            lines.forEach(line => {
+                line = line.trim();
+                if (line.startsWith('#EXTINF:')) {
+                    // Wyciąganie nazwy kanału po przecinku
+                    const parts = line.split(',');
+                    currentTitle = parts.length > 1 ? parts[parts.length - 1] : 'Nieznany kanał';
+                } else if (line && !line.startsWith('#')) {
+                    // To jest adres URL strumienia
+                    const option = document.createElement('option');
+                    option.value = line;
+                    option.textContent = currentTitle;
+                    select.appendChild(option);
+                }
+            });
+        }
 
-
-<input id="search" placeholder="🔍 Szukaj">
-
-
-<select id="channels" size="25"></select>
-
-
-<input type="file" id="m3uFile">
-
-</aside>
-
-
-
-<section>
-
-<div class="tv">
-
-<video id="player" controls></video>
-
-<button id="fullscreen">
-⛶ Pełny ekran
-</button>
-
-</div>
-
-
-<div class="info">
-
-<h2 id="channelName">
-Wybierz kanał
-</h2>
-
-<p id="program">
-Brak informacji o programie
-</p>
-
-<p>
-Smart IPTV Decoder • HD Player
-</p>
-
-</div>
-
-
-</section>
-
-
-</div>
-
-
-<script src="script.js"></script>
+        document.getElementById('channelList').addEventListener('change', function(e) {
+            const url = e.target.value;
+            const video = document.getElementById('videoPlayer');
+            
+            if (url) {
+                video.src = url;
+                video.play().catch(error => {
+                    console.error("Błąd odtwarzania (może wymagać HLS.js lub brak wsparcia przeglądarki dla tego formatu):", error);
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
