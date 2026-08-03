@@ -2,63 +2,222 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Prosty IPTV Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPTV Dark Player</title>
+    <!-- Biblioteka Hls.js do obsługi strumieni .m3u8 / HLS -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        :root {
+            --bg-color: #121214;
+            --card-bg: #1e1e24;
+            --accent-color: #6366f1;
+            --accent-hover: #4f46e5;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #2e2e38;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .file-upload {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-color);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+
+        .file-upload:hover {
+            border-color: var(--accent-color);
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .select-wrapper select {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .select-wrapper select:focus {
+            border-color: var(--accent-color);
+        }
+
+        .player-wrapper {
+            position: relative;
+            width: 100%;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .status-msg {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-    <input type="file" id="m3uFile" accept=".m3u,.m3u8">
-    <select id="channelList" style="width: 300px; margin-top: 10px;">
-        <option value="">Wybierz kanał...</option>
-    </select>
-    
-    <br><br>
-    <video id="videoPlayer" controls width="600"></video>
+    <div class="container">
+        <h1>IPTV Dark Player</h1>
+
+        <div class="controls">
+            <div class="file-upload">
+                <span id="fileName">Wybierz lub przeciągnij plik .m3u / .m3u8</span>
+                <input type="file" id="m3uFile" accept=".m3u,.m3u8">
+            </div>
+
+            <div class="select-wrapper">
+                <select id="channelList" disabled>
+                    <option value="">Najpierw wczytaj playlistę...</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="player-wrapper">
+            <video id="videoPlayer" controls></video>
+        </div>
+    </div>
 
     <script>
-        document.getElementById('m3uFile').addEventListener('change', function(event) {
-            const file = event.target.files[0];
+        const fileInput = document.getElementById('m3uFile');
+        const fileNameLabel = document.getElementById('fileName');
+        const channelSelect = document.getElementById('channelList');
+        const video = document.getElementById('videoPlayer');
+
+        let hls = null;
+
+        // Inicjalizacja Hls.js
+        if (Hls.isSupported()) {
+            hls = new Hls();
+        }
+
+        // Obsługa wczytywania pliku
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
             if (!file) return;
 
+            fileNameLabel.textContent = `Plik: ${file.name}`;
+
             const reader = new FileReader();
-            reader.onload = function(e) {
-                const content = e.target.result;
-                parseM3U(content);
+            reader.onload = function(event) {
+                parseM3U(event.target.result);
             };
             reader.readAsText(file);
         });
 
+        // Parsowanie pliku M3U
         function parseM3U(data) {
             const lines = data.split('\n');
-            const select = document.getElementById('channelList');
-            select.innerHTML = '<option value="">Wybierz kanał...</option>';
+            channelSelect.innerHTML = '<option value="">-- Wybierz kanał --</option>';
 
             let currentTitle = '';
+            let channelCount = 0;
 
             lines.forEach(line => {
                 line = line.trim();
                 if (line.startsWith('#EXTINF:')) {
-                    // Wyciąganie nazwy kanału po przecinku
                     const parts = line.split(',');
-                    currentTitle = parts.length > 1 ? parts[parts.length - 1] : 'Nieznany kanał';
+                    currentTitle = parts.length > 1 ? parts[parts.length - 1] : 'Kanał bez nazwy';
                 } else if (line && !line.startsWith('#')) {
-                    // To jest adres URL strumienia
                     const option = document.createElement('option');
                     option.value = line;
-                    option.textContent = currentTitle;
-                    select.appendChild(option);
+                    option.textContent = currentTitle || line;
+                    channelSelect.appendChild(option);
+                    currentTitle = '';
+                    channelCount++;
                 }
             });
+
+            if (channelCount > 0) {
+                channelSelect.disabled = false;
+            } else {
+                alert('Nie znaleziono poprawnych strumieni w pliku M3U.');
+            }
         }
 
-        document.getElementById('channelList').addEventListener('change', function(e) {
-            const url = e.target.value;
-            const video = document.getElementById('videoPlayer');
-            
-            if (url) {
-                video.src = url;
-                video.play().catch(error => {
-                    console.error("Błąd odtwarzania (może wymagać HLS.js lub brak wsparcia przeglądarki dla tego formatu):", error);
+        // Obsługa zmiany wybranego kanału
+        channelSelect.addEventListener('change', function() {
+            const streamUrl = this.value;
+            if (!streamUrl) return;
+
+            if (Hls.isSupported()) {
+                hls.loadSource(streamUrl);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
                 });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // Dla Safari, które natywnie wspiera HLS
+                video.src = streamUrl;
+                video.play();
+            } else {
+                alert('Twoja przeglądarka nie obsługuje odtwarzania strumieni HLS.');
             }
         });
     </script>
