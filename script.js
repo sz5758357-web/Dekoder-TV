@@ -7,479 +7,1640 @@ const input = document.getElementById("m3uFile");
 let channels = [];
 
 // Domacza lista M3U wklejana bezpośrednio do kodu
-const defaultM3U = `#EXTM3U
-#EXTINF:-1,13 Ulica HD
-http://185.236.229.62:9981/play/a03o
-#EXTINF:-1,2M MONDE HD
-http://185.236.229.62:9981/play/a08r
-#EXTINF:-1,2M Monde
-http://185.236.229.62:9981/play/a06p
-#EXTINF:-1,4Fun Dance
-http://185.236.229.62:9981/play/a020
-#EXTINF:-1,4Fun Kids
-http://185.236.229.62:9981/play/a01z
-#EXTINF:-1,4Fun.TV
-http://185.236.229.62:9981/play/a01y
-#EXTINF:-1,8 TV RU
-http://185.236.229.62:9981/play/a08g
-#EXTINF:-1,ACISPORT TV
-http://185.236.229.62:9981/play/a08u
-#EXTINF:-1,ADVENTURE HD
-http://185.236.229.62:9981/play/a049
-#EXTINF:-1,AMC
-http://185.236.229.62:9981/play/a05g
-#EXTINF:-1,ANTENA
-http://185.236.229.62:9981/play/a04h
-#EXTINF:-1,ANTENA
-http://185.236.229.62:9981/play/a047
-#EXTINF:-1,AXN
-http://185.236.229.62:9981/play/a07a
-#EXTINF:-1,AXN Black
-http://185.236.229.62:9981/play/a075
-#EXTINF:-1,AXN HD
-http://185.236.229.62:9981/play/a07s
-#EXTINF:-1,AXN SPIN HD
-http://185.236.229.62:9981/play/a044
-#EXTINF:-1,AXN White
-http://185.236.229.62:9981/play/a074
-#EXTINF:-1,Active Family
-http://185.236.229.62:9981/play/a04a
-#EXTINF:-1,Al Aoula Inter
-http://185.236.229.62:9981/play/a084
-#EXTINF:-1,Al Aoula Inter HD
-http://185.236.229.62:9981/play/a082
-#EXTINF:-1,Al Jazeera HD
-http://185.236.229.62:9981/play/a08s
-#EXTINF:-1,Al Maghribia HD
-http://185.236.229.62:9981/play/a080
-#EXTINF:-1,Ale kino+ HD
-http://185.236.229.62:9981/play/a056
-#EXTINF:-1,Arryadia HD
-http://185.236.229.62:9981/play/a086
-#EXTINF:-1,Assadissa HD
-http://185.236.229.62:9981/play/a085
-#EXTINF:-1,Athaqafia HD
-http://185.236.229.62:9981/play/a083
-#EXTINF:-1,BBC Brit
-http://185.236.229.62:9981/play/a06r
-#EXTINF:-1,BBC CBeebies
-http://185.236.229.62:9981/play/a06s
-#EXTINF:-1,BBC Earth HD
-http://185.236.229.62:9981/play/a02o
-#EXTINF:-1,BBC FIRST
-http://185.236.229.62:9981/play/a02n
-#EXTINF:-1,BBC Lifestyle HD
-http://185.236.229.62:9981/play/a06t
-#EXTINF:-1,BIKE
-http://185.236.229.62:9981/play/a04n
-#EXTINF:-1,BIZNES24 HD
-http://185.236.229.62:9981/play/a02s
-#EXTINF:-1,Baby TV
-http://185.236.229.62:9981/play/a038
-#EXTINF:-1,ByoBlu
-http://185.236.229.62:9981/play/a04v
-#EXTINF:-1,CANAL+ DOKUMENT HD
-http://185.236.229.62:9981/play/a059
-#EXTINF:-1,CANAL+ DOMO HD
-http://185.236.229.62:9981/play/a05u
-#EXTINF:-1,CANAL+ FAMILY HD
-http://185.236.229.62:9981/play/a04z
-#EXTINF:-1,CANAL+ FILM HD
-http://185.236.229.62:9981/play/a04y
-#EXTINF:-1,CANAL+ FILM HD
-http://185.236.229.62:9981/play/a057
-#EXTINF:-1,CANAL+ KUCHNIA
-http://185.236.229.62:9981/play/a053
-#EXTINF:-1,CANAL+ NOW
-http://185.236.229.62:9981/play/a045
-#EXTINF:-1,CANAL+ NOW
-http://185.236.229.62:9981/play/a04f
-#EXTINF:-1,CANAL+ PREMIUM HD
-http://185.236.229.62:9981/play/a04b
-#EXTINF:-1,CANAL+ SERIALE HD
-http://185.236.229.62:9981/play/a058
-#EXTINF:-1,CANAL+ SERIALE HD
-http://185.236.229.62:9981/play/a054
-#EXTINF:-1,CANAL+ SPORT 2 HD
-http://185.236.229.62:9981/play/a05t
-#EXTINF:-1,CANAL+ SPORT 3 HD
-http://185.236.229.62:9981/play/a05e
-#EXTINF:-1,CANAL+ SPORT 3 HD
-http://185.236.229.62:9981/play/a05n
-#EXTINF:-1,CANAL+ SPORT 3 HD
-http://185.236.229.62:9981/play/a05q
-#EXTINF:-1,CANAL+ SPORT 4 HD
-http://185.236.229.62:9981/play/a05f
-#EXTINF:-1,CANAL+ SPORT 4 HD
-http://185.236.229.62:9981/play/a05o
-#EXTINF:-1,CANAL+ SPORT 4 HD
-http://185.236.229.62:9981/play/a05r
-#EXTINF:-1,CANAL+ SPORT 5 HD
-http://185.236.229.62:9981/play/a05h
-#EXTINF:-1,CANAL+ SPORT HD
-http://185.236.229.62:9981/play/a04c
-#EXTINF:-1,CANAL+1 HD
-http://185.236.229.62:9981/play/a05s
-#EXTINF:-1,CBS Europa HD
-http://185.236.229.62:9981/play/a06i
-#EXTINF:-1,CBS Reality HD
-http://185.236.229.62:9981/play/a02v
-#EXTINF:-1,CGTN
-http://185.236.229.62:9981/play/a08b
-#EXTINF:-1,CI Polsat HD
-http://185.236.229.62:9981/play/a07w
-#EXTINF:-1,CNBC HD
-http://185.236.229.62:9981/play/a04o
-#EXTINF:-1,CNN Europe HD
-http://185.236.229.62:9981/play/a076
-#EXTINF:-1,Can TV HD
-http://185.236.229.62:9981/play/a08o
-#EXTINF:-1,Cartoon Network HD
-http://185.236.229.62:9981/play/a06e
-#EXTINF:-1,Cartoonito
-http://185.236.229.62:9981/play/a02c
-#EXTINF:-1,Cinemax 2 HD
-http://185.236.229.62:9981/play/a07r
-#EXTINF:-1,Cinemax HD
-http://185.236.229.62:9981/play/a05p
-#EXTINF:-1,Cinemax HD
-http://185.236.229.62:9981/play/a05m
-#EXTINF:-1,Cinemax HD
-http://185.236.229.62:9981/play/a05d
-#EXTINF:-1,Class TV Moda
-http://185.236.229.62:9981/play/a04s
-#EXTINF:-1,Comedy Central HD
-http://185.236.229.62:9981/play/a068
-#EXTINF:-1,Da Vinci
-http://185.236.229.62:9981/play/a024
-#EXTINF:-1,Dim TV
-http://185.236.229.62:9981/play/a04x
-#EXTINF:-1,Disco Polo Music
-http://185.236.229.62:9981/play/a078
-#EXTINF:-1,Disney Channel HD
-http://185.236.229.62:9981/play/a07d
-#EXTINF:-1,Disney Junior
-http://185.236.229.62:9981/play/a06n
-#EXTINF:-1,Disney XD
-http://185.236.229.62:9981/play/a07c
-#EXTINF:-1,Dla Ciebie TV
-http://185.236.229.62:9981/play/a04u
-#EXTINF:-1,E! Entertainment
-http://185.236.229.62:9981/play/a03j
-#EXTINF:-1,ELEVEN SPORTS 4 HD
-http://185.236.229.62:9981/play/a046
-#EXTINF:-1,EURONEWS ITALIAN SD PAL 1.8
-http://185.236.229.62:9981/play/a06q
-#EXTINF:-1,Eko TV
-http://185.236.229.62:9981/play/a08h
-#EXTINF:-1,Eleven Sports 1 4K
-http://185.236.229.62:9981/play/a03t
-#EXTINF:-1,Eleven Sports 1 HD
-http://185.236.229.62:9981/play/a05w
-#EXTINF:-1,Eleven Sports 2 HD
-http://185.236.229.62:9981/play/a05y
-#EXTINF:-1,Eleven Sports 3 HD
-http://185.236.229.62:9981/play/a061
-#EXTINF:-1,Epic Drama HD
-http://185.236.229.62:9981/play/a029
-#EXTINF:-1,Eska Rock
-http://185.236.229.62:9981/play/a08q
-#EXTINF:-1,Eska TV Extra
-http://185.236.229.62:9981/play/a021
-#EXTINF:-1,Eska TV HD
-http://185.236.229.62:9981/play/a02f
-#EXTINF:-1,Espresso TV
-http://185.236.229.62:9981/play/a04w
-#EXTINF:-1,Extreme Sports HD
-http://185.236.229.62:9981/play/a06h
-#EXTINF:-1,FX HD
-http://185.236.229.62:9981/play/a07u
-#EXTINF:-1,Fightbox HD
-http://185.236.229.62:9981/play/a03n
-#EXTINF:-1,Fightklub HD
-http://185.236.229.62:9981/play/a02l
-#EXTINF:-1,FilmBox Action
-http://185.236.229.62:9981/play/a033
-#EXTINF:-1,FilmBox Extra HD
-http://185.236.229.62:9981/play/a036
-#EXTINF:-1,FilmBox Family
-http://185.236.229.62:9981/play/a032
-#EXTINF:-1,FilmBox Family
-http://185.236.229.62:9981/play/a037
-#EXTINF:-1,Filmbox Arthouse
-http://185.236.229.62:9981/play/a028
-#EXTINF:-1,Filmbox Premium HD
-http://185.236.229.62:9981/play/a02x
-#EXTINF:-1,Fokus TV
-http://185.236.229.62:9981/play/a02g
-#EXTINF:-1,Food Network HD
-http://185.236.229.62:9981/play/a073
-#EXTINF:-1,Fx Comedy HD
-http://185.236.229.62:9981/play/a07t
-#EXTINF:-1,Golf Channel
-http://185.236.229.62:9981/play/a03m
-#EXTINF:-1,HBO HD
-http://185.236.229.62:9981/play/a06k
-#EXTINF:-1,HBO2 HD
-http://185.236.229.62:9981/play/a05x
-#EXTINF:-1,HBO3 HD
-http://185.236.229.62:9981/play/a062
-#EXTINF:-1,HOME TV
-http://185.236.229.62:9981/play/a048
-#EXTINF:-1,History 2 HD
-http://185.236.229.62:9981/play/a03l
-#EXTINF:-1,History HD
-http://185.236.229.62:9981/play/a07v
-#EXTINF:-1,Horse TV HD
-http://185.236.229.62:9981/play/a04r
-#EXTINF:-1,Iran e Aryaee
-http://185.236.229.62:9981/play/a08p
-#EXTINF:-1,Italian Fishing TV
-http://185.236.229.62:9981/play/a08t
-#EXTINF:-1,Jin TV
-http://185.236.229.62:9981/play/a08n
-#EXTINF:-1,KINO POLSKA HD
-http://185.236.229.62:9981/play/a05v
-#EXTINF:-1,KaravanTV
-http://185.236.229.62:9981/play/a08l
-#EXTINF:-1,Kino Polska Muzyka
-http://185.236.229.62:9981/play/a030
-#EXTINF:-1,Kino TV HD
-http://185.236.229.62:9981/play/a031
-#EXTINF:-1,LN24SA
-http://185.236.229.62:9981/play/a04t
-#EXTINF:-1,Laayoune TV HD
-http://185.236.229.62:9981/play/a081
-#EXTINF:-1,MTV 00s
-http://185.236.229.62:9981/play/a066
-#EXTINF:-1,MTV 90s
-http://185.236.229.62:9981/play/a07f
-#EXTINF:-1,MTV Live HD
-http://185.236.229.62:9981/play/a063
-#EXTINF:-1,MTV Polska HD
-http://185.236.229.62:9981/play/a06b
-#EXTINF:-1,Metro HD
-http://185.236.229.62:9981/play/a06z
-#EXTINF:-1,Milady
-http://185.236.229.62:9981/play/a08i
-#EXTINF:-1,MiniMini+ HD
-http://185.236.229.62:9981/play/a04e
-#EXTINF:-1,Motowizja HD
-http://185.236.229.62:9981/play/a02r
-#EXTINF:-1,NATIONAL GEO HD
-http://185.236.229.62:9981/play/a04d
-#EXTINF:-1,NOVELAS+
-http://185.236.229.62:9981/play/a05a
-#EXTINF:-1,NOVELAS+
-http://185.236.229.62:9981/play/a05k
-#EXTINF:-1,NUTA GOLD
-http://185.236.229.62:9981/play/a04k
-#EXTINF:-1,NUTA TV
-http://185.236.229.62:9981/play/a04j
-#EXTINF:-1,Nat Geo People HD
-http://185.236.229.62:9981/play/a06f
-#EXTINF:-1,Nataly
-http://185.236.229.62:9981/play/a08j
-#EXTINF:-1,National Geographic Wild HD
-http://185.236.229.62:9981/play/a05z
-#EXTINF:-1,Nick Jr
-http://185.236.229.62:9981/play/a065
-#EXTINF:-1,Nick Music
-http://185.236.229.62:9981/play/a064
-#EXTINF:-1,Nickelodeon
-http://185.236.229.62:9981/play/a067
-#EXTINF:-1,Nicktoons HD
-http://185.236.229.62:9981/play/a06a
-#EXTINF:-1,Noursat English
-http://185.236.229.62:9981/play/a08v
-#EXTINF:-1,Nowa TV
-http://185.236.229.62:9981/play/a02h
-#EXTINF:-1,POWER TV
-http://185.236.229.62:9981/play/a04i
-#EXTINF:-1,Paramount Network Polska
-http://185.236.229.62:9981/play/a069
-#EXTINF:-1,Planete+ HD
-http://185.236.229.62:9981/play/a052
-#EXTINF:-1,Polo TV
-http://185.236.229.62:9981/play/a02e
-#EXTINF:-1,Polsat 2 HD 
-http://185.236.229.62:9981/play/a042
-#EXTINF:-1,Polsat Cafe HD
-http://185.236.229.62:9981/play/a03z
-#EXTINF:-1,Polsat Comedy Central Extra
-http://185.236.229.62:9981/play/a06c
-#EXTINF:-1,Polsat Doku HD
-http://185.236.229.62:9981/play/a07z
-#EXTINF:-1,Polsat Film HD
-http://185.236.229.62:9981/play/a040
-#EXTINF:-1,Polsat Games
-http://185.236.229.62:9981/play/a025
-#EXTINF:-1,Polsat HD
-http://185.236.229.62:9981/play/a03v
-#EXTINF:-1,Polsat Jim Jam
-http://185.236.229.62:9981/play/a07e
-#EXTINF:-1,Polsat Music HD
-http://185.236.229.62:9981/play/a02b
-#EXTINF:-1,Polsat News 2
-http://185.236.229.62:9981/play/a03u
-#EXTINF:-1,Polsat News HD
-http://185.236.229.62:9981/play/a041
-#EXTINF:-1,Polsat News Polityka HD
-http://185.236.229.62:9981/play/a07h
-#EXTINF:-1,Polsat Play HD
-http://185.236.229.62:9981/play/a03w
-#EXTINF:-1,Polsat Rodzina HD
-http://185.236.229.62:9981/play/a079
-#EXTINF:-1,Polsat Seriale HD
-http://185.236.229.62:9981/play/a07b
-#EXTINF:-1,Polsat Sport Extra HD
-http://185.236.229.62:9981/play/a07q
-#EXTINF:-1,Polsat Sport Fight HD
-http://185.236.229.62:9981/play/a06l
-#EXTINF:-1,Polsat Sport HD
-http://185.236.229.62:9981/play/a07n
-#EXTINF:-1,Polsat Sport News HD
-http://185.236.229.62:9981/play/a06m
-#EXTINF:-1,Polsat Sport Premium 1
-http://185.236.229.62:9981/play/a03r
-#EXTINF:-1,Polsat Sport Premium 2
-http://185.236.229.62:9981/play/a03s
-#EXTINF:-1,Polsat Sport Premium PPV3
-http://185.236.229.62:9981/play/a03p
-#EXTINF:-1,Polsat Sport Premium PPV4
-http://185.236.229.62:9981/play/a03q
-#EXTINF:-1,Polsat Sport Premium PPV5
-http://185.236.229.62:9981/play/a07x
-#EXTINF:-1,Polsat Sport Premium PPV6
-http://185.236.229.62:9981/play/a07y
-#EXTINF:-1,Polsat Viasat Explore HD
-http://185.236.229.62:9981/play/a07i
-#EXTINF:-1,Polsat Viasat History HD
-http://185.236.229.62:9981/play/a07o
-#EXTINF:-1,Polsat Viasat Nature HD
-http://185.236.229.62:9981/play/a06g
-#EXTINF:-1,Provence
-http://185.236.229.62:9981/play/a08k
-#EXTINF:-1,Puls 2 HD
-http://185.236.229.62:9981/play/a02y
-#EXTINF:-1,Red Carpet TV
-http://185.236.229.62:9981/play/a02q
-#EXTINF:-1,Romance TV
-http://185.236.229.62:9981/play/a05j
-#EXTINF:-1,SOYUZ
-http://185.236.229.62:9981/play/a08f
-#EXTINF:-1,SRS - TV
-http://185.236.229.62:9981/play/a08w
-#EXTINF:-1,STARS.TV
-http://185.236.229.62:9981/play/a01x
-#EXTINF:-1,SciFi HD
-http://185.236.229.62:9981/play/a03k
-#EXTINF:-1,Sportklub HD
-http://185.236.229.62:9981/play/a02k
-#EXTINF:-1,Stopklatka
-http://185.236.229.62:9981/play/a023
-#EXTINF:-1,StudioMed TV HD
-http://185.236.229.62:9981/play/a050
-#EXTINF:-1,Sundance HD
-http://185.236.229.62:9981/play/a03i
-#EXTINF:-1,Super Polsat HD
-http://185.236.229.62:9981/play/a043
-#EXTINF:-1,Super!
-http://185.236.229.62:9981/play/a08y
-#EXTINF:-1,THT
-http://185.236.229.62:9981/play/a08a
-#EXTINF:-1,TTV HD
-http://185.236.229.62:9981/play/a071
-#EXTINF:-1,TV CORAN
-http://185.236.229.62:9981/play/a088
-#EXTINF:-1,TV Okazje
-http://185.236.229.62:9981/play/a07m
-#EXTINF:-1,TV Okazje
-http://185.236.229.62:9981/play/a07l
-#EXTINF:-1,TV PULS HD
-http://185.236.229.62:9981/play/a034
-#EXTINF:-1,TV Republika
-http://185.236.229.62:9981/play/a027
-#EXTINF:-1,TV TAMAZIGHT
-http://185.236.229.62:9981/play/a089
-#EXTINF:-1,TV4 HD
-http://185.236.229.62:9981/play/a03x
-#EXTINF:-1,TV6 HD
-http://185.236.229.62:9981/play/a03y
-#EXTINF:-1,TVC
-http://185.236.229.62:9981/play/a04l
-#EXTINF:-1,TVN 24 HD
-http://185.236.229.62:9981/play/a06x
-#EXTINF:-1,TVN 7 HD
-http://185.236.229.62:9981/play/a06y
-#EXTINF:-1,TVN Fabula
-http://185.236.229.62:9981/play/a070
-#EXTINF:-1,TVN HD
-http://185.236.229.62:9981/play/a06u
-#EXTINF:-1,TVN STYLE HD
-http://185.236.229.62:9981/play/a06v
-#EXTINF:-1,TVN TURBO HD
-http://185.236.229.62:9981/play/a06w
-#EXTINF:-1,TVP 1 HD
-http://185.236.229.62:9981/play/a05i
-#EXTINF:-1,TVP 2 HD
-http://185.236.229.62:9981/play/a07p
-#EXTINF:-1,TVP 3
-http://185.236.229.62:9981/play/a060
-#EXTINF:-1,TVP ABC
-http://185.236.229.62:9981/play/a02z
-#EXTINF:-1,TVP Dokument HD
-http://185.236.229.62:9981/play/a05b
-#EXTINF:-1,TVP HD
-http://185.236.229.62:9981/play/a02i
-#EXTINF:-1,TVP Historia
-http://185.236.229.62:9981/play/a035
-#EXTINF:-1,TVP INFO HD
-http://185.236.229.62:9981/play/a02j
-#EXTINF:-1,TVP Kultura HD
-http://185.236.229.62:9981/play/a02t
-#EXTINF:-1,TVP Polonia
-http://185.236.229.62:9981/file/play/a08m
-#EXTINF:-1,TVP Rozrywka
-http://185.236.229.62:9981/play/a026
-#EXTINF:-1,TVP SERIALE
-http://185.236.229.62:9981/play/a02w
-#EXTINF:-1,TVP Sport HD
-http://185.236.229.62:9981/play/a05l
-#EXTINF:-1,TVP Sport HD
-http://185.236.229.62:9981/play/a05c
-#EXTINF:-1,TVRUS
-http://185.236.229.62:9981/play/a08c
-#EXTINF:-1,TVRUS Plus
-http://185.236.229.62:9981/play/a08d
-#EXTINF:-1,TVS
-http://185.236.229.62:9981/play/a02p
-#EXTINF:-1,Tamazight HD
-http://185.236.229.62:9981/play/a087
-#EXTINF:-1,TeenNick
-http://185.236.229.62:9981/play/a055
-#EXTINF:-1,Travel Channel HD
-http://185.236.229.62:9981/play/a072
-#EXTINF:-1,UA WORLD TV
-http://185.236.229.62:9981/play/a08e
-#EXTINF:-1,UATV
-http://185.236.229.62:9981/play/a04p
-#EXTINF:-1,VOX Music TV
-http://185.236.229.62:9981/play/a02d
-#EXTINF:-1,Vatican Media Europa
-http://185.236.229.62:9981/play/a06o
-#EXTINF:-1,WP
-http://185.236.229.62:9981/play/a02u
-#EXTINF:-1,Warner TV
-http://185.236.229.62:9981/play/a06d
-#EXTINF:-1,Wydarzenia 24 HD
-http://185.236.229.62:9981/play/a06j
-#EXTINF:-1,Zoom TV
-http://185.236.229.62:9981/play/a02a
-#EXTINF:-1,teleTOON+ HD
-http://185.236.229.62:9981/play/a051
-#EXTINF:-1,wPolsce.pl
-http://185.236.229.62:9981/play/a022`;
+const defaultM3U = `#EXTM3U tvg-url="https://epg.ovh/pltv.xml"
+#EXTINF:-1 tvg-id="PL| ARKA NOEGO KOLĘDY PIOSENKI ŚWIĄTECZNE POL" tvg-logo="http://103.176.90.92/images/1735090.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ARKA NOEGO KOLĘDY PIOSENKI ŚWIĄTECZNE POL",PL| ARKA NOEGO KOLĘDY PIOSENKI ŚWIĄTECZNE POL
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735090&extension=ts&play_token=lxDyYLg5py
+#EXTINF:-1 tvg-id="PL| ENEJ KOLĘDY POD WSPÓLNYM NIEBEM" tvg-logo="http://103.176.90.92/images/1735089.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ENEJ KOLĘDY POD WSPÓLNYM NIEBEM",PL| ENEJ KOLĘDY POD WSPÓLNYM NIEBEM
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735089&extension=ts&play_token=2gZGhcOZqi
+#EXTINF:-1 tvg-id="PL| GRONICKI NAJPIĘKNIEJSZE KOLĘDY POLSKIE I GÓRALSKIE" tvg-logo="http://103.176.90.92/images/1735088.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| GRONICKI NAJPIĘKNIEJSZE KOLĘDY POLSKIE I GÓRALSKIE",PL| GRONICKI NAJPIĘKNIEJSZE KOLĘDY POLSKIE I GÓRALSKIE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735088&extension=ts&play_token=siwcvOsfCI
+#EXTINF:-1 tvg-id="PL| KAPELA GÓROLE KOLĘDY GÓRALSKIE" tvg-logo="http://103.176.90.92/images/1735087.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KAPELA GÓROLE KOLĘDY GÓRALSKIE",PL| KAPELA GÓROLE KOLĘDY GÓRALSKIE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735087&extension=ts&play_token=i4MHeP2Tov
+#EXTINF:-1 tvg-id="PL| KOLĘDY I PASTORAŁKI GÓRALSKIE KAPELA OGÓRKI" tvg-logo="http://103.176.90.92/images/1735086.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOLĘDY I PASTORAŁKI GÓRALSKIE KAPELA OGÓRKI",PL| KOLĘDY I PASTORAŁKI GÓRALSKIE KAPELA OGÓRKI
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735086&extension=ts&play_token=YtKzj4WjpF
+#EXTINF:-1 tvg-id="PL| KOLEDY I PASTORALKI GÓRALSKIE SPOD SAMIUCKIK TATER" tvg-logo="http://103.176.90.92/images/1735085.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOLEDY I PASTORALKI GÓRALSKIE SPOD SAMIUCKIK TATER",PL| KOLEDY I PASTORALKI GÓRALSKIE SPOD SAMIUCKIK TATER
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735085&extension=ts&play_token=YpuvtgMETc
+#EXTINF:-1 tvg-id="PL| KOLĘDY Z ZENKIEM MARTYNIUKIEM" tvg-logo="http://103.176.90.92/images/1735084.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOLĘDY Z ZENKIEM MARTYNIUKIEM",PL| KOLĘDY Z ZENKIEM MARTYNIUKIEM
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735084&extension=ts&play_token=8iKOfKfqU1
+#EXTINF:-1 tvg-id="PL| KOMINEK I MUZYKA RELAKSACYJNO BOŻONARODZENIOWA 1" tvg-logo="http://103.176.90.92/images/1735083.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOMINEK I MUZYKA RELAKSACYJNO BOŻONARODZENIOWA 1",PL| KOMINEK I MUZYKA RELAKSACYJNO BOŻONARODZENIOWA 1
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735083&extension=ts&play_token=1tX2rW5ZJ8
+#EXTINF:-1 tvg-id="PL| KOMINEK I MUZYKA RELAKSACYJNO BOŻONARODZENIOWA 2" tvg-logo="http://103.176.90.92/images/1735082.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOMINEK I MUZYKA RELAKSACYJNO BOŻONARODZENIOWA 2",PL| KOMINEK I MUZYKA RELAKSACYJNO BOŻONARODZENIOWA 2
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735082&extension=ts&play_token=OUMkqLsP44
+#EXTINF:-1 tvg-id="PL| KOMINEK I ZAGRANICZNE PIOSENKI ŚWIĄTECZNE 1" tvg-logo="http://103.176.90.92/images/1735081.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOMINEK I ZAGRANICZNE PIOSENKI ŚWIĄTECZNE 1",PL| KOMINEK I ZAGRANICZNE PIOSENKI ŚWIĄTECZNE 1
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735081&extension=ts&play_token=4frgYNzkrx
+#EXTINF:-1 tvg-id="PL| KOMINEK I ZAGRANICZNE PIOSENKI ŚWIĄTECZNE 2" tvg-logo="http://103.176.90.92/images/1735080.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOMINEK I ZAGRANICZNE PIOSENKI ŚWIĄTECZNE 2",PL| KOMINEK I ZAGRANICZNE PIOSENKI ŚWIĄTECZNE 2
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735080&extension=ts&play_token=Ti7WqDO2DE
+#EXTINF:-1 tvg-id="PL| KOMINEK ŚWIĄTECZNY 1" tvg-logo="http://103.176.90.92/images/1735079.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOMINEK ŚWIĄTECZNY 1",PL| KOMINEK ŚWIĄTECZNY 1
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735079&extension=ts&play_token=4dA8kEb5ty
+#EXTINF:-1 tvg-id="PL| KOMINEK ŚWIĄTECZNY 2" tvg-logo="http://103.176.90.92/images/1735078.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KOMINEK ŚWIĄTECZNY 2",PL| KOMINEK ŚWIĄTECZNY 2
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735078&extension=ts&play_token=NmKqFXqMRx
+#EXTINF:-1 tvg-id="PL| KONCERT KOLĘD I PASTORAŁEK MAŁEJ ARMII JANOSIKA W ROKICINACH PODHALAŃSKICH" tvg-logo="http://103.176.90.92/images/1735077.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| KONCERT KOLĘD I PASTORAŁEK MAŁEJ ARMII JANOSIKA W ROKICINACH PODHALAŃSKICH",PL| KONCERT KOLĘD I PASTORAŁEK MAŁEJ ARMII JANOSIKA W ROKICINACH PODHALAŃSKICH
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735077&extension=ts&play_token=7sgc7ZqNN7
+#EXTINF:-1 tvg-id="PL| MATTEO BOCELLI I PRZYJACIELE ŚWIĘTA SPEŁNIONYCH MARZEŃ" tvg-logo="http://103.176.90.92/images/1735076.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| MATTEO BOCELLI I PRZYJACIELE ŚWIĘTA SPEŁNIONYCH MARZEŃ",PL| MATTEO BOCELLI I PRZYJACIELE ŚWIĘTA SPEŁNIONYCH MARZEŃ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735076&extension=ts&play_token=28XjmxIUcn
+#EXTINF:-1 tvg-id="PL| MAZOWSZE ŚPIEWA KOLĘDY" tvg-logo="http://103.176.90.92/images/1735075.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| MAZOWSZE ŚPIEWA KOLĘDY",PL| MAZOWSZE ŚPIEWA KOLĘDY
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735075&extension=ts&play_token=ulUEA80d2P
+#EXTINF:-1 tvg-id="PL| NAJLEPSZA RELAKSACYJNO ZAGRANICZNA MUZYKA ŚWIĄTECZNA PRZY KOMINKU" tvg-logo="http://103.176.90.92/images/1735074.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJLEPSZA RELAKSACYJNO ZAGRANICZNA MUZYKA ŚWIĄTECZNA PRZY KOMINKU",PL| NAJLEPSZA RELAKSACYJNO ZAGRANICZNA MUZYKA ŚWIĄTECZNA PRZY KOMINKU
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735074&extension=ts&play_token=3iH2dTWf6k
+#EXTINF:-1 tvg-id="PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE ZIMA" tvg-logo="http://103.176.90.92/images/1735073.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE ZIMA",PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE ZIMA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735073&extension=ts&play_token=v7UFTHNkBq
+#EXTINF:-1 tvg-id="PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE PRZY CHOINCE" tvg-logo="http://103.176.90.92/images/1735072.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE PRZY CHOINCE",PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE PRZY CHOINCE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735072&extension=ts&play_token=jH18V8dwHC
+#EXTINF:-1 tvg-id="PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE Z TEKSTEM" tvg-logo="http://103.176.90.92/images/1735071.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE Z TEKSTEM",PL| NAJLEPSZE ZAGRANICZNE PIOSENKI ŚWIĄTECZNE Z TEKSTEM
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735071&extension=ts&play_token=lIhgPdH3We
+#EXTINF:-1 tvg-id="PL| NAJPIĘKNIEJSZE KOLĘDY I PASTORAŁKI GÓRALSKIE" tvg-logo="http://103.176.90.92/images/1735070.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJPIĘKNIEJSZE KOLĘDY I PASTORAŁKI GÓRALSKIE",PL| NAJPIĘKNIEJSZE KOLĘDY I PASTORAŁKI GÓRALSKIE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735070&extension=ts&play_token=CfVgYrflxU
+#EXTINF:-1 tvg-id="PL| NAJPIĘKNIEJSZE KOLĘDY KRZYSZTOF KRAWCZYK" tvg-logo="http://103.176.90.92/images/1735069.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJPIĘKNIEJSZE KOLĘDY KRZYSZTOF KRAWCZYK",PL| NAJPIĘKNIEJSZE KOLĘDY KRZYSZTOF KRAWCZYK
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735069&extension=ts&play_token=PvlRqNB5Zx
+#EXTINF:-1 tvg-id="PL| NAJPIĘKNIEJSZE KOLĘDY Z PODHALA" tvg-logo="http://103.176.90.92/images/1735068.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJPIĘKNIEJSZE KOLĘDY Z PODHALA",PL| NAJPIĘKNIEJSZE KOLĘDY Z PODHALA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735068&extension=ts&play_token=Pd8u3gtRik
+#EXTINF:-1 tvg-id="PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY DLA DZIECI" tvg-logo="http://103.176.90.92/images/1735067.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY DLA DZIECI",PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY DLA DZIECI
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735067&extension=ts&play_token=jnxfZrRlmy
+#EXTINF:-1 tvg-id="PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY GOLEC UORKIESTRA" tvg-logo="http://103.176.90.92/images/1735066.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY GOLEC UORKIESTRA",PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY GOLEC UORKIESTRA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735066&extension=ts&play_token=W0GM5SGYwY
+#EXTINF:-1 tvg-id="PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY GOLEC UORKIESTRA 3 JASNA GÓRA" tvg-logo="http://103.176.90.92/images/1735065.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY GOLEC UORKIESTRA 3 JASNA GÓRA",PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY GOLEC UORKIESTRA 3 JASNA GÓRA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735065&extension=ts&play_token=aqDZ0h4hgX
+#EXTINF:-1 tvg-id="PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY Z TEKSTEM" tvg-logo="http://103.176.90.92/images/1735064.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY Z TEKSTEM",PL| NAJPIĘKNIEJSZE POLSKIE KOLĘDY Z TEKSTEM
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735064&extension=ts&play_token=4Trc2nGndi
+#EXTINF:-1 tvg-id="PL| PIOSENKI ŚWIĄTECZNE DLA DZIECI" tvg-logo="http://103.176.90.92/images/1735063.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| PIOSENKI ŚWIĄTECZNE DLA DZIECI",PL| PIOSENKI ŚWIĄTECZNE DLA DZIECI
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735063&extension=ts&play_token=GmL0pFHZuT
+#EXTINF:-1 tvg-id="PL| ŚWIĄTECZNE ZAGRANICZNE PIOSENKI DLA DZIECI" tvg-logo="http://103.176.90.92/images/1735062.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ŚWIĄTECZNE ZAGRANICZNE PIOSENKI DLA DZIECI",PL| ŚWIĄTECZNE ZAGRANICZNE PIOSENKI DLA DZIECI
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735062&extension=ts&play_token=yAumTPNiYT
+#EXTINF:-1 tvg-id="PL| ŚWIĄTECZNY KOMINEK" tvg-logo="http://103.176.90.92/images/1735061.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ŚWIĄTECZNY KOMINEK",PL| ŚWIĄTECZNY KOMINEK
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735061&extension=ts&play_token=7F0AhBV9eR
+#EXTINF:-1 tvg-id="PL| ŚWIĘTA NA KLUBOWO" tvg-logo="http://103.176.90.92/images/1735060.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ŚWIĘTA NA KLUBOWO",PL| ŚWIĘTA NA KLUBOWO
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735060&extension=ts&play_token=oMG0NHkqE5
+#EXTINF:-1 tvg-id="PL| ŚWIĘTA Z BONEY M PRZY KOMINKU" tvg-logo="http://103.176.90.92/images/1735059.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ŚWIĘTA Z BONEY M PRZY KOMINKU",PL| ŚWIĘTA Z BONEY M PRZY KOMINKU
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735059&extension=ts&play_token=Z6E8iNz8I3
+#EXTINF:-1 tvg-id="PL| WODECKI KRAWCZYK I RYNKOWSKI KOLĘDY" tvg-logo="http://103.176.90.92/images/1735058.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| WODECKI KRAWCZYK I RYNKOWSKI KOLĘDY",PL| WODECKI KRAWCZYK I RYNKOWSKI KOLĘDY
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735058&extension=ts&play_token=7SvJbWuTE1
+#EXTINF:-1 tvg-id="PL| ZIMA RELAKS 1" tvg-logo="http://103.176.90.92/images/1735057.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ZIMA RELAKS 1",PL| ZIMA RELAKS 1
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735057&extension=ts&play_token=aCfVoT3fGD
+#EXTINF:-1 tvg-id="PL| ZIMA RELAKS 2" tvg-logo="http://103.176.90.92/images/1735056.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ZIMA RELAKS 2",PL| ZIMA RELAKS 2
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735056&extension=ts&play_token=kBTacH9uLO
+#EXTINF:-1 tvg-id="PL| ZIMOWY KOMINEK 1" tvg-logo="http://103.176.90.92/images/1735055.png" group-title="PL| NA ŚWIĄTECZNIE 24/7" tvg-name="PL| ZIMOWY KOMINEK 1",PL| ZIMOWY KOMINEK 1
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1735055&extension=ts&play_token=gJI1Csri7A
+#EXTINF:-1 tvg-id="4K| ELEVEN PL UHD/4K" tvg-logo="http://51.158.145.100/picons/logos/LOGOSNEW/4K.png" group-title="4K UHD 3840P" tvg-name="4K| ELEVEN PL UHD/4K",4K| ELEVEN PL UHD/4K
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1948662&extension=ts&play_token=8mK1HiLWqV
+#EXTINF:-1 tvg-id="4K| ELEVEN SPORTS PL UHD/4K" tvg-logo="http://51.158.145.100/picons/logos/LOGOSNEW/4K.png" group-title="4K UHD 3840P" tvg-name="4K| ELEVEN SPORTS PL UHD/4K",4K| ELEVEN SPORTS PL UHD/4K
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1948661&extension=ts&play_token=anuoxml64s
+#EXTINF:-1 tvg-id="UK| SKY SPORTS PL HD" tvg-logo="http://51.158.145.100/picons/logos/UKNEW/SKYSPORTSPL.png" group-title="UK| SPORTS" tvg-name="UK| SKY SPORTS PL HD",UK| SKY SPORTS PL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=83447&extension=ts&play_token=EtDyeKannC
+#EXTINF:-1 tvg-id="UK| SKY SPORTS PL FHD" tvg-logo="http://103.176.90.92/images/30493.png" group-title="UK| SPORTS" tvg-name="UK| SKY SPORTS PL FHD",UK| SKY SPORTS PL FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=30493&extension=ts&play_token=N8fMfPaU9G
+#EXTINF:-1 tvg-id="##### PL REPLAYS #####" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="##### PL REPLAYS #####",##### PL REPLAYS #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038925&extension=ts&play_token=cVQRuWrmE8
+#EXTINF:-1 tvg-id="UK| PL REPLAY INFO HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY INFO HD",UK| PL REPLAY INFO HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038924&extension=ts&play_token=XKAUxLGXww
+#EXTINF:-1 tvg-id="UK| PL HIGHLIGHTS HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL HIGHLIGHTS HD",UK| PL HIGHLIGHTS HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038923&extension=ts&play_token=crT0V0SW1O
+#EXTINF:-1 tvg-id="UK| PL REPLAY 1 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 1 HD",UK| PL REPLAY 1 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038922&extension=ts&play_token=CbNlBwg0OW
+#EXTINF:-1 tvg-id="UK| PL REPLAY 2 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 2 HD",UK| PL REPLAY 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038921&extension=ts&play_token=dFRF3mpv63
+#EXTINF:-1 tvg-id="UK| PL REPLAY 3 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 3 HD",UK| PL REPLAY 3 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038920&extension=ts&play_token=XaHoYQMJN8
+#EXTINF:-1 tvg-id="UK| PL REPLAY 4 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 4 HD",UK| PL REPLAY 4 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038919&extension=ts&play_token=JGfkAVb7XV
+#EXTINF:-1 tvg-id="UK| PL REPLAY 5 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 5 HD",UK| PL REPLAY 5 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038918&extension=ts&play_token=oV7P1wVJd7
+#EXTINF:-1 tvg-id="UK| PL REPLAY 6 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 6 HD",UK| PL REPLAY 6 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038917&extension=ts&play_token=2C5HRnSjUM
+#EXTINF:-1 tvg-id="UK| PL REPLAY 7 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 7 HD",UK| PL REPLAY 7 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038916&extension=ts&play_token=cUj9fDB4cW
+#EXTINF:-1 tvg-id="UK| PL REPLAY 8 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 8 HD",UK| PL REPLAY 8 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038915&extension=ts&play_token=1H2zVeSCb2
+#EXTINF:-1 tvg-id="UK| PL REPLAY 9 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 9 HD",UK| PL REPLAY 9 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038914&extension=ts&play_token=v8gaUiEcgq
+#EXTINF:-1 tvg-id="UK| PL REPLAY 10 HD" tvg-logo="http://51.158.145.100/picons/logos/UK/premierleague.png" group-title="UK| SOCCER REPLAY" tvg-name="UK| PL REPLAY 10 HD",UK| PL REPLAY 10 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1038913&extension=ts&play_token=fbyVSapFvn
+#EXTINF:-1 tvg-id="UK| SUPERSPORTS PL HD" tvg-logo="http://51.158.145.100/picons/logos/UKNEW/SUPERSPORT.png" group-title="UK| WORLD SPORTS" tvg-name="UK| SUPERSPORTS PL HD",UK| SUPERSPORTS PL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=239078&extension=ts&play_token=S3HrAYTHc5
+#EXTINF:-1 tvg-id="UK: VOLLEY PPV 8 · BELGIUM V POLAND | WEEK 1 | WOMEN'S VNL 2026 | Wed 03 Jun 04:15 | 8K EXCLUSIVE" tvg-logo="http://51.158.145.100/picons/logos/UK/FIV3.png" group-title="UK| VOLLEY BALL WORLD PPV" tvg-name="UK: VOLLEY PPV 8 · BELGIUM V POLAND | WEEK 1 | WOMEN'S VNL 2026 | Wed 03 Jun 04:15 | 8K EXCLUSIVE",UK: VOLLEY PPV 8 · BELGIUM V POLAND | WEEK 1 | WOMEN'S VNL 2026 | Wed 03 Jun 04:15 | 8K EXCLUSIVE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1921434&extension=ts&play_token=92wbmakhv3
+#EXTINF:-1 tvg-id="UK: VOLLEY PPV 17 · CZECHIA V POLAND | WEEK 1 | WOMEN'S VNL 2026 | Thu 04 Jun 07:45 | 8K EXCLUSIVE" tvg-logo="http://51.158.145.100/picons/logos/UK/FIV3.png" group-title="UK| VOLLEY BALL WORLD PPV" tvg-name="UK: VOLLEY PPV 17 · CZECHIA V POLAND | WEEK 1 | WOMEN'S VNL 2026 | Thu 04 Jun 07:45 | 8K EXCLUSIVE",UK: VOLLEY PPV 17 · CZECHIA V POLAND | WEEK 1 | WOMEN'S VNL 2026 | Thu 04 Jun 07:45 | 8K EXCLUSIVE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1921425&extension=ts&play_token=nGZdbxZXbk
+#EXTINF:-1 tvg-id="PRIME| THE INCREDIBLE DR. POL ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/USA/1919857.png" group-title="US| PRIME" tvg-name="PRIME| THE INCREDIBLE DR. POL ᴿᴬᵂ",PRIME| THE INCREDIBLE DR. POL ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1919857&extension=ts&play_token=IQB4k112fz
+#EXTINF:-1 tvg-id="(FLSP 818) | flobikes: 2026 Tour of Poland _ Men (Tour of Poland _ Men) (2026—08—03 04:56:10)" tvg-logo="http://51.158.145.100/picons/logos/USA/flo.png" group-title="US| FLO NETWORK" tvg-name="(FLSP 818) | flobikes: 2026 Tour of Poland _ Men (Tour of Poland _ Men) (2026—08—03 04:56:10)",(FLSP 818) | flobikes: 2026 Tour of Poland _ Men (Tour of Poland _ Men) (2026—08—03 04:56:10)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1960444&extension=ts&play_token=Odwp3KL1aI
+#EXTINF:-1 tvg-id="(FLSP 837) | flobikes: 2026 Tour of Poland _ Women (Tour of Poland) (2026—08—14 04:56:00)" tvg-logo="http://51.158.145.100/picons/logos/USA/flo.png" group-title="US| FLO NETWORK" tvg-name="(FLSP 837) | flobikes: 2026 Tour of Poland _ Women (Tour of Poland) (2026—08—14 04:56:00)",(FLSP 837) | flobikes: 2026 Tour of Poland _ Women (Tour of Poland) (2026—08—14 04:56:00)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1960425&extension=ts&play_token=r1UkD8Nsaj
+#EXTINF:-1 tvg-id="(FLSP 852) | flotrack: 2026 Wanda Diamond League: Silesia (POL) Press Conference (Wanda DL: Silesia Press Conference) (2026—08—21 00:56:00)" tvg-logo="http://51.158.145.100/picons/logos/USA/flo.png" group-title="US| FLO NETWORK" tvg-name="(FLSP 852) | flotrack: 2026 Wanda Diamond League: Silesia (POL) Press Conference (Wanda DL: Silesia Press Conference) (2026—08—21 00:56:00)",(FLSP 852) | flotrack: 2026 Wanda Diamond League: Silesia (POL) Press Conference (Wanda DL: Silesia Press Conference) (2026—08—21 00:56:00)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1960410&extension=ts&play_token=Ie08dYHzX9
+#EXTINF:-1 tvg-id="(FLSP 856) | flotrack: 2026 Wanda Diamond League: Silesia (POL) (Wanda Diamond League: Silesia (POL)) (2026—08—22 08:30:00)" tvg-logo="http://51.158.145.100/picons/logos/USA/flo.png" group-title="US| FLO NETWORK" tvg-name="(FLSP 856) | flotrack: 2026 Wanda Diamond League: Silesia (POL) (Wanda Diamond League: Silesia (POL)) (2026—08—22 08:30:00)",(FLSP 856) | flotrack: 2026 Wanda Diamond League: Silesia (POL) (Wanda Diamond League: Silesia (POL)) (2026—08—22 08:30:00)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1960406&extension=ts&play_token=sEy2uftyAe
+#EXTINF:-1 tvg-id="NZ| SKY SPORTS NZ PL" tvg-logo="http://picons.cmshulk.com/picons/1424311.png" group-title="NZ| SKY SPORTS NZ" tvg-name="NZ| SKY SPORTS NZ PL",NZ| SKY SPORTS NZ PL
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1424311&extension=ts&play_token=GW0N6G5V9X
+#EXTINF:-1 tvg-id="SA| SUPERSPORT PL HD" tvg-logo="http://103.176.90.95/images/144412.png" group-title="AFR| DSTV NETWORK" tvg-name="SA| SUPERSPORT PL HD",SA| SUPERSPORT PL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=144412&extension=ts&play_token=G8GGK9AIkh
+#EXTINF:-1 tvg-id="ES—DG| TVP POLONIA ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/SPAINNEW/TVPPOLONIA.png" group-title="ES| DIGI ᴿᴬᵂ" tvg-name="ES—DG| TVP POLONIA ᴿᴬᵂ",ES—DG| TVP POLONIA ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=2069232&extension=ts&play_token=6TV77Dftuh
+#EXTINF:-1 tvg-id="FR| CANAL+ PL 4K" tvg-logo="http://51.158.145.100/picons/logos/france/526129.png" group-title="FR| FRANCE 4K" tvg-name="FR| CANAL+ PL 4K",FR| CANAL+ PL 4K
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=526129&extension=ts&play_token=Z5NJ4eUNbm
+#EXTINF:-1 tvg-id="FR| CANAL+ PL HD" tvg-logo="http://51.158.145.100/picons/logos/france/507394.png" group-title="FR| FRANCE HD" tvg-name="FR| CANAL+ PL HD",FR| CANAL+ PL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=507394&extension=ts&play_token=fGJlo821FD
+#EXTINF:-1 tvg-id="FR| CANAL+ PL LQ" tvg-logo="http://51.158.145.100/picons/logos/france/507550.png" group-title="FR| FRANCE LQ" tvg-name="FR| CANAL+ PL LQ",FR| CANAL+ PL LQ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=507550&extension=ts&play_token=hcMBmTipRH
+#EXTINF:-1 tvg-id="SP| CANAL+ PL HD" tvg-logo="http://51.158.145.100/picons/logos/france/507712.png" group-title="FR| SPORTS HD" tvg-name="SP| CANAL+ PL HD",SP| CANAL+ PL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=507712&extension=ts&play_token=nqTLZlcZ7U
+#EXTINF:-1 tvg-id="BE| PLAY SPORTS PL HD" tvg-logo="http://103.176.90.92/images/931400.png" group-title="BE| SPORTS" tvg-name="BE| PLAY SPORTS PL HD",BE| PLAY SPORTS PL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=931400&extension=ts&play_token=rBKRbAJnMD
+#EXTINF:-1 tvg-id="PL—VIP| TVN RAW" tvg-logo="http://103.176.90.92/images/1530234.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVN RAW",PL—VIP| TVN RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530234&extension=ts&play_token=lrkaRmYFTM
+#EXTINF:-1 tvg-id="PL—VIP| TVN 7 RAW" tvg-logo="http://103.176.90.92/images/1530230.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVN 7 RAW",PL—VIP| TVN 7 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530230&extension=ts&play_token=ePKBvfxHku
+#EXTINF:-1 tvg-id="PL—VIP| TVN 24 RAW" tvg-logo="http://103.176.90.92/images/1530232.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVN 24 RAW",PL—VIP| TVN 24 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530232&extension=ts&play_token=aX18bb95qT
+#EXTINF:-1 tvg-id="PL—VIP| TVN24 BIS RAW" tvg-logo="http://103.176.90.92/images/1530231.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVN24 BIS RAW",PL—VIP| TVN24 BIS RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530231&extension=ts&play_token=hyoPI6UsX0
+#EXTINF:-1 tvg-id="PL—VIP| TVN FABULA RAW" tvg-logo="http://103.176.90.92/images/1530233.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVN FABULA RAW",PL—VIP| TVN FABULA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530233&extension=ts&play_token=5wzCnK0gk9
+#EXTINF:-1 tvg-id="PL—VIP| TVN STYLE RAW" tvg-logo="http://103.176.90.92/images/1530235.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVN STYLE RAW",PL—VIP| TVN STYLE RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530235&extension=ts&play_token=c55O1IU8Mf
+#EXTINF:-1 tvg-id="PL—VIP| TVN TURBO RAW" tvg-logo="http://103.176.90.92/images/1530236.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVN TURBO RAW",PL—VIP| TVN TURBO RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530236&extension=ts&play_token=erZgKuBj8h
+#EXTINF:-1 tvg-id="PL—VIP| TVP RAW" tvg-logo="http://103.176.90.92/images/1530243.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVP RAW",PL—VIP| TVP RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530243&extension=ts&play_token=519QTR23gO
+#EXTINF:-1 tvg-id="PL—VIP| TVP 1 RAW" tvg-logo="http://103.176.90.92/images/1530237.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVP 1 RAW",PL—VIP| TVP 1 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530237&extension=ts&play_token=NBfd9bj4Kj
+#EXTINF:-1 tvg-id="PL—VIP| TVP 2 RAW" tvg-logo="http://103.176.90.92/images/1530238.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVP 2 RAW",PL—VIP| TVP 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530238&extension=ts&play_token=FCKWqHKJwI
+#EXTINF:-1 tvg-id="PL—VIP| TVP ABC RAW" tvg-logo="http://103.176.90.92/images/1530240.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVP ABC RAW",PL—VIP| TVP ABC RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530240&extension=ts&play_token=czjxvbghEX
+#EXTINF:-1 tvg-id="PL—VIP| TVP HISTORIA RAW" tvg-logo="http://103.176.90.92/images/1530241.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVP HISTORIA RAW",PL—VIP| TVP HISTORIA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530241&extension=ts&play_token=PMVVsOOXhT
+#EXTINF:-1 tvg-id="PL—VIP| TVP KULTURA RAW" tvg-logo="http://103.176.90.92/images/1530242.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVP KULTURA RAW",PL—VIP| TVP KULTURA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530242&extension=ts&play_token=WSEeo69Mkp
+#EXTINF:-1 tvg-id="PL—VIP| TVP SERIALE RAW" tvg-logo="http://103.176.90.92/images/1530244.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVP SERIALE RAW",PL—VIP| TVP SERIALE RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530244&extension=ts&play_token=ojm1USMwA0
+#EXTINF:-1 tvg-id="PL—VIP| TVP SPORT RAW" tvg-logo="http://103.176.90.92/images/1530245.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVP SPORT RAW",PL—VIP| TVP SPORT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530245&extension=ts&play_token=HzxrZNL8mA
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT RAW" tvg-logo="http://103.176.90.92/images/1530203.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT RAW",PL—VIP| POLSAT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530203&extension=ts&play_token=A05Udvsfg8
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT CAFE RAW" tvg-logo="http://103.176.90.92/images/1530193.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT CAFE RAW",PL—VIP| POLSAT CAFE RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530193&extension=ts&play_token=mYLhNQzBrR
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT DOKU RAW" tvg-logo="http://103.176.90.92/images/1530194.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT DOKU RAW",PL—VIP| POLSAT DOKU RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530194&extension=ts&play_token=dAUHgkO7A6
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT FILM RAW" tvg-logo="http://103.176.90.92/images/1530195.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT FILM RAW",PL—VIP| POLSAT FILM RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530195&extension=ts&play_token=GOYdHhV9pV
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT GAMES RAW" tvg-logo="http://103.176.90.92/images/1530196.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT GAMES RAW",PL—VIP| POLSAT GAMES RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530196&extension=ts&play_token=tR83Uv1jM7
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT JIM JAM RAW" tvg-logo="http://103.176.90.92/images/1530197.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT JIM JAM RAW",PL—VIP| POLSAT JIM JAM RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530197&extension=ts&play_token=8xbJ8ESKDV
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT MUSIC RAW" tvg-logo="http://103.176.90.92/images/1530198.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT MUSIC RAW",PL—VIP| POLSAT MUSIC RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530198&extension=ts&play_token=UFzgniELSE
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT NEWS RAW" tvg-logo="http://103.176.90.92/images/1530201.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT NEWS RAW",PL—VIP| POLSAT NEWS RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530201&extension=ts&play_token=tE4YSz6JdE
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT NEWS POLITYKA RAW" tvg-logo="http://103.176.90.92/images/1530200.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT NEWS POLITYKA RAW",PL—VIP| POLSAT NEWS POLITYKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530200&extension=ts&play_token=7EgbanDije
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT PLAY RAW" tvg-logo="http://103.176.90.92/images/1530202.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT PLAY RAW",PL—VIP| POLSAT PLAY RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530202&extension=ts&play_token=Nd7dK8jkFY
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT RODZINA RAW" tvg-logo="http://103.176.90.92/images/1530204.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT RODZINA RAW",PL—VIP| POLSAT RODZINA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530204&extension=ts&play_token=tfHLr0iql7
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SERIALE RAW" tvg-logo="http://103.176.90.92/images/1530205.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SERIALE RAW",PL—VIP| POLSAT SERIALE RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530205&extension=ts&play_token=4VY8KrcX4k
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SPORT 1 RAW" tvg-logo="http://103.176.90.92/images/1530206.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SPORT 1 RAW",PL—VIP| POLSAT SPORT 1 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530206&extension=ts&play_token=K81it7mnhU
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SPORT 2 RAW" tvg-logo="http://103.176.90.92/images/1530207.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SPORT 2 RAW",PL—VIP| POLSAT SPORT 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530207&extension=ts&play_token=jgP4iQ9nM9
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SPORT 3 RAW" tvg-logo="http://103.176.90.92/images/1530208.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SPORT 3 RAW",PL—VIP| POLSAT SPORT 3 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530208&extension=ts&play_token=UIFE64Il9i
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SPORT FIGHT RAW" tvg-logo="http://103.176.90.92/images/1530209.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SPORT FIGHT RAW",PL—VIP| POLSAT SPORT FIGHT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530209&extension=ts&play_token=tZghsuSagA
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SPORT PREMIUM 1 RAW" tvg-logo="http://103.176.90.92/images/1530210.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SPORT PREMIUM 1 RAW",PL—VIP| POLSAT SPORT PREMIUM 1 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530210&extension=ts&play_token=HC3dfIXvhU
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SPORT PREMIUM 2 RAW" tvg-logo="http://103.176.90.92/images/1530211.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SPORT PREMIUM 2 RAW",PL—VIP| POLSAT SPORT PREMIUM 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530211&extension=ts&play_token=fTiMOTMCHs
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SPORT PREMIUM PPV3 RAW" tvg-logo="http://103.176.90.92/images/1530212.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SPORT PREMIUM PPV3 RAW",PL—VIP| POLSAT SPORT PREMIUM PPV3 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530212&extension=ts&play_token=5CU1lvqM5O
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT SPORT PREMIUM PPV5 RAW" tvg-logo="http://103.176.90.92/images/1530214.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT SPORT PREMIUM PPV5 RAW",PL—VIP| POLSAT SPORT PREMIUM PPV5 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530214&extension=ts&play_token=Lhw6Twt3z2
+#EXTINF:-1 tvg-id="PL—VIP| POLSAT VIASAT HISTORY RAW" tvg-logo="http://103.176.90.92/images/1530216.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLSAT VIASAT HISTORY RAW",PL—VIP| POLSAT VIASAT HISTORY RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530216&extension=ts&play_token=yMSTpAb8lo
+#EXTINF:-1 tvg-id="PL—VIP|  POLSAT SPORT PREMIUM PPV4 RAW" tvg-logo="http://103.176.90.92/images/1530213.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP|  POLSAT SPORT PREMIUM PPV4 RAW",PL—VIP|  POLSAT SPORT PREMIUM PPV4 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530213&extension=ts&play_token=02OfBDRYQe
+#EXTINF:-1 tvg-id="PL—VIP|  POLSAT SPORT PREMIUM PPV6 RAW" tvg-logo="http://103.176.90.92/images/1530215.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP|  POLSAT SPORT PREMIUM PPV6 RAW",PL—VIP|  POLSAT SPORT PREMIUM PPV6 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530215&extension=ts&play_token=bS33JvdHRe
+#EXTINF:-1 tvg-id="PL—VIP| SKY SHOWTIME 1 RAW" tvg-logo="http://103.176.90.92/images/1847051.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| SKY SHOWTIME 1 RAW",PL—VIP| SKY SHOWTIME 1 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1847051&extension=ts&play_token=YXw4UC2U6T
+#EXTINF:-1 tvg-id="PL—VIP| SKY SHOWTIME 2 RAW" tvg-logo="http://103.176.90.92/images/1847052.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| SKY SHOWTIME 2 RAW",PL—VIP| SKY SHOWTIME 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1847052&extension=ts&play_token=etsF8mpui6
+#EXTINF:-1 tvg-id="PL—VIP| CANAL+ DOKUMENT RAW" tvg-logo="http://103.176.90.92/images/1530128.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CANAL+ DOKUMENT RAW",PL—VIP| CANAL+ DOKUMENT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530128&extension=ts&play_token=u5V35Qdqk8
+#EXTINF:-1 tvg-id="PL—VIP| CANAL+ DOMO RAW" tvg-logo="http://103.176.90.92/images/1530129.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CANAL+ DOMO RAW",PL—VIP| CANAL+ DOMO RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530129&extension=ts&play_token=OGZcHTv5E3
+#EXTINF:-1 tvg-id="PL—VIP| CANAL+ FAMILY RAW" tvg-logo="http://103.176.90.92/images/1530130.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CANAL+ FAMILY RAW",PL—VIP| CANAL+ FAMILY RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530130&extension=ts&play_token=0fKO6NcVyM
+#EXTINF:-1 tvg-id="PL—VIP| CANAL+ KUCHNIA RAW" tvg-logo="http://103.176.90.92/images/1530132.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CANAL+ KUCHNIA RAW",PL—VIP| CANAL+ KUCHNIA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530132&extension=ts&play_token=xCrR3ll08l
+#EXTINF:-1 tvg-id="PL—VIP| CANAL+ NOW RAW" tvg-logo="http://103.176.90.92/images/1530133.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CANAL+ NOW RAW",PL—VIP| CANAL+ NOW RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530133&extension=ts&play_token=W31bQctYHx
+#EXTINF:-1 tvg-id="PL—VIP| CANAL+ SPORT 5 POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530139.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CANAL+ SPORT 5 POLSKA RAW",PL—VIP| CANAL+ SPORT 5 POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530139&extension=ts&play_token=ao97l59DdH
+#EXTINF:-1 tvg-id="PL—VIP| ELEVEN SPORTS 1 RAW" tvg-logo="http://103.176.90.92/images/1530157.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| ELEVEN SPORTS 1 RAW",PL—VIP| ELEVEN SPORTS 1 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530157&extension=ts&play_token=dBUxTxH8p7
+#EXTINF:-1 tvg-id="PL—VIP| ELEVEN SPORTS 2 RAW" tvg-logo="http://103.176.90.92/images/1530158.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| ELEVEN SPORTS 2 RAW",PL—VIP| ELEVEN SPORTS 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530158&extension=ts&play_token=Vfz46ZaeMo
+#EXTINF:-1 tvg-id="PL—VIP| ELEVEN SPORTS 3 RAW" tvg-logo="http://103.176.90.92/images/1530159.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| ELEVEN SPORTS 3 RAW",PL—VIP| ELEVEN SPORTS 3 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530159&extension=ts&play_token=zcb2tzhb2L
+#EXTINF:-1 tvg-id="PL—VIP| 13 ULICA RAW" tvg-logo="http://103.176.90.92/images/1530115.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| 13 ULICA RAW",PL—VIP| 13 ULICA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530115&extension=ts&play_token=2lmW8mGACi
+#EXTINF:-1 tvg-id="PL—VIP| 4 FUN DANCE RAW" tvg-logo="http://103.176.90.92/images/1530112.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| 4 FUN DANCE RAW",PL—VIP| 4 FUN DANCE RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530112&extension=ts&play_token=D9tJnxkXam
+#EXTINF:-1 tvg-id="PL—VIP| 4 FUN KIDS RAW" tvg-logo="http://103.176.90.92/images/1530113.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| 4 FUN KIDS RAW",PL—VIP| 4 FUN KIDS RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530113&extension=ts&play_token=NKQfW1xiQq
+#EXTINF:-1 tvg-id="PL—VIP| 4 FUN TV RAW" tvg-logo="http://103.176.90.92/images/1530114.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| 4 FUN TV RAW",PL—VIP| 4 FUN TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530114&extension=ts&play_token=5bZs52X6on
+#EXTINF:-1 tvg-id="PL—VIP| AlLE INO+ RAW" tvg-logo="http://103.176.90.92/images/1530116.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| AlLE INO+ RAW",PL—VIP| AlLE INO+ RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530116&extension=ts&play_token=Svz1nWS4Qz
+#EXTINF:-1 tvg-id="PL—VIP| AMC POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530117.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| AMC POLSKA RAW",PL—VIP| AMC POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530117&extension=ts&play_token=VQLeKaMA14
+#EXTINF:-1 tvg-id="PL—VIP| ANIMAL PLANET RAW" tvg-logo="http://103.176.90.92/images/1530118.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| ANIMAL PLANET RAW",PL—VIP| ANIMAL PLANET RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530118&extension=ts&play_token=IPwAWQRME5
+#EXTINF:-1 tvg-id="PL—VIP| AXN BLACK RAW" tvg-logo="http://103.176.90.92/images/1530119.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| AXN BLACK RAW",PL—VIP| AXN BLACK RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530119&extension=ts&play_token=DynpSooyhC
+#EXTINF:-1 tvg-id="PL—VIP| AXN RAW" tvg-logo="http://103.176.90.92/images/1530120.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| AXN RAW",PL—VIP| AXN RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530120&extension=ts&play_token=GsSZqQ9tIG
+#EXTINF:-1 tvg-id="PL—VIP| AXN WHITE RAW" tvg-logo="http://103.176.90.92/images/1530121.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| AXN WHITE RAW",PL—VIP| AXN WHITE RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530121&extension=ts&play_token=lYM0GiRbTl
+#EXTINF:-1 tvg-id="PL—VIP| BBC BRIT RAW" tvg-logo="http://103.176.90.92/images/1530122.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| BBC BRIT RAW",PL—VIP| BBC BRIT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530122&extension=ts&play_token=rxn2Vydgy7
+#EXTINF:-1 tvg-id="PL—VIP| BBC CBEEBIES POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530123.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| BBC CBEEBIES POLSKA RAW",PL—VIP| BBC CBEEBIES POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530123&extension=ts&play_token=8bHfKGYjE5
+#EXTINF:-1 tvg-id="PL—VIP| BBC FIRST RAW" tvg-logo="http://103.176.90.92/images/1530124.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| BBC FIRST RAW",PL—VIP| BBC FIRST RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530124&extension=ts&play_token=b8BTuIukl2
+#EXTINF:-1 tvg-id="PL—VIP| BBC LIFESTYLE POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530125.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| BBC LIFESTYLE POLSKA RAW",PL—VIP| BBC LIFESTYLE POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530125&extension=ts&play_token=Ke3bl6PF0X
+#EXTINF:-1 tvg-id="PL—VIP| BOOMERANG RAW" tvg-logo="http://103.176.90.92/images/1530126.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| BOOMERANG RAW",PL—VIP| BOOMERANG RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530126&extension=ts&play_token=MB4UQ4UaLJ
+#EXTINF:-1 tvg-id="PL—VIP| CARTOON NETWORK RAW" tvg-logo="http://103.176.90.92/images/1530141.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CARTOON NETWORK RAW",PL—VIP| CARTOON NETWORK RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530141&extension=ts&play_token=BrkkjJpuO3
+#EXTINF:-1 tvg-id="PL—VIP| CBS EUROPA RAW" tvg-logo="http://103.176.90.92/images/1530142.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CBS EUROPA RAW",PL—VIP| CBS EUROPA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530142&extension=ts&play_token=IfCurbHVOv
+#EXTINF:-1 tvg-id="PL—VIP| CBS RRALITY RAW" tvg-logo="http://103.176.90.92/images/1530143.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CBS RRALITY RAW",PL—VIP| CBS RRALITY RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530143&extension=ts&play_token=wwIpedb6t2
+#EXTINF:-1 tvg-id="PL—VIP| CI POLSAT RAW" tvg-logo="http://103.176.90.92/images/1530146.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CI POLSAT RAW",PL—VIP| CI POLSAT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530146&extension=ts&play_token=tWgvWM5Lbq
+#EXTINF:-1 tvg-id="PL—VIP| CINEMAX 2 RAW" tvg-logo="http://103.176.90.92/images/1530144.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CINEMAX 2 RAW",PL—VIP| CINEMAX 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530144&extension=ts&play_token=esZJhzbbbX
+#EXTINF:-1 tvg-id="PL—VIP| CINEMAX RAW" tvg-logo="http://103.176.90.92/images/1530145.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| CINEMAX RAW",PL—VIP| CINEMAX RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530145&extension=ts&play_token=TgSmP0FgYL
+#EXTINF:-1 tvg-id="PL—VIP| DA VINCI POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530148.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| DA VINCI POLSKA RAW",PL—VIP| DA VINCI POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530148&extension=ts&play_token=1HPliJBp6r
+#EXTINF:-1 tvg-id="PL—VIP| DISCO POLO MUSIC RAW" tvg-logo="http://103.176.90.92/images/1530149.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| DISCO POLO MUSIC RAW",PL—VIP| DISCO POLO MUSIC RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530149&extension=ts&play_token=8BIPvQ1e2m
+#EXTINF:-1 tvg-id="PL—VIP| DISCOVERY HISTORIA RAW" tvg-logo="http://103.176.90.92/images/1530150.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| DISCOVERY HISTORIA RAW",PL—VIP| DISCOVERY HISTORIA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530150&extension=ts&play_token=dqt1sBR6tF
+#EXTINF:-1 tvg-id="PL—VIP| DISCOVERY RAW" tvg-logo="http://103.176.90.92/images/1530151.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| DISCOVERY RAW",PL—VIP| DISCOVERY RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530151&extension=ts&play_token=M1BjNhqucL
+#EXTINF:-1 tvg-id="PL—VIP| DISNEY CHANNEL RAW" tvg-logo="http://103.176.90.92/images/1530153.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| DISNEY CHANNEL RAW",PL—VIP| DISNEY CHANNEL RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530153&extension=ts&play_token=3yn0bEpU7O
+#EXTINF:-1 tvg-id="PL—VIP| DISNEY JUNIOR RAW" tvg-logo="http://103.176.90.92/images/1530154.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| DISNEY JUNIOR RAW",PL—VIP| DISNEY JUNIOR RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530154&extension=ts&play_token=OvufyWwHlc
+#EXTINF:-1 tvg-id="PL—VIP| DISNEY XD RAW" tvg-logo="http://103.176.90.92/images/1530155.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| DISNEY XD RAW",PL—VIP| DISNEY XD RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530155&extension=ts&play_token=i9shJYDPMM
+#EXTINF:-1 tvg-id="PL—VIP| E ENTERTAINMENT RAW" tvg-logo="http://103.176.90.92/images/1530156.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| E ENTERTAINMENT RAW",PL—VIP| E ENTERTAINMENT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530156&extension=ts&play_token=qIQtAeQJqD
+#EXTINF:-1 tvg-id="PL—VIP| EPIC DRAMA RAW" tvg-logo="http://103.176.90.92/images/1530160.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| EPIC DRAMA RAW",PL—VIP| EPIC DRAMA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530160&extension=ts&play_token=b3V8ruxeqV
+#EXTINF:-1 tvg-id="PL—VIP| ESKA ROCK TV RAW" tvg-logo="http://103.176.90.92/images/1530161.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| ESKA ROCK TV RAW",PL—VIP| ESKA ROCK TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530161&extension=ts&play_token=IcYbGvmqer
+#EXTINF:-1 tvg-id="PL—VIP| ESKA TV RAW" tvg-logo="http://103.176.90.92/images/1530162.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| ESKA TV RAW",PL—VIP| ESKA TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530162&extension=ts&play_token=KeodDd0Yc8
+#EXTINF:-1 tvg-id="PL—VIP| EUROSPORT 1 RAW" tvg-logo="http://103.176.90.92/images/1530163.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| EUROSPORT 1 RAW",PL—VIP| EUROSPORT 1 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530163&extension=ts&play_token=AjNbfUGFfU
+#EXTINF:-1 tvg-id="PL—VIP| EUROSPORT 2 RAW" tvg-logo="http://103.176.90.92/images/1530164.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| EUROSPORT 2 RAW",PL—VIP| EUROSPORT 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530164&extension=ts&play_token=NBwPCPXLIe
+#EXTINF:-1 tvg-id="PL—VIP| EXTREME SPORTS RAW" tvg-logo="http://103.176.90.92/images/1530165.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| EXTREME SPORTS RAW",PL—VIP| EXTREME SPORTS RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530165&extension=ts&play_token=Qp6QwbEZiZ
+#EXTINF:-1 tvg-id="PL—VIP| FILMBOX ARTHOUSE RAW" tvg-logo="http://103.176.90.92/images/1530261.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FILMBOX ARTHOUSE RAW",PL—VIP| FILMBOX ARTHOUSE RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530261&extension=ts&play_token=YagOcAGzIy
+#EXTINF:-1 tvg-id="PL—VIP| FILMBOX EXTRA RAW" tvg-logo="http://103.176.90.92/images/1530263.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FILMBOX EXTRA RAW",PL—VIP| FILMBOX EXTRA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530263&extension=ts&play_token=smBkMaipV6
+#EXTINF:-1 tvg-id="PL—VIP| FILMBOX FAMILY RAW" tvg-logo="http://103.176.90.92/images/1530262.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FILMBOX FAMILY RAW",PL—VIP| FILMBOX FAMILY RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530262&extension=ts&play_token=VtlAQrpITo
+#EXTINF:-1 tvg-id="PL—VIP| FOKUS TV RAW" tvg-logo="http://103.176.90.92/images/1530166.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FOKUS TV RAW",PL—VIP| FOKUS TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530166&extension=ts&play_token=k0Xhea7v0z
+#EXTINF:-1 tvg-id="PL—VIP| FOOD NETWORK RAW" tvg-logo="http://103.176.90.92/images/1530167.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FOOD NETWORK RAW",PL—VIP| FOOD NETWORK RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530167&extension=ts&play_token=qRw9Iew7AH
+#EXTINF:-1 tvg-id="PL—VIP| FOX COMEDY POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530168.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FOX COMEDY POLSKA RAW",PL—VIP| FOX COMEDY POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530168&extension=ts&play_token=bovDJl6rvY
+#EXTINF:-1 tvg-id="PL—VIP| FOX RAW" tvg-logo="http://103.176.90.92/images/1530169.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FOX RAW",PL—VIP| FOX RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530169&extension=ts&play_token=rABmh4ayCE
+#EXTINF:-1 tvg-id="PL—VIP| FX COMEDY RAW" tvg-logo="http://103.176.90.92/images/1530260.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FX COMEDY RAW",PL—VIP| FX COMEDY RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530260&extension=ts&play_token=KNP0TDayUa
+#EXTINF:-1 tvg-id="PL—VIP| FX RAW" tvg-logo="http://103.176.90.92/images/1530111.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| FX RAW",PL—VIP| FX RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530111&extension=ts&play_token=lYsRnXQgyX
+#EXTINF:-1 tvg-id="PL—VIP| GOLF CHANNEL RAW" tvg-logo="http://103.176.90.92/images/1530170.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| GOLF CHANNEL RAW",PL—VIP| GOLF CHANNEL RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530170&extension=ts&play_token=Kv9OwTubPd
+#EXTINF:-1 tvg-id="PL—VIP| HBO 2 RAW" tvg-logo="http://103.176.90.92/images/1530171.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| HBO 2 RAW",PL—VIP| HBO 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530171&extension=ts&play_token=uhJYWUZFAH
+#EXTINF:-1 tvg-id="PL—VIP| HBO 3 RAW" tvg-logo="http://103.176.90.92/images/1530172.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| HBO 3 RAW",PL—VIP| HBO 3 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530172&extension=ts&play_token=jK2qmOCfhU
+#EXTINF:-1 tvg-id="PL—VIP| HBO RAW" tvg-logo="http://103.176.90.92/images/1530173.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| HBO RAW",PL—VIP| HBO RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530173&extension=ts&play_token=2SHAvWzWTH
+#EXTINF:-1 tvg-id="PL—VIP| HISTORY 2 POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530174.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| HISTORY 2 POLSKA RAW",PL—VIP| HISTORY 2 POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530174&extension=ts&play_token=Z8eWffLkSe
+#EXTINF:-1 tvg-id="PL—VIP| HISTORY RAW" tvg-logo="http://103.176.90.92/images/1530175.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| HISTORY RAW",PL—VIP| HISTORY RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530175&extension=ts&play_token=n11x1RUQeK
+#EXTINF:-1 tvg-id="PL—VIP| INVESTIGATION DISCOVERY POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530176.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| INVESTIGATION DISCOVERY POLSKA RAW",PL—VIP| INVESTIGATION DISCOVERY POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530176&extension=ts&play_token=VXLlNoZPAZ
+#EXTINF:-1 tvg-id="PL—VIP| MINIMINI+ RAW" tvg-logo="http://103.176.90.92/images/1530177.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| MINIMINI+ RAW",PL—VIP| MINIMINI+ RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530177&extension=ts&play_token=Sf7MeuT4VE
+#EXTINF:-1 tvg-id="PL—VIP| MTV LIVE RAW" tvg-logo="http://103.176.90.92/images/1530180.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| MTV LIVE RAW",PL—VIP| MTV LIVE RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530180&extension=ts&play_token=Y36i63Jebz
+#EXTINF:-1 tvg-id="PL—VIP| MTV POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530181.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| MTV POLSKA RAW",PL—VIP| MTV POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530181&extension=ts&play_token=1jOxWIulby
+#EXTINF:-1 tvg-id="PL—VIP| NATIONAL GEO RAW" tvg-logo="http://103.176.90.92/images/1530183.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| NATIONAL GEO RAW",PL—VIP| NATIONAL GEO RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530183&extension=ts&play_token=HcnQi1hmEB
+#EXTINF:-1 tvg-id="PL—VIP| NATIONAL GEOGRAPHIC WILD RAW" tvg-logo="http://103.176.90.92/images/1530182.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| NATIONAL GEOGRAPHIC WILD RAW",PL—VIP| NATIONAL GEOGRAPHIC WILD RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530182&extension=ts&play_token=CuIaPqD3eq
+#EXTINF:-1 tvg-id="PL—VIP| NICK JR RAW" tvg-logo="http://103.176.90.92/images/1530185.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| NICK JR RAW",PL—VIP| NICK JR RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530185&extension=ts&play_token=iF19IAgYSh
+#EXTINF:-1 tvg-id="PL—VIP| NICKELODEON RAW" tvg-logo="http://103.176.90.92/images/1530184.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| NICKELODEON RAW",PL—VIP| NICKELODEON RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530184&extension=ts&play_token=QxZv5ZWsKZ
+#EXTINF:-1 tvg-id="PL—VIP| NOVELA TV RAW" tvg-logo="http://103.176.90.92/images/1530186.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| NOVELA TV RAW",PL—VIP| NOVELA TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530186&extension=ts&play_token=pIv2Q9euts
+#EXTINF:-1 tvg-id="PL—VIP| NOWA TV RAW" tvg-logo="http://103.176.90.92/images/1530187.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| NOWA TV RAW",PL—VIP| NOWA TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530187&extension=ts&play_token=jljL22Z5Gm
+#EXTINF:-1 tvg-id="PL—VIP| PARAMOUNT CHANNEL POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530188.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| PARAMOUNT CHANNEL POLSKA RAW",PL—VIP| PARAMOUNT CHANNEL POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530188&extension=ts&play_token=eEWmZr3KsF
+#EXTINF:-1 tvg-id="PL—VIP| PLANETE+ RAW" tvg-logo="http://103.176.90.92/images/1530189.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| PLANETE+ RAW",PL—VIP| PLANETE+ RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530189&extension=ts&play_token=Esnt7LPUJz
+#EXTINF:-1 tvg-id="PL—VIP| POLO TV RAW" tvg-logo="http://103.176.90.92/images/1530191.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| POLO TV RAW",PL—VIP| POLO TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530191&extension=ts&play_token=GeHibEgHne
+#EXTINF:-1 tvg-id="PL—VIP| PULS 2 RAW" tvg-logo="http://103.176.90.92/images/1530217.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| PULS 2 RAW",PL—VIP| PULS 2 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530217&extension=ts&play_token=fLDXC6aCI5
+#EXTINF:-1 tvg-id="PL—VIP| ROMANCE TV RAW" tvg-logo="http://103.176.90.92/images/1530218.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| ROMANCE TV RAW",PL—VIP| ROMANCE TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530218&extension=ts&play_token=rQGe1WrSVL
+#EXTINF:-1 tvg-id="PL—VIP| SCIENCE POLAND RAW" tvg-logo="http://103.176.90.92/images/1530259.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| SCIENCE POLAND RAW",PL—VIP| SCIENCE POLAND RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530259&extension=ts&play_token=B8djubX63v
+#EXTINF:-1 tvg-id="PL—VIP| SCIFI POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530219.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| SCIFI POLSKA RAW",PL—VIP| SCIFI POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530219&extension=ts&play_token=SuDypQIekh
+#EXTINF:-1 tvg-id="PL—VIP| STOPKLATKA RAW" tvg-logo="http://103.176.90.92/images/1530258.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| STOPKLATKA RAW",PL—VIP| STOPKLATKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530258&extension=ts&play_token=DsvDl8PngN
+#EXTINF:-1 tvg-id="PL—VIP| TEENNICK POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530221.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TEENNICK POLSKA RAW",PL—VIP| TEENNICK POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530221&extension=ts&play_token=Y0LIlAHyRr
+#EXTINF:-1 tvg-id="PL—VIP| TELETOON+ RAW" tvg-logo="http://103.176.90.92/images/1530223.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TELETOON+ RAW",PL—VIP| TELETOON+ RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530223&extension=ts&play_token=klw6jsg9X7
+#EXTINF:-1 tvg-id="PL—VIP| TLC RAW" tvg-logo="http://103.176.90.92/images/1530224.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TLC RAW",PL—VIP| TLC RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530224&extension=ts&play_token=FvEmEHqyr4
+#EXTINF:-1 tvg-id="PL—VIP| TRAVEL CHANNEL RAW" tvg-logo="http://103.176.90.92/images/1530225.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TRAVEL CHANNEL RAW",PL—VIP| TRAVEL CHANNEL RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530225&extension=ts&play_token=EpadipVa0v
+#EXTINF:-1 tvg-id="PL—VIP| TTV RAW" tvg-logo="http://103.176.90.92/images/1530226.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TTV RAW",PL—VIP| TTV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530226&extension=ts&play_token=XTFI01JGbe
+#EXTINF:-1 tvg-id="PL—VIP| TV PULS RAW" tvg-logo="http://103.176.90.92/images/1530246.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TV PULS RAW",PL—VIP| TV PULS RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530246&extension=ts&play_token=hOFs4It2xx
+#EXTINF:-1 tvg-id="PL—VIP| TV REPUBLIKA RAW" tvg-logo="http://103.176.90.92/images/1530247.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TV REPUBLIKA RAW",PL—VIP| TV REPUBLIKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530247&extension=ts&play_token=Xd1ap6G3Pq
+#EXTINF:-1 tvg-id="PL—VIP| TV4 RAW" tvg-logo="http://103.176.90.92/images/1530228.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TV4 RAW",PL—VIP| TV4 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530228&extension=ts&play_token=Ucxbipyfzn
+#EXTINF:-1 tvg-id="PL—VIP| TV6 RAW" tvg-logo="http://103.176.90.92/images/1530229.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TV6 RAW",PL—VIP| TV6 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530229&extension=ts&play_token=r2nsZMbEBg
+#EXTINF:-1 tvg-id="PL—VIP| TVS RAW" tvg-logo="http://103.176.90.92/images/1530248.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| TVS RAW",PL—VIP| TVS RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530248&extension=ts&play_token=NycsvCLCHr
+#EXTINF:-1 tvg-id="PL—VIP| VIASAT EXPLORE POLSAT RAW" tvg-logo="http://103.176.90.92/images/1530249.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| VIASAT EXPLORE POLSAT RAW",PL—VIP| VIASAT EXPLORE POLSAT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530249&extension=ts&play_token=Ldj9b8MRsy
+#EXTINF:-1 tvg-id="PL—VIP| VIASAT NATURE POLSAT RAW" tvg-logo="http://103.176.90.92/images/1530250.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| VIASAT NATURE POLSAT RAW",PL—VIP| VIASAT NATURE POLSAT RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530250&extension=ts&play_token=BOPbym5lah
+#EXTINF:-1 tvg-id="PL—VIP| VOX MUSIC TV RAW" tvg-logo="http://103.176.90.92/images/1530252.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| VOX MUSIC TV RAW",PL—VIP| VOX MUSIC TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530252&extension=ts&play_token=9dxrRQsI7x
+#EXTINF:-1 tvg-id="PL—VIP| WARNER TV POLSKA RAW" tvg-logo="http://103.176.90.92/images/1530253.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| WARNER TV POLSKA RAW",PL—VIP| WARNER TV POLSKA RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530253&extension=ts&play_token=JpXs9syHqJ
+#EXTINF:-1 tvg-id="PL—VIP| WPOLSCE.PL RAW" tvg-logo="http://103.176.90.92/images/1530256.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| WPOLSCE.PL RAW",PL—VIP| WPOLSCE.PL RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530256&extension=ts&play_token=xl5GMhmSs8
+#EXTINF:-1 tvg-id="PL—VIP| ZOOM TV RAW" tvg-logo="http://103.176.90.92/images/1530255.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP| ZOOM TV RAW",PL—VIP| ZOOM TV RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530255&extension=ts&play_token=LuWYBJ54xh
+#EXTINF:-1 tvg-id="PL—VIP|TVP 3 RAW" tvg-logo="http://103.176.90.92/images/1530239.png" group-title="PL| POLAND VIP" tvg-name="PL—VIP|TVP 3 RAW",PL—VIP|TVP 3 RAW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530239&extension=ts&play_token=2SsHy3DiTn
+#EXTINF:-1 tvg-id="##### PL KANAŁY (NA) #####" tvg-logo="" group-title="PL| KANAŁY (NA)" tvg-name="##### PL KANAŁY (NA) #####",##### PL KANAŁY (NA) #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288923&extension=ts&play_token=1iqbfQHgrd
+#EXTINF:-1 tvg-id="PL| ITVN HD (NA)" tvg-logo="http://103.176.90.92/images/897006.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| ITVN HD (NA)",PL| ITVN HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=897006&extension=ts&play_token=51RQH5zfsv
+#EXTINF:-1 tvg-id="PL| ITVN EXTRA (NA)" tvg-logo="http://103.176.90.92/images/897007.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| ITVN EXTRA (NA)",PL| ITVN EXTRA (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=897007&extension=ts&play_token=WqFWTVhe79
+#EXTINF:-1 tvg-id="PL| TVP3 WROCLAW (NA)" tvg-logo="http://103.176.90.92/images/936949.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP3 WROCLAW (NA)",PL| TVP3 WROCLAW (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936949&extension=ts&play_token=JND43QkVoF
+#EXTINF:-1 tvg-id="PL| LUBELSKA TV (NA)" tvg-logo="http://103.176.90.92/images/897009.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| LUBELSKA TV (NA)",PL| LUBELSKA TV (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=897009&extension=ts&play_token=wksVIzCPkT
+#EXTINF:-1 tvg-id="PL| CHANNEL 13 (NA)" tvg-logo="http://103.176.90.92/images/897004.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| CHANNEL 13 (NA)",PL| CHANNEL 13 (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=897004&extension=ts&play_token=4hTvIY1wgA
+#EXTINF:-1 tvg-id="PL| TVP 1 HD (NA)" tvg-logo="http://103.176.90.92/images/882111.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP 1 HD (NA)",PL| TVP 1 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882111&extension=ts&play_token=74inXTtJM9
+#EXTINF:-1 tvg-id="PL| TVP 2 HD (NA)" tvg-logo="http://103.176.90.92/images/882110.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP 2 HD (NA)",PL| TVP 2 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882110&extension=ts&play_token=eBdJOELzKe
+#EXTINF:-1 tvg-id="PL| TVP SERIALE (NA)" tvg-logo="http://103.176.90.92/images/882105.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP SERIALE (NA)",PL| TVP SERIALE (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882105&extension=ts&play_token=HtBCLQmAwk
+#EXTINF:-1 tvg-id="PL| TVP HD (NA)" tvg-logo="http://103.176.90.92/images/882112.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP HD (NA)",PL| TVP HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882112&extension=ts&play_token=HIshqpwn8U
+#EXTINF:-1 tvg-id="PL| TVP HISTORIA (NA)" tvg-logo="http://103.176.90.92/images/882108.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP HISTORIA (NA)",PL| TVP HISTORIA (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882108&extension=ts&play_token=21aeU3KBhC
+#EXTINF:-1 tvg-id="PL| TVP KULTURA HD (NA)" tvg-logo="http://103.176.90.92/images/882109.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP KULTURA HD (NA)",PL| TVP KULTURA HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882109&extension=ts&play_token=5DerIuPmmL
+#EXTINF:-1 tvg-id="PL| TVP ROZRYWKA (NA)" tvg-logo="http://103.176.90.92/images/882106.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP ROZRYWKA (NA)",PL| TVP ROZRYWKA (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882106&extension=ts&play_token=pHEta0ZKXe
+#EXTINF:-1 tvg-id="PL| POLSAT SERIALE HD (NA)" tvg-logo="http://103.176.90.92/images/882078.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| POLSAT SERIALE HD (NA)",PL| POLSAT SERIALE HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882078&extension=ts&play_token=WuEBMz05ww
+#EXTINF:-1 tvg-id="PL| TVN HD (NA)" tvg-logo="http://103.176.90.92/images/882103.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVN HD (NA)",PL| TVN HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882103&extension=ts&play_token=FY44VSr6AN
+#EXTINF:-1 tvg-id="PL| TVN24 HD (NA)" tvg-logo="http://103.176.90.92/images/882083.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVN24 HD (NA)",PL| TVN24 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882083&extension=ts&play_token=MqFYxLUjkx
+#EXTINF:-1 tvg-id="PL| TVN 7 HD (NA)" tvg-logo="http://103.176.90.92/images/882102.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVN 7 HD (NA)",PL| TVN 7 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882102&extension=ts&play_token=GvpEvDFVR0
+#EXTINF:-1 tvg-id="PL| POLSAT HD (NA)" tvg-logo="http://103.176.90.92/images/882080.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| POLSAT HD (NA)",PL| POLSAT HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882080&extension=ts&play_token=CKNHs3Rtig
+#EXTINF:-1 tvg-id="PL| POLSAT 1 (NA)" tvg-logo="http://103.176.90.92/images/897011.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| POLSAT 1 (NA)",PL| POLSAT 1 (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=897011&extension=ts&play_token=DiVR76A2of
+#EXTINF:-1 tvg-id="PL| POLSAT2 HD (NA)" tvg-logo="http://103.176.90.92/images/882079.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| POLSAT2 HD (NA)",PL| POLSAT2 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882079&extension=ts&play_token=FE03vG0DtY
+#EXTINF:-1 tvg-id="PL| KINO POLSKA HD (NA)" tvg-logo="http://103.176.90.92/images/882095.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| KINO POLSKA HD (NA)",PL| KINO POLSKA HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882095&extension=ts&play_token=1P8VRlms5G
+#EXTINF:-1 tvg-id="PL| TV4 HD (NA)" tvg-logo="http://103.176.90.92/images/882081.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TV4 HD (NA)",PL| TV4 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882081&extension=ts&play_token=hiPiFZUm8I
+#EXTINF:-1 tvg-id="PL| TV6 HD (NA)" tvg-logo="http://103.176.90.92/images/882082.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TV6 HD (NA)",PL| TV6 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882082&extension=ts&play_token=CgmUVi5zL8
+#EXTINF:-1 tvg-id="PL| TTV HD (NA)" tvg-logo="http://103.176.90.92/images/882104.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TTV HD (NA)",PL| TTV HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882104&extension=ts&play_token=v1ruNjCg6M
+#EXTINF:-1 tvg-id="PL| TVN TURBO HD (NA)" tvg-logo="http://103.176.90.92/images/882100.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVN TURBO HD (NA)",PL| TVN TURBO HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882100&extension=ts&play_token=4ZWJAo1oGc
+#EXTINF:-1 tvg-id="PL| TVN STYLE HD (NA)" tvg-logo="http://103.176.90.92/images/882101.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVN STYLE HD (NA)",PL| TVN STYLE HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882101&extension=ts&play_token=tOfOsdHzQX
+#EXTINF:-1 tvg-id="PL| POLSAT PLAY HD (NA)" tvg-logo="http://103.176.90.92/images/882099.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| POLSAT PLAY HD (NA)",PL| POLSAT PLAY HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882099&extension=ts&play_token=6Lq4m7MHtI
+#EXTINF:-1 tvg-id="PL| POLSAT CAFE HD (NA)" tvg-logo="http://103.176.90.92/images/882098.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| POLSAT CAFE HD (NA)",PL| POLSAT CAFE HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882098&extension=ts&play_token=UX8FZucB52
+#EXTINF:-1 tvg-id="PL| HBO HD (NA)" tvg-logo="http://103.176.90.92/images/882086.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| HBO HD (NA)",PL| HBO HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882086&extension=ts&play_token=DncqkrmHgc
+#EXTINF:-1 tvg-id="PL| HBO 2 HD (NA)" tvg-logo="http://103.176.90.92/images/882085.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| HBO 2 HD (NA)",PL| HBO 2 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882085&extension=ts&play_token=LAD86gELwy
+#EXTINF:-1 tvg-id="PL| HBO 3 HD (NA)" tvg-logo="http://103.176.90.92/images/882084.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| HBO 3 HD (NA)",PL| HBO 3 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882084&extension=ts&play_token=Ajr51PpHfR
+#EXTINF:-1 tvg-id="PL| CANAL+ PREMIUM HD (NA)" tvg-logo="http://103.176.90.92/images/882088.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| CANAL+ PREMIUM HD (NA)",PL| CANAL+ PREMIUM HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882088&extension=ts&play_token=fUsUr3Uida
+#EXTINF:-1 tvg-id="PL| CANAL+ SERIALE HD (NA)" tvg-logo="http://103.176.90.92/images/882087.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| CANAL+ SERIALE HD (NA)",PL| CANAL+ SERIALE HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882087&extension=ts&play_token=v9inPAXbOC
+#EXTINF:-1 tvg-id="PL| CANAL+ FILM HD (NA)" tvg-logo="http://103.176.90.92/images/882092.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| CANAL+ FILM HD (NA)",PL| CANAL+ FILM HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882092&extension=ts&play_token=rym1X56IMI
+#EXTINF:-1 tvg-id="PL| DOMO+ HD (NA)" tvg-logo="http://103.176.90.92/images/882096.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| DOMO+ HD (NA)",PL| DOMO+ HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882096&extension=ts&play_token=wGAoBvwvVc
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 1 HD (NA)" tvg-logo="http://103.176.90.92/images/882094.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| POLSAT SPORT PREMIUM 1 HD (NA)",PL| POLSAT SPORT PREMIUM 1 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882094&extension=ts&play_token=YUbBlfMgHC
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 2 HD (NA)" tvg-logo="http://103.176.90.92/images/882093.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| POLSAT SPORT PREMIUM 2 HD (NA)",PL| POLSAT SPORT PREMIUM 2 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882093&extension=ts&play_token=VgQbVHef23
+#EXTINF:-1 tvg-id="PL| TVP ABC (NA)" tvg-logo="http://103.176.90.92/images/882107.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| TVP ABC (NA)",PL| TVP ABC (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882107&extension=ts&play_token=nQsCybx6Ur
+#EXTINF:-1 tvg-id="PL| CANAL+ 1 HD (NA)" tvg-logo="http://103.176.90.92/images/882091.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| CANAL+ 1 HD (NA)",PL| CANAL+ 1 HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882091&extension=ts&play_token=Fh7a4ztgPd
+#EXTINF:-1 tvg-id="PL| CANAL+ NOW HD (NA)" tvg-logo="http://103.176.90.92/images/882089.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| CANAL+ NOW HD (NA)",PL| CANAL+ NOW HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882089&extension=ts&play_token=W4lNn9hYlm
+#EXTINF:-1 tvg-id="PL| KUCHNIA+ HD (NA)" tvg-logo="http://103.176.90.92/images/882097.png" group-title="PL| KANAŁY (NA)" tvg-name="PL| KUCHNIA+ HD (NA)",PL| KUCHNIA+ HD (NA)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882097&extension=ts&play_token=4rvhGdIds3
+#EXTINF:-1 tvg-id="##### PL OGÓLNOTEMATYCZNE #####" tvg-logo="" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="##### PL OGÓLNOTEMATYCZNE #####",##### PL OGÓLNOTEMATYCZNE #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288922&extension=ts&play_token=ZBxSPZ9VJ6
+#EXTINF:-1 tvg-id="PL| TVP 1 FHD" tvg-logo="http://103.176.90.92/images/880520.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP 1 FHD",PL| TVP 1 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880520&extension=ts&play_token=CAXa90v849
+#EXTINF:-1 tvg-id="PL| TVP 1 HD" tvg-logo="http://103.176.90.92/images/880380.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP 1 HD",PL| TVP 1 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880380&extension=ts&play_token=JAnsprmxDq
+#EXTINF:-1 tvg-id="PL| TVP 2 FHD" tvg-logo="http://103.176.90.92/images/880519.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP 2 FHD",PL| TVP 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880519&extension=ts&play_token=ObZhKUDLK3
+#EXTINF:-1 tvg-id="PL| TVP 2 HD" tvg-logo="http://103.176.90.92/images/880379.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP 2 HD",PL| TVP 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880379&extension=ts&play_token=LQ1V15BClt
+#EXTINF:-1 tvg-id="PL| TVP FHD" tvg-logo="http://103.176.90.92/images/880504.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP FHD",PL| TVP FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880504&extension=ts&play_token=14i5EEwqVJ
+#EXTINF:-1 tvg-id="PL| TVP HD" tvg-logo="http://103.176.90.92/images/880364.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP HD",PL| TVP HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880364&extension=ts&play_token=YcbheybknE
+#EXTINF:-1 tvg-id="PL| TVP 3" tvg-logo="http://103.176.90.92/images/880240.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP 3",PL| TVP 3
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880240&extension=ts&play_token=t9h0IHmxPS
+#EXTINF:-1 tvg-id="PL| TVP KOBIETA HD" tvg-logo="http://103.176.90.92/images/1121741.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP KOBIETA HD",PL| TVP KOBIETA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121741&extension=ts&play_token=pm0WkMG09n
+#EXTINF:-1 tvg-id="PL| TVP ROZRYWKA" tvg-logo="http://103.176.90.92/images/880237.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP ROZRYWKA",PL| TVP ROZRYWKA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880237&extension=ts&play_token=1qjqm7nFyy
+#EXTINF:-1 tvg-id="PL| TVP KULTURA FHD" tvg-logo="http://103.176.90.92/images/880387.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP KULTURA FHD",PL| TVP KULTURA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880387&extension=ts&play_token=ujdsDLaP4C
+#EXTINF:-1 tvg-id="PL| TVP KULTURA HD" tvg-logo="http://103.176.90.92/images/880247.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP KULTURA HD",PL| TVP KULTURA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880247&extension=ts&play_token=8YgiFh4CoK
+#EXTINF:-1 tvg-id="PL| TTV FHD" tvg-logo="http://103.176.90.92/images/880389.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TTV FHD",PL| TTV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880389&extension=ts&play_token=jb6VNTxSTs
+#EXTINF:-1 tvg-id="PL| TTV HD" tvg-logo="http://103.176.90.92/images/880249.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TTV HD",PL| TTV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880249&extension=ts&play_token=SD4e1hjAY8
+#EXTINF:-1 tvg-id="PL| TVN FHD" tvg-logo="http://103.176.90.92/images/880518.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN FHD",PL| TVN FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880518&extension=ts&play_token=LTLMHGcabO
+#EXTINF:-1 tvg-id="PL| TVN HD" tvg-logo="http://103.176.90.92/images/880378.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN HD",PL| TVN HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880378&extension=ts&play_token=K2oq2McwV8
+#EXTINF:-1 tvg-id="PL| TVN 7 FHD" tvg-logo="http://103.176.90.92/images/880517.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN 7 FHD",PL| TVN 7 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880517&extension=ts&play_token=LmaIeg8Zpu
+#EXTINF:-1 tvg-id="PL| TVN 7 HD" tvg-logo="http://103.176.90.92/images/880377.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN 7 HD",PL| TVN 7 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880377&extension=ts&play_token=8v1eZIcMtz
+#EXTINF:-1 tvg-id="PL| TVN FABULA FHD" tvg-logo="http://103.176.90.92/images/880516.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN FABULA FHD",PL| TVN FABULA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880516&extension=ts&play_token=jCRqtyEIT7
+#EXTINF:-1 tvg-id="PL| TVN FABULA HD" tvg-logo="http://103.176.90.92/images/880376.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN FABULA HD",PL| TVN FABULA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880376&extension=ts&play_token=cj2FMxfYQY
+#EXTINF:-1 tvg-id="PL| TVN STYLE FHD" tvg-logo="http://103.176.90.92/images/880515.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN STYLE FHD",PL| TVN STYLE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880515&extension=ts&play_token=RfoQBLcM8G
+#EXTINF:-1 tvg-id="PL| TVN STYLE HD" tvg-logo="http://103.176.90.92/images/880375.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN STYLE HD",PL| TVN STYLE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880375&extension=ts&play_token=5ImOmo5ylQ
+#EXTINF:-1 tvg-id="PL| TVN TURBO FHD" tvg-logo="http://103.176.90.92/images/880514.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN TURBO FHD",PL| TVN TURBO FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880514&extension=ts&play_token=Q41w2EAG8m
+#EXTINF:-1 tvg-id="PL| TVN TURBO HD" tvg-logo="http://103.176.90.92/images/880374.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVN TURBO HD",PL| TVN TURBO HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880374&extension=ts&play_token=GG4HS3Yj4p
+#EXTINF:-1 tvg-id="PL| TBN POLSKA FHD" tvg-logo="http://103.176.90.92/images/1629540.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TBN POLSKA FHD",PL| TBN POLSKA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1629540&extension=ts&play_token=1iedoP2v7g
+#EXTINF:-1 tvg-id="PL| SUPER POLSAT FHD" tvg-logo="http://103.176.90.92/images/880386.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| SUPER POLSAT FHD",PL| SUPER POLSAT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880386&extension=ts&play_token=Dh5ORF6Yuh
+#EXTINF:-1 tvg-id="PL| SUPER POLSAT HD" tvg-logo="http://103.176.90.92/images/880246.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| SUPER POLSAT HD",PL| SUPER POLSAT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880246&extension=ts&play_token=PwzNLGBPPp
+#EXTINF:-1 tvg-id="PL| POLSAT FHD" tvg-logo="http://103.176.90.92/images/880509.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT FHD",PL| POLSAT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880509&extension=ts&play_token=i1dNCyItNu
+#EXTINF:-1 tvg-id="PL| POLSAT HD" tvg-logo="http://103.176.90.92/images/880369.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT HD",PL| POLSAT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880369&extension=ts&play_token=z1d4zMDoU2
+#EXTINF:-1 tvg-id="PL| POLSAT 2 FHD" tvg-logo="http://103.176.90.92/images/880508.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT 2 FHD",PL| POLSAT 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880508&extension=ts&play_token=oqo1MMbxvL
+#EXTINF:-1 tvg-id="PL| POLSAT 2 HD" tvg-logo="http://103.176.90.92/images/880368.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT 2 HD",PL| POLSAT 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880368&extension=ts&play_token=xWHbuZrJfs
+#EXTINF:-1 tvg-id="PL| POLSAT RODZINA FHD" tvg-logo="http://103.176.90.92/images/880506.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT RODZINA FHD",PL| POLSAT RODZINA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880506&extension=ts&play_token=GltfLiw0lk
+#EXTINF:-1 tvg-id="PL| POLSAT RODZINA HD" tvg-logo="http://103.176.90.92/images/880366.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT RODZINA HD",PL| POLSAT RODZINA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880366&extension=ts&play_token=Oomert7q8y
+#EXTINF:-1 tvg-id="PL| POLSAT CAFE FHD" tvg-logo="http://103.176.90.92/images/880404.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT CAFE FHD",PL| POLSAT CAFE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880404&extension=ts&play_token=sexN8S8rlH
+#EXTINF:-1 tvg-id="PL| POLSAT CAFE HD" tvg-logo="http://103.176.90.92/images/880264.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT CAFE HD",PL| POLSAT CAFE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880264&extension=ts&play_token=QWyYLpB6mM
+#EXTINF:-1 tvg-id="PL| POLSAT GAMES FHD" tvg-logo="http://103.176.90.92/images/880401.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT GAMES FHD",PL| POLSAT GAMES FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880401&extension=ts&play_token=JSUEU9WoA9
+#EXTINF:-1 tvg-id="PL| POLSAT GAMES HD" tvg-logo="http://103.176.90.92/images/880261.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT GAMES HD",PL| POLSAT GAMES HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880261&extension=ts&play_token=ygzMZCripH
+#EXTINF:-1 tvg-id="PL| POLSAT PLAY FHD" tvg-logo="http://103.176.90.92/images/880399.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT PLAY FHD",PL| POLSAT PLAY FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880399&extension=ts&play_token=SokBGh1kI9
+#EXTINF:-1 tvg-id="PL| POLSAT PLAY HD" tvg-logo="http://picons.cmshulk.com/picons/880259.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| POLSAT PLAY HD",PL| POLSAT PLAY HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880259&extension=ts&play_token=oEvy8UInrt
+#EXTINF:-1 tvg-id="PL| PULS FHD" tvg-logo="http://picons.cmshulk.com/picons/880475.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| PULS FHD",PL| PULS FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880475&extension=ts&play_token=x1x6F7fHWc
+#EXTINF:-1 tvg-id="PL| PULS HD" tvg-logo="http://103.176.90.92/images/880335.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| PULS HD",PL| PULS HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880335&extension=ts&play_token=SLBTZSkuU9
+#EXTINF:-1 tvg-id="PL| PULS 2 FHD" tvg-logo="http://103.176.90.92/images/880479.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| PULS 2 FHD",PL| PULS 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880479&extension=ts&play_token=rKgWSsKpAC
+#EXTINF:-1 tvg-id="PL| PULS 2 HD" tvg-logo="http://103.176.90.92/images/880339.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| PULS 2 HD",PL| PULS 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880339&extension=ts&play_token=d0uGoIyWVV
+#EXTINF:-1 tvg-id="PL| TV4 FHD" tvg-logo="http://103.176.90.92/images/880510.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TV4 FHD",PL| TV4 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880510&extension=ts&play_token=6JDqrBPBtz
+#EXTINF:-1 tvg-id="PL| TV4 HD" tvg-logo="http://103.176.90.92/images/880370.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TV4 HD",PL| TV4 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880370&extension=ts&play_token=pYrVDsqgxt
+#EXTINF:-1 tvg-id="PL| TV6 FHD" tvg-logo="http://103.176.90.92/images/880511.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TV6 FHD",PL| TV6 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880511&extension=ts&play_token=Gf7xrDfekB
+#EXTINF:-1 tvg-id="PL| TV6 HD" tvg-logo="http://103.176.90.92/images/880371.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TV6 HD",PL| TV6 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880371&extension=ts&play_token=cisoLDZ9hG
+#EXTINF:-1 tvg-id="PL| TELE 5" tvg-logo="http://103.176.90.92/images/880230.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TELE 5",PL| TELE 5
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880230&extension=ts&play_token=8uZcbdp9bQ
+#EXTINF:-1 tvg-id="PL| EWTN POLSKA" tvg-logo="http://103.176.90.92/images/1679452.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| EWTN POLSKA",PL| EWTN POLSKA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1679452&extension=ts&play_token=vjSyd87ovl
+#EXTINF:-1 tvg-id="PL| ANTENA TV" tvg-logo="http://103.176.90.92/images/1060637.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| ANTENA TV",PL| ANTENA TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1060637&extension=ts&play_token=NjspgxZ6MC
+#EXTINF:-1 tvg-id="PL| TLC FHD" tvg-logo="http://103.176.90.92/images/880474.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TLC FHD",PL| TLC FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880474&extension=ts&play_token=7uLEH89ceH
+#EXTINF:-1 tvg-id="PL| TLC HD" tvg-logo="http://103.176.90.92/images/880334.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TLC HD",PL| TLC HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880334&extension=ts&play_token=aAYPeTPdgj
+#EXTINF:-1 tvg-id="PL| FOOD NETWORK FHD" tvg-logo="http://103.176.90.92/images/880481.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| FOOD NETWORK FHD",PL| FOOD NETWORK FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880481&extension=ts&play_token=a1xmsyXK4T
+#EXTINF:-1 tvg-id="PL| FOOD NETWORK HD" tvg-logo="http://103.176.90.92/images/880341.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| FOOD NETWORK HD",PL| FOOD NETWORK HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880341&extension=ts&play_token=uK2oAXpNrS
+#EXTINF:-1 tvg-id="PL| HGTV FHD" tvg-logo="http://103.176.90.92/images/880385.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| HGTV FHD",PL| HGTV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880385&extension=ts&play_token=k9CYBzPxDu
+#EXTINF:-1 tvg-id="PL| HGTV HD" tvg-logo="http://103.176.90.92/images/880245.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| HGTV HD",PL| HGTV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880245&extension=ts&play_token=m5Kj6NS3tE
+#EXTINF:-1 tvg-id="PL| HOME TV" tvg-logo="http://103.176.90.92/images/880214.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| HOME TV",PL| HOME TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880214&extension=ts&play_token=o4Z3uRLDon
+#EXTINF:-1 tvg-id="PL| DOMO+ FHD" tvg-logo="http://103.176.90.92/images/880424.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| DOMO+ FHD",PL| DOMO+ FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880424&extension=ts&play_token=aDq4mL2jVc
+#EXTINF:-1 tvg-id="PL| DOMO+ HD" tvg-logo="http://103.176.90.92/images/880284.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| DOMO+ HD",PL| DOMO+ HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880284&extension=ts&play_token=PRAzZOCUs0
+#EXTINF:-1 tvg-id="PL| KUCHNIA+ FHD" tvg-logo="http://103.176.90.92/images/880415.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| KUCHNIA+ FHD",PL| KUCHNIA+ FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880415&extension=ts&play_token=BAwjmIaycc
+#EXTINF:-1 tvg-id="PL| KUCHNIA+ HD" tvg-logo="http://103.176.90.92/images/880275.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| KUCHNIA+ HD",PL| KUCHNIA+ HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880275&extension=ts&play_token=5PSvMf2KEo
+#EXTINF:-1 tvg-id="PL| ACTIVE FAMILY" tvg-logo="http://103.176.90.92/images/880234.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| ACTIVE FAMILY",PL| ACTIVE FAMILY
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880234&extension=ts&play_token=qaMKWN0grT
+#EXTINF:-1 tvg-id="PL| METRO" tvg-logo="http://103.176.90.92/images/880212.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| METRO",PL| METRO
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880212&extension=ts&play_token=aqGll4NnSe
+#EXTINF:-1 tvg-id="PL| TVS" tvg-logo="http://103.176.90.92/images/880201.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVS",PL| TVS
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880201&extension=ts&play_token=h51OSu4z4x
+#EXTINF:-1 tvg-id="PL| NOWA TV FHD" tvg-logo="http://103.176.90.92/images/880407.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| NOWA TV FHD",PL| NOWA TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880407&extension=ts&play_token=7WuPEzgjkD
+#EXTINF:-1 tvg-id="PL| NOWA TV HD" tvg-logo="http://103.176.90.92/images/880267.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| NOWA TV HD",PL| NOWA TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880267&extension=ts&play_token=rlYbBc1aOH
+#EXTINF:-1 tvg-id="PL| ZOOM TV" tvg-logo="http://103.176.90.92/images/880190.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| ZOOM TV",PL| ZOOM TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880190&extension=ts&play_token=1VXtLMwJ3o
+#EXTINF:-1 tvg-id="PL| E! ENTERTAINMENT FHD" tvg-logo="http://103.176.90.92/images/880422.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| E! ENTERTAINMENT FHD",PL| E! ENTERTAINMENT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880422&extension=ts&play_token=uSX6NPWW5k
+#EXTINF:-1 tvg-id="PL| E! ENTERTAINMENT HD" tvg-logo="http://103.176.90.92/images/880282.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| E! ENTERTAINMENT HD",PL| E! ENTERTAINMENT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880282&extension=ts&play_token=CLPw0PGVPo
+#EXTINF:-1 tvg-id="PL| WP" tvg-logo="http://103.176.90.92/images/880192.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| WP",PL| WP
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880192&extension=ts&play_token=9K13AkD52Q
+#EXTINF:-1 tvg-id="PL| TVP POLONIA HD" tvg-logo="http://103.176.90.92/images/880242.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP POLONIA HD",PL| TVP POLONIA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880242&extension=ts&play_token=Ql7jHEi6jR
+#EXTINF:-1 tvg-id="PL| TVP POLONIA 1" tvg-logo="http://103.176.90.92/images/880241.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TVP POLONIA 1",PL| TVP POLONIA 1
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880241&extension=ts&play_token=PPcN6i75vB
+#EXTINF:-1 tvg-id="PL| TRWAM TV" tvg-logo="http://103.176.90.92/images/884764.png" group-title="PL| OGÓLNOTEMATYCZNE" tvg-name="PL| TRWAM TV",PL| TRWAM TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=884764&extension=ts&play_token=1mDryfg8Fz
+#EXTINF:-1 tvg-id="##### PL FILMOWE #####" tvg-logo="" group-title="PL| FILMOWE" tvg-name="##### PL FILMOWE #####",##### PL FILMOWE #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288921&extension=ts&play_token=aGJwv1hG4K
+#EXTINF:-1 tvg-id="PL| CANAL+ PREMIUM FHD" tvg-logo="http://103.176.90.92/images/880498.png" group-title="PL| FILMOWE" tvg-name="PL| CANAL+ PREMIUM FHD",PL| CANAL+ PREMIUM FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880498&extension=ts&play_token=nPHNNuZJ1C
+#EXTINF:-1 tvg-id="PL| CANAL+ PREMIUM HD" tvg-logo="http://103.176.90.92/images/880358.png" group-title="PL| FILMOWE" tvg-name="PL| CANAL+ PREMIUM HD",PL| CANAL+ PREMIUM HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880358&extension=ts&play_token=biGVw8ij9r
+#EXTINF:-1 tvg-id="PL| CANAL+ 1 FHD" tvg-logo="http://103.176.90.92/images/880501.png" group-title="PL| FILMOWE" tvg-name="PL| CANAL+ 1 FHD",PL| CANAL+ 1 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880501&extension=ts&play_token=VLGwqZRzYX
+#EXTINF:-1 tvg-id="PL| CANAL+ 1 HD" tvg-logo="http://103.176.90.92/images/880361.png" group-title="PL| FILMOWE" tvg-name="PL| CANAL+ 1 HD",PL| CANAL+ 1 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880361&extension=ts&play_token=10aIdOaFMU
+#EXTINF:-1 tvg-id="PL| CANAL+ FILM FHD" tvg-logo="http://103.176.90.92/images/880491.png" group-title="PL| FILMOWE" tvg-name="PL| CANAL+ FILM FHD",PL| CANAL+ FILM FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880491&extension=ts&play_token=4i5BuGJK8I
+#EXTINF:-1 tvg-id="PL| CANAL+ FILM HD" tvg-logo="http://103.176.90.92/images/880351.png" group-title="PL| FILMOWE" tvg-name="PL| CANAL+ FILM HD",PL| CANAL+ FILM HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880351&extension=ts&play_token=zxez7YFhUR
+#EXTINF:-1 tvg-id="PL| CANAL+ SERIALE FHD" tvg-logo="http://103.176.90.92/images/880497.png" group-title="PL| FILMOWE" tvg-name="PL| CANAL+ SERIALE FHD",PL| CANAL+ SERIALE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880497&extension=ts&play_token=qLV3QrWR8w
+#EXTINF:-1 tvg-id="PL| CANAL+ SERIALE HD" tvg-logo="http://103.176.90.92/images/880357.png" group-title="PL| FILMOWE" tvg-name="PL| CANAL+ SERIALE HD",PL| CANAL+ SERIALE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880357&extension=ts&play_token=CI44qGbyz1
+#EXTINF:-1 tvg-id="PL| HBO FHD" tvg-logo="http://103.176.90.92/images/880494.png" group-title="PL| FILMOWE" tvg-name="PL| HBO FHD",PL| HBO FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880494&extension=ts&play_token=wF4Ryu9Lk8
+#EXTINF:-1 tvg-id="PL| HBO HD" tvg-logo="http://103.176.90.92/images/880354.png" group-title="PL| FILMOWE" tvg-name="PL| HBO HD",PL| HBO HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880354&extension=ts&play_token=2oyyq8rc5R
+#EXTINF:-1 tvg-id="PL| HBO 2 FHD" tvg-logo="http://103.176.90.92/images/880496.png" group-title="PL| FILMOWE" tvg-name="PL| HBO 2 FHD",PL| HBO 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880496&extension=ts&play_token=nIO1BoV72Y
+#EXTINF:-1 tvg-id="PL| HBO 2 HD" tvg-logo="http://103.176.90.92/images/880356.png" group-title="PL| FILMOWE" tvg-name="PL| HBO 2 HD",PL| HBO 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880356&extension=ts&play_token=IkPlubZ04b
+#EXTINF:-1 tvg-id="PL| HBO 3 FHD" tvg-logo="http://103.176.90.92/images/880495.png" group-title="PL| FILMOWE" tvg-name="PL| HBO 3 FHD",PL| HBO 3 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880495&extension=ts&play_token=A9xn3qcXgN
+#EXTINF:-1 tvg-id="PL| HBO 3 HD" tvg-logo="http://103.176.90.92/images/880355.png" group-title="PL| FILMOWE" tvg-name="PL| HBO 3 HD",PL| HBO 3 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880355&extension=ts&play_token=A5UQ6egXFN
+#EXTINF:-1 tvg-id="PL| POLSAT FILM FHD" tvg-logo="http://103.176.90.92/images/880505.png" group-title="PL| FILMOWE" tvg-name="PL| POLSAT FILM FHD",PL| POLSAT FILM FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880505&extension=ts&play_token=cuSM4NMnnV
+#EXTINF:-1 tvg-id="PL| POLSAT FILM HD" tvg-logo="http://103.176.90.92/images/880365.png" group-title="PL| FILMOWE" tvg-name="PL| POLSAT FILM HD",PL| POLSAT FILM HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880365&extension=ts&play_token=JWLtdrRoPs
+#EXTINF:-1 tvg-id="PL| PARAMOUNT CHANNEL FHD" tvg-logo="http://103.176.90.92/images/880472.png" group-title="PL| FILMOWE" tvg-name="PL| PARAMOUNT CHANNEL FHD",PL| PARAMOUNT CHANNEL FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880472&extension=ts&play_token=lA1etPuDkL
+#EXTINF:-1 tvg-id="PL| PARAMOUNT CHANNEL HD" tvg-logo="http://103.176.90.92/images/880332.png" group-title="PL| FILMOWE" tvg-name="PL| PARAMOUNT CHANNEL HD",PL| PARAMOUNT CHANNEL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880332&extension=ts&play_token=z96b9sHXVj
+#EXTINF:-1 tvg-id="PL| WARNER TV FHD" tvg-logo="http://103.176.90.92/images/880473.png" group-title="PL| FILMOWE" tvg-name="PL| WARNER TV FHD",PL| WARNER TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880473&extension=ts&play_token=OLjD52987k
+#EXTINF:-1 tvg-id="PL| WARNER TV HD" tvg-logo="http://103.176.90.92/images/880333.png" group-title="PL| FILMOWE" tvg-name="PL| WARNER TV HD",PL| WARNER TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880333&extension=ts&play_token=lgPfS8fh9E
+#EXTINF:-1 tvg-id="PL| 13 ULICA FHD" tvg-logo="http://103.176.90.92/images/880492.png" group-title="PL| FILMOWE" tvg-name="PL| 13 ULICA FHD",PL| 13 ULICA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880492&extension=ts&play_token=SA7n8gGjZb
+#EXTINF:-1 tvg-id="PL| 13 ULICA HD" tvg-logo="http://103.176.90.92/images/880352.png" group-title="PL| FILMOWE" tvg-name="PL| 13 ULICA HD",PL| 13 ULICA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880352&extension=ts&play_token=qw41urtHdx
+#EXTINF:-1 tvg-id="PL| AMC FHD" tvg-logo="http://103.176.90.92/images/880433.png" group-title="PL| FILMOWE" tvg-name="PL| AMC FHD",PL| AMC FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880433&extension=ts&play_token=ByeVevZ5MI
+#EXTINF:-1 tvg-id="PL| AMC HD" tvg-logo="http://103.176.90.92/images/880293.png" group-title="PL| FILMOWE" tvg-name="PL| AMC HD",PL| AMC HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880293&extension=ts&play_token=MmayDJQXwR
+#EXTINF:-1 tvg-id="PL| ALE KINO+ FHD" tvg-logo="http://103.176.90.92/images/880493.png" group-title="PL| FILMOWE" tvg-name="PL| ALE KINO+ FHD",PL| ALE KINO+ FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880493&extension=ts&play_token=sn5u6sjvUj
+#EXTINF:-1 tvg-id="PL| ALE KINO+ HD" tvg-logo="http://103.176.90.92/images/880353.png" group-title="PL| FILMOWE" tvg-name="PL| ALE KINO+ HD",PL| ALE KINO+ HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880353&extension=ts&play_token=riaMdtC64k
+#EXTINF:-1 tvg-id="PL| AXN FHD" tvg-logo="http://103.176.90.92/images/880490.png" group-title="PL| FILMOWE" tvg-name="PL| AXN FHD",PL| AXN FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880490&extension=ts&play_token=5nsxmHmZ8A
+#EXTINF:-1 tvg-id="PL| AXN HD" tvg-logo="http://103.176.90.92/images/880350.png" group-title="PL| FILMOWE" tvg-name="PL| AXN HD",PL| AXN HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880350&extension=ts&play_token=6X0jvY4nQl
+#EXTINF:-1 tvg-id="PL| AXN SPIN FHD" tvg-logo="http://103.176.90.92/images/880489.png" group-title="PL| FILMOWE" tvg-name="PL| AXN SPIN FHD",PL| AXN SPIN FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880489&extension=ts&play_token=67Bx6jclZi
+#EXTINF:-1 tvg-id="PL| AXN SPIN HD" tvg-logo="http://103.176.90.92/images/880349.png" group-title="PL| FILMOWE" tvg-name="PL| AXN SPIN HD",PL| AXN SPIN HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880349&extension=ts&play_token=KhgujO4wMy
+#EXTINF:-1 tvg-id="PL| AXN WHITE" tvg-logo="http://103.176.90.92/images/880235.png" group-title="PL| FILMOWE" tvg-name="PL| AXN WHITE",PL| AXN WHITE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880235&extension=ts&play_token=ChNYoDwkIV
+#EXTINF:-1 tvg-id="PL| AXN BLACK" tvg-logo="http://103.176.90.92/images/880236.png" group-title="PL| FILMOWE" tvg-name="PL| AXN BLACK",PL| AXN BLACK
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880236&extension=ts&play_token=qVOdjWiut8
+#EXTINF:-1 tvg-id="PL| CINEMAX FHD" tvg-logo="http://103.176.90.92/images/880485.png" group-title="PL| FILMOWE" tvg-name="PL| CINEMAX FHD",PL| CINEMAX FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880485&extension=ts&play_token=f9idbIeRIT
+#EXTINF:-1 tvg-id="PL| CINEMAX HD" tvg-logo="http://103.176.90.92/images/880345.png" group-title="PL| FILMOWE" tvg-name="PL| CINEMAX HD",PL| CINEMAX HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880345&extension=ts&play_token=h6sgmE1G84
+#EXTINF:-1 tvg-id="PL| CINEMAX 2 FHD" tvg-logo="http://103.176.90.92/images/880488.png" group-title="PL| FILMOWE" tvg-name="PL| CINEMAX 2 FHD",PL| CINEMAX 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880488&extension=ts&play_token=BtkvQiLeOr
+#EXTINF:-1 tvg-id="PL| CINEMAX 2 HD" tvg-logo="http://103.176.90.92/images/880348.png" group-title="PL| FILMOWE" tvg-name="PL| CINEMAX 2 HD",PL| CINEMAX 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880348&extension=ts&play_token=rex8PewVae
+#EXTINF:-1 tvg-id="PL| FILMBOX PREMIUM FHD" tvg-logo="http://103.176.90.92/images/880483.png" group-title="PL| FILMOWE" tvg-name="PL| FILMBOX PREMIUM FHD",PL| FILMBOX PREMIUM FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880483&extension=ts&play_token=hCxAyHITCI
+#EXTINF:-1 tvg-id="PL| FILMBOX EXTRA HD" tvg-logo="http://103.176.90.92/images/880344.png" group-title="PL| FILMOWE" tvg-name="PL| FILMBOX EXTRA HD",PL| FILMBOX EXTRA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880344&extension=ts&play_token=birL1eFi92
+#EXTINF:-1 tvg-id="PL| FILMBOX EXTRA FHD" tvg-logo="http://103.176.90.92/images/880484.png" group-title="PL| FILMOWE" tvg-name="PL| FILMBOX EXTRA FHD",PL| FILMBOX EXTRA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880484&extension=ts&play_token=7MeiZDj2uG
+#EXTINF:-1 tvg-id="PL| FILMBOX ARTHOUSE" tvg-logo="http://103.176.90.92/images/880232.png" group-title="PL| FILMOWE" tvg-name="PL| FILMBOX ARTHOUSE",PL| FILMBOX ARTHOUSE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880232&extension=ts&play_token=fhiLsUy1dr
+#EXTINF:-1 tvg-id="PL| FILMBOX ACTION" tvg-logo="http://103.176.90.92/images/880233.png" group-title="PL| FILMOWE" tvg-name="PL| FILMBOX ACTION",PL| FILMBOX ACTION
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880233&extension=ts&play_token=LvgxZUCLqY
+#EXTINF:-1 tvg-id="PL| FILMBOX FAMILY" tvg-logo="http://103.176.90.92/images/880231.png" group-title="PL| FILMOWE" tvg-name="PL| FILMBOX FAMILY",PL| FILMBOX FAMILY
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880231&extension=ts&play_token=fi4UfBPGtz
+#EXTINF:-1 tvg-id="PL| COMEDY CENTRAL FHD" tvg-logo="http://103.176.90.92/images/880487.png" group-title="PL| FILMOWE" tvg-name="PL| COMEDY CENTRAL FHD",PL| COMEDY CENTRAL FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880487&extension=ts&play_token=IZNWg1VFCm
+#EXTINF:-1 tvg-id="PL| COMEDY CENTRAL HD" tvg-logo="http://103.176.90.92/images/880347.png" group-title="PL| FILMOWE" tvg-name="PL| COMEDY CENTRAL HD",PL| COMEDY CENTRAL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880347&extension=ts&play_token=ryvuV9joKa
+#EXTINF:-1 tvg-id="PL| POLSAT COMEDY CENTRAL EXTRA FHD" tvg-logo="http://103.176.90.92/images/880403.png" group-title="PL| FILMOWE" tvg-name="PL| POLSAT COMEDY CENTRAL EXTRA FHD",PL| POLSAT COMEDY CENTRAL EXTRA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880403&extension=ts&play_token=zE5Ce3lVMl
+#EXTINF:-1 tvg-id="PL| POLSAT COMEDY CENTRAL EXTRA HD" tvg-logo="http://103.176.90.92/images/880263.png" group-title="PL| FILMOWE" tvg-name="PL| POLSAT COMEDY CENTRAL EXTRA HD",PL| POLSAT COMEDY CENTRAL EXTRA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880263&extension=ts&play_token=GdEuk5wJFr
+#EXTINF:-1 tvg-id="PL| COMEDY CENTRAL POLAND FHD" tvg-logo="http://103.176.90.92/images/880486.png" group-title="PL| FILMOWE" tvg-name="PL| COMEDY CENTRAL POLAND FHD",PL| COMEDY CENTRAL POLAND FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880486&extension=ts&play_token=XmRROZurpZ
+#EXTINF:-1 tvg-id="PL| COMEDY CENTRAL POLAND HD" tvg-logo="http://103.176.90.92/images/880346.png" group-title="PL| FILMOWE" tvg-name="PL| COMEDY CENTRAL POLAND HD",PL| COMEDY CENTRAL POLAND HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880346&extension=ts&play_token=9SQ7q3nIHE
+#EXTINF:-1 tvg-id="PL| KINO TV FHD" tvg-logo="http://103.176.90.92/images/880478.png" group-title="PL| FILMOWE" tvg-name="PL| KINO TV FHD",PL| KINO TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880478&extension=ts&play_token=8UidG6qqXQ
+#EXTINF:-1 tvg-id="PL| KINO TV HD" tvg-logo="http://103.176.90.92/images/880338.png" group-title="PL| FILMOWE" tvg-name="PL| KINO TV HD",PL| KINO TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880338&extension=ts&play_token=8XgNIIiK9z
+#EXTINF:-1 tvg-id="PL| KINO POLSKA FHD" tvg-logo="http://103.176.90.92/images/880476.png" group-title="PL| FILMOWE" tvg-name="PL| KINO POLSKA FHD",PL| KINO POLSKA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880476&extension=ts&play_token=rpTbl9psla
+#EXTINF:-1 tvg-id="PL| KINO POLSKA HD" tvg-logo="http://103.176.90.92/images/880336.png" group-title="PL| FILMOWE" tvg-name="PL| KINO POLSKA HD",PL| KINO POLSKA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880336&extension=ts&play_token=zhdjA1Hw20
+#EXTINF:-1 tvg-id="PL| TVP SERIALE" tvg-logo="http://103.176.90.92/images/880189.png" group-title="PL| FILMOWE" tvg-name="PL| TVP SERIALE",PL| TVP SERIALE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880189&extension=ts&play_token=kMwdGZBrYC
+#EXTINF:-1 tvg-id="PL| POLSAT SERIALE FHD" tvg-logo="http://103.176.90.92/images/880507.png" group-title="PL| FILMOWE" tvg-name="PL| POLSAT SERIALE FHD",PL| POLSAT SERIALE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880507&extension=ts&play_token=dpqbvPVHex
+#EXTINF:-1 tvg-id="PL| POLSAT SERIALE HD" tvg-logo="http://103.176.90.92/images/880367.png" group-title="PL| FILMOWE" tvg-name="PL| POLSAT SERIALE HD",PL| POLSAT SERIALE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880367&extension=ts&play_token=JP8B4rd4BM
+#EXTINF:-1 tvg-id="PL| FOX FHD" tvg-logo="http://103.176.90.92/images/880477.png" group-title="PL| FILMOWE" tvg-name="PL| FOX FHD",PL| FOX FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880477&extension=ts&play_token=HGt2NINfAY
+#EXTINF:-1 tvg-id="PL| FOX HD" tvg-logo="http://103.176.90.92/images/880337.png" group-title="PL| FILMOWE" tvg-name="PL| FOX HD",PL| FOX HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880337&extension=ts&play_token=gGKMRTWJzF
+#EXTINF:-1 tvg-id="PL| FOX COMEDY FHD" tvg-logo="http://103.176.90.92/images/880480.png" group-title="PL| FILMOWE" tvg-name="PL| FOX COMEDY FHD",PL| FOX COMEDY FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880480&extension=ts&play_token=usWgqwXpkw
+#EXTINF:-1 tvg-id="PL| FOX COMEDY HD" tvg-logo="http://103.176.90.92/images/880340.png" group-title="PL| FILMOWE" tvg-name="PL| FOX COMEDY HD",PL| FOX COMEDY HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880340&extension=ts&play_token=9KthnCLrys
+#EXTINF:-1 tvg-id="PL| SCIFI UNIVERSAL FHD" tvg-logo="http://103.176.90.92/images/880451.png" group-title="PL| FILMOWE" tvg-name="PL| SCIFI UNIVERSAL FHD",PL| SCIFI UNIVERSAL FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880451&extension=ts&play_token=w7fmBXwPwt
+#EXTINF:-1 tvg-id="PL| SCIFI UNIVERSAL HD" tvg-logo="http://103.176.90.92/images/880311.png" group-title="PL| FILMOWE" tvg-name="PL| SCIFI UNIVERSAL HD",PL| SCIFI UNIVERSAL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880311&extension=ts&play_token=RRUUlUFW1b
+#EXTINF:-1 tvg-id="PL| CBS EUROPA FHD" tvg-logo="http://103.176.90.92/images/880431.png" group-title="PL| FILMOWE" tvg-name="PL| CBS EUROPA FHD",PL| CBS EUROPA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880431&extension=ts&play_token=3pnC2DUnJM
+#EXTINF:-1 tvg-id="PL| CBS EUROPA HD" tvg-logo="http://103.176.90.92/images/880291.png" group-title="PL| FILMOWE" tvg-name="PL| CBS EUROPA HD",PL| CBS EUROPA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880291&extension=ts&play_token=OeZxUY2Aj4
+#EXTINF:-1 tvg-id="PL| EPIC DRAMA FHD" tvg-logo="http://103.176.90.92/images/880421.png" group-title="PL| FILMOWE" tvg-name="PL| EPIC DRAMA FHD",PL| EPIC DRAMA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880421&extension=ts&play_token=SKpGZxO5MB
+#EXTINF:-1 tvg-id="PL| EPIC DRAMA HD" tvg-logo="http://103.176.90.92/images/880281.png" group-title="PL| FILMOWE" tvg-name="PL| EPIC DRAMA HD",PL| EPIC DRAMA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880281&extension=ts&play_token=oEGB6tl9yM
+#EXTINF:-1 tvg-id="PL| STOPKLATKA TV" tvg-logo="http://103.176.90.92/images/880229.png" group-title="PL| FILMOWE" tvg-name="PL| STOPKLATKA TV",PL| STOPKLATKA TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880229&extension=ts&play_token=0HEaFCYkUL
+#EXTINF:-1 tvg-id="PL| SUNDANCE TV FHD" tvg-logo="http://103.176.90.92/images/880392.png" group-title="PL| FILMOWE" tvg-name="PL| SUNDANCE TV FHD",PL| SUNDANCE TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880392&extension=ts&play_token=Lq9SZPFspO
+#EXTINF:-1 tvg-id="PL| SUNDANCE TV HD" tvg-logo="http://103.176.90.92/images/880252.png" group-title="PL| FILMOWE" tvg-name="PL| SUNDANCE TV HD",PL| SUNDANCE TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880252&extension=ts&play_token=75b7iYtYGA
+#EXTINF:-1 tvg-id="PL| ROMANCE TV FHD" tvg-logo="http://103.176.90.92/images/880394.png" group-title="PL| FILMOWE" tvg-name="PL| ROMANCE TV FHD",PL| ROMANCE TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880394&extension=ts&play_token=orJ5sNhvSm
+#EXTINF:-1 tvg-id="PL| ROMANCE TV HD" tvg-logo="http://103.176.90.92/images/880254.png" group-title="PL| FILMOWE" tvg-name="PL| ROMANCE TV HD",PL| ROMANCE TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880254&extension=ts&play_token=IRhu5w8a7Y
+#EXTINF:-1 tvg-id="PL| NOVELA TV" tvg-logo="http://103.176.90.92/images/880209.png" group-title="PL| FILMOWE" tvg-name="PL| NOVELA TV",PL| NOVELA TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880209&extension=ts&play_token=jaEVRMM87g
+#EXTINF:-1 tvg-id="PL| NOVELAS+ FHD" tvg-logo="http://103.176.90.92/images/880410.png" group-title="PL| FILMOWE" tvg-name="PL| NOVELAS+ FHD",PL| NOVELAS+ FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880410&extension=ts&play_token=2mpLCP86rq
+#EXTINF:-1 tvg-id="PL| NOVELAS+ HD" tvg-logo="http://103.176.90.92/images/880270.png" group-title="PL| FILMOWE" tvg-name="PL| NOVELAS+ HD",PL| NOVELAS+ HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880270&extension=ts&play_token=nvYtQAKvu0
+#EXTINF:-1 tvg-id="PL| RED CARPET TV FHD" tvg-logo="http://103.176.90.92/images/880395.png" group-title="PL| FILMOWE" tvg-name="PL| RED CARPET TV FHD",PL| RED CARPET TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880395&extension=ts&play_token=gjZfm4iG8J
+#EXTINF:-1 tvg-id="PL| RED CARPET TV HD" tvg-logo="http://103.176.90.92/images/880255.png" group-title="PL| FILMOWE" tvg-name="PL| RED CARPET TV HD",PL| RED CARPET TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880255&extension=ts&play_token=JMCkZQtWef
+#EXTINF:-1 tvg-id="PL| VOD 205" tvg-logo="http://103.176.90.92/images/880197.png" group-title="PL| FILMOWE" tvg-name="PL| VOD 205",PL| VOD 205
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880197&extension=ts&play_token=XkLdclLd5G
+#EXTINF:-1 tvg-id="PL| VOD 206" tvg-logo="http://103.176.90.92/images/880196.png" group-title="PL| FILMOWE" tvg-name="PL| VOD 206",PL| VOD 206
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880196&extension=ts&play_token=nQL7E4OOSK
+#EXTINF:-1 tvg-id="PL| VOD 207" tvg-logo="http://103.176.90.92/images/880195.png" group-title="PL| FILMOWE" tvg-name="PL| VOD 207",PL| VOD 207
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880195&extension=ts&play_token=vVAkmzy80y
+#EXTINF:-1 tvg-id="PL| VOD 208" tvg-logo="http://103.176.90.92/images/880194.png" group-title="PL| FILMOWE" tvg-name="PL| VOD 208",PL| VOD 208
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880194&extension=ts&play_token=FJZnuuZLpJ
+#EXTINF:-1 tvg-id="##### KANAŁY TVN PLAYER ᵁᴴᴰ/ᴴᴰ #####" tvg-logo="" group-title="PL| KANAŁY TVN PLAYER" tvg-name="##### KANAŁY TVN PLAYER ᵁᴴᴰ/ᴴᴰ #####",##### KANAŁY TVN PLAYER ᵁᴴᴰ/ᴴᴰ #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433873&extension=ts&play_token=NkDZdjTd5h
+#EXTINF:-1 tvg-id="PL| TVN CZAS NA ŚLUB ᴴᴰ" tvg-logo="http://103.176.90.92/images/1649893.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN CZAS NA ŚLUB ᴴᴰ",PL| TVN CZAS NA ŚLUB ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1649893&extension=ts&play_token=6Z3zQgNdiU
+#EXTINF:-1 tvg-id="PL| TVN CZAS NA ŚLUB ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1649892.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN CZAS NA ŚLUB ᵁᴴᴰ",PL| TVN CZAS NA ŚLUB ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1649892&extension=ts&play_token=i4BoaJQ9Ij
+#EXTINF:-1 tvg-id="PL| TVN KULINARNE PODRÓŻE ᴴᴰ" tvg-logo="http://103.176.90.92/images/1649891.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN KULINARNE PODRÓŻE ᴴᴰ",PL| TVN KULINARNE PODRÓŻE ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1649891&extension=ts&play_token=fQi5lCTqFO
+#EXTINF:-1 tvg-id="PL| TVN KULINARNE PODRÓŻE ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1649890.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN KULINARNE PODRÓŻE ᵁᴴᴰ",PL| TVN KULINARNE PODRÓŻE ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1649890&extension=ts&play_token=DZMliWkrdg
+#EXTINF:-1 tvg-id="PL| TVN PATROL ONLINE ᴴᴰ" tvg-logo="http://103.176.90.92/images/1649889.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN PATROL ONLINE ᴴᴰ",PL| TVN PATROL ONLINE ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1649889&extension=ts&play_token=tBPhwZE8Yi
+#EXTINF:-1 tvg-id="PL| TVN PATROL ONLINE ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1649888.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN PATROL ONLINE ᵁᴴᴰ",PL| TVN PATROL ONLINE ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1649888&extension=ts&play_token=y82VsCnXfa
+#EXTINF:-1 tvg-id="PL| TVN KRYMINALNIE ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433874.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN KRYMINALNIE ᴴᴰ",PL| TVN KRYMINALNIE ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433874&extension=ts&play_token=GNPHOAfECm
+#EXTINF:-1 tvg-id="PL| TVN KRYMINALNIE ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433875.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN KRYMINALNIE ᵁᴴᴰ",PL| TVN KRYMINALNIE ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433875&extension=ts&play_token=Hb4LQqogu6
+#EXTINF:-1 tvg-id="PL| TVN KULTOWE SERIALE ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433876.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN KULTOWE SERIALE ᴴᴰ",PL| TVN KULTOWE SERIALE ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433876&extension=ts&play_token=R4ddlgpwTL
+#EXTINF:-1 tvg-id="PL| TVN KULTOWE SERIALE ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433877.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN KULTOWE SERIALE ᵁᴴᴰ",PL| TVN KULTOWE SERIALE ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433877&extension=ts&play_token=S9uf5VCrZO
+#EXTINF:-1 tvg-id="PL| TVN MOMENTY PRAWDY ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433878.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN MOMENTY PRAWDY ᴴᴰ",PL| TVN MOMENTY PRAWDY ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433878&extension=ts&play_token=SY0UQicIsX
+#EXTINF:-1 tvg-id="PL| TVN MOMENTY PRAWDY ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433879.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN MOMENTY PRAWDY ᵁᴴᴰ",PL| TVN MOMENTY PRAWDY ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433879&extension=ts&play_token=zv48iasaqQ
+#EXTINF:-1 tvg-id="PL| TVN MOTO ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433880.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN MOTO ᴴᴰ",PL| TVN MOTO ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433880&extension=ts&play_token=WkBPRzDjXH
+#EXTINF:-1 tvg-id="PL| TVN MOTO ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433881.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN MOTO ᵁᴴᴰ",PL| TVN MOTO ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433881&extension=ts&play_token=J38x4G9kdB
+#EXTINF:-1 tvg-id="PL| TVN PRAWO I ŻYCIE ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433882.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN PRAWO I ŻYCIE ᴴᴰ",PL| TVN PRAWO I ŻYCIE ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433882&extension=ts&play_token=1oGnwkGfWX
+#EXTINF:-1 tvg-id="PL| TVN PRAWO I ŻYCIE ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433883.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN PRAWO I ŻYCIE ᵁᴴᴰ",PL| TVN PRAWO I ŻYCIE ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433883&extension=ts&play_token=IUJ8T7X2KS
+#EXTINF:-1 tvg-id="PL| TVN RAJSKA MIŁOŚĆ ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433884.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN RAJSKA MIŁOŚĆ ᴴᴰ",PL| TVN RAJSKA MIŁOŚĆ ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433884&extension=ts&play_token=GZB0w03uil
+#EXTINF:-1 tvg-id="PL| TVN RAJSKA MIŁOŚĆ ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433885.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN RAJSKA MIŁOŚĆ ᵁᴴᴰ",PL| TVN RAJSKA MIŁOŚĆ ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433885&extension=ts&play_token=lsAPzUKLHe
+#EXTINF:-1 tvg-id="PL| TVN REWOLUCJE W KUCHNI ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433886.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN REWOLUCJE W KUCHNI ᴴᴰ",PL| TVN REWOLUCJE W KUCHNI ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433886&extension=ts&play_token=F5lJDbXtHA
+#EXTINF:-1 tvg-id="PL| TVN REWOLUCJE W KUCHNI ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433887.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN REWOLUCJE W KUCHNI ᵁᴴᴰ",PL| TVN REWOLUCJE W KUCHNI ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433887&extension=ts&play_token=kLMnpZWrfS
+#EXTINF:-1 tvg-id="PL| TVN SERIAL O KOBIETACH ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433888.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN SERIAL O KOBIETACH ᴴᴰ",PL| TVN SERIAL O KOBIETACH ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433888&extension=ts&play_token=bYLOj0mHA8
+#EXTINF:-1 tvg-id="PL| TVN SERIAL O KOBIETACH ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433889.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN SERIAL O KOBIETACH ᵁᴴᴰ",PL| TVN SERIAL O KOBIETACH ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433889&extension=ts&play_token=9gFKGxpEXH
+#EXTINF:-1 tvg-id="PL| TVN SZKOŁA ŻYCIA ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433890.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN SZKOŁA ŻYCIA ᴴᴰ",PL| TVN SZKOŁA ŻYCIA ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433890&extension=ts&play_token=8KXg4aBCrj
+#EXTINF:-1 tvg-id="PL| TVN SZKOŁA ŻYCIA ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433891.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN SZKOŁA ŻYCIA ᵁᴴᴰ",PL| TVN SZKOŁA ŻYCIA ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433891&extension=ts&play_token=vqJHVTD82S
+#EXTINF:-1 tvg-id="PL| TVN SZPITALNE HISTORIE ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433892.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN SZPITALNE HISTORIE ᴴᴰ",PL| TVN SZPITALNE HISTORIE ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433892&extension=ts&play_token=9n83gX4PpE
+#EXTINF:-1 tvg-id="PL| TVN SZPITALNE HISTORIE ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433893.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN SZPITALNE HISTORIE ᵁᴴᴰ",PL| TVN SZPITALNE HISTORIE ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433893&extension=ts&play_token=l4LA5DuRMJ
+#EXTINF:-1 tvg-id="PL| TVN TALK—SHOW ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433894.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN TALK—SHOW ᴴᴰ",PL| TVN TALK—SHOW ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433894&extension=ts&play_token=2ah4pEJICg
+#EXTINF:-1 tvg-id="PL| TVN TALK—SHOW ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433895.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN TALK—SHOW ᵁᴴᴰ",PL| TVN TALK—SHOW ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433895&extension=ts&play_token=40zCHTDpVa
+#EXTINF:-1 tvg-id="PL| TVN TELENOWELE ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433896.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN TELENOWELE ᴴᴰ",PL| TVN TELENOWELE ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433896&extension=ts&play_token=TMGSZLJjzp
+#EXTINF:-1 tvg-id="PL| TVN TELENOWELE ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433897.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN TELENOWELE ᵁᴴᴰ",PL| TVN TELENOWELE ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433897&extension=ts&play_token=6QszLzuPoC
+#EXTINF:-1 tvg-id="PL| TVN USTERKA ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433898.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN USTERKA ᴴᴰ",PL| TVN USTERKA ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433898&extension=ts&play_token=hry6v0y58B
+#EXTINF:-1 tvg-id="PL| TVN USTERKA ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433899.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN USTERKA ᵁᴴᴰ",PL| TVN USTERKA ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433899&extension=ts&play_token=itudGr3LXo
+#EXTINF:-1 tvg-id="PL| TVN W DOMU ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433900.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN W DOMU ᴴᴰ",PL| TVN W DOMU ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433900&extension=ts&play_token=CpAqyuNq7D
+#EXTINF:-1 tvg-id="PL| TVN W DOMU ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433901.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN W DOMU ᵁᴴᴰ",PL| TVN W DOMU ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433901&extension=ts&play_token=UtdiTzEH2L
+#EXTINF:-1 tvg-id="PL| TVN MILIONERZY ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1496498.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN MILIONERZY ᵁᴴᴰ",PL| TVN MILIONERZY ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1496498&extension=ts&play_token=PIR2OgIy4s
+#EXTINF:-1 tvg-id="PL| TVN MILIONERZY ᴴᴰ" tvg-logo="http://103.176.90.92/images/1496497.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN MILIONERZY ᴴᴰ",PL| TVN MILIONERZY ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1496497&extension=ts&play_token=yzCSJOXPIf
+#EXTINF:-1 tvg-id="PL| TVN ŻYCIE JAK W BAJCE ᴴᴰ" tvg-logo="http://103.176.90.92/images/1433902.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN ŻYCIE JAK W BAJCE ᴴᴰ",PL| TVN ŻYCIE JAK W BAJCE ᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433902&extension=ts&play_token=tGkYy7VNNn
+#EXTINF:-1 tvg-id="PL| TVN ŻYCIE JAK W BAJCE ᵁᴴᴰ" tvg-logo="http://103.176.90.92/images/1433903.png" group-title="PL| KANAŁY TVN PLAYER" tvg-name="PL| TVN ŻYCIE JAK W BAJCE ᵁᴴᴰ",PL| TVN ŻYCIE JAK W BAJCE ᵁᴴᴰ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1433903&extension=ts&play_token=gJ5ZNzSspj
+#EXTINF:-1 tvg-id="##### PL DLA DZIECI #####" tvg-logo="" group-title="PL| DLA DZIECI" tvg-name="##### PL DLA DZIECI #####",##### PL DLA DZIECI #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288920&extension=ts&play_token=Z4HHxDsx8D
+#EXTINF:-1 tvg-id="PL| DA VINCI LEARNING" tvg-logo="http://103.176.90.92/images/880224.png" group-title="PL| DLA DZIECI" tvg-name="PL| DA VINCI LEARNING",PL| DA VINCI LEARNING
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880224&extension=ts&play_token=CFfBgnu2e4
+#EXTINF:-1 tvg-id="PL| TVP ABC" tvg-logo="http://103.176.90.92/images/880239.png" group-title="PL| DLA DZIECI" tvg-name="PL| TVP ABC",PL| TVP ABC
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880239&extension=ts&play_token=MlKG9WDFkl
+#EXTINF:-1 tvg-id="PL| TVP ABC 2 HD" tvg-logo="http://103.176.90.92/images/1121740.png" group-title="PL| DLA DZIECI" tvg-name="PL| TVP ABC 2 HD",PL| TVP ABC 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121740&extension=ts&play_token=KBSmhGjMMi
+#EXTINF:-1 tvg-id="PL| DUCK TV HD" tvg-logo="http://103.176.90.92/images/1121750.png" group-title="PL| DLA DZIECI" tvg-name="PL| DUCK TV HD",PL| DUCK TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121750&extension=ts&play_token=PC7hVDI2rt
+#EXTINF:-1 tvg-id="PL| DUCK TV PLUS HD" tvg-logo="http://103.176.90.92/images/1121751.png" group-title="PL| DLA DZIECI" tvg-name="PL| DUCK TV PLUS HD",PL| DUCK TV PLUS HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121751&extension=ts&play_token=JLZzCbVbF9
+#EXTINF:-1 tvg-id="PL| BBC CBEEBIES" tvg-logo="http://103.176.90.92/images/880226.png" group-title="PL| DLA DZIECI" tvg-name="PL| BBC CBEEBIES",PL| BBC CBEEBIES
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880226&extension=ts&play_token=5cDffcXvFT
+#EXTINF:-1 tvg-id="PL| TOP KIDS" tvg-logo="http://103.176.90.92/images/897016.png" group-title="PL| DLA DZIECI" tvg-name="PL| TOP KIDS",PL| TOP KIDS
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=897016&extension=ts&play_token=oPm0VSkIGT
+#EXTINF:-1 tvg-id="PL| BABY TV" tvg-logo="http://103.176.90.92/images/880225.png" group-title="PL| DLA DZIECI" tvg-name="PL| BABY TV",PL| BABY TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880225&extension=ts&play_token=v6ol1EbXO7
+#EXTINF:-1 tvg-id="PL| 4FUN KIDS" tvg-logo="http://103.176.90.92/images/1035704.png" group-title="PL| DLA DZIECI" tvg-name="PL| 4FUN KIDS",PL| 4FUN KIDS
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1035704&extension=ts&play_token=xKCuh3GfE3
+#EXTINF:-1 tvg-id="PL| NICK JR POLSKA" tvg-logo="http://103.176.90.92/images/880211.png" group-title="PL| DLA DZIECI" tvg-name="PL| NICK JR POLSKA",PL| NICK JR POLSKA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880211&extension=ts&play_token=Td3knarFkL
+#EXTINF:-1 tvg-id="PL| NICK MUSIC HD" tvg-logo="http://103.176.90.92/images/1121757.png" group-title="PL| DLA DZIECI" tvg-name="PL| NICK MUSIC HD",PL| NICK MUSIC HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121757&extension=ts&play_token=d2SMTVZbRA
+#EXTINF:-1 tvg-id="PL| TEENNICK FHD" tvg-logo="http://103.176.90.92/images/880411.png" group-title="PL| DLA DZIECI" tvg-name="PL| TEENNICK FHD",PL| TEENNICK FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880411&extension=ts&play_token=5mSObtAgnA
+#EXTINF:-1 tvg-id="PL| TEENNICK HD" tvg-logo="http://103.176.90.92/images/880271.png" group-title="PL| DLA DZIECI" tvg-name="PL| TEENNICK HD",PL| TEENNICK HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880271&extension=ts&play_token=XpL1mET8n9
+#EXTINF:-1 tvg-id="PL| NICKELODEON" tvg-logo="http://103.176.90.92/images/880210.png" group-title="PL| DLA DZIECI" tvg-name="PL| NICKELODEON",PL| NICKELODEON
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880210&extension=ts&play_token=7kq9HszF1b
+#EXTINF:-1 tvg-id="PL| NICKTOONS FHD" tvg-logo="http://103.176.90.92/images/880412.png" group-title="PL| DLA DZIECI" tvg-name="PL| NICKTOONS FHD",PL| NICKTOONS FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880412&extension=ts&play_token=uvWUxQW03i
+#EXTINF:-1 tvg-id="PL| NICKTOONS HD" tvg-logo="http://103.176.90.92/images/880272.png" group-title="PL| DLA DZIECI" tvg-name="PL| NICKTOONS HD",PL| NICKTOONS HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880272&extension=ts&play_token=wI3udXfqrj
+#EXTINF:-1 tvg-id="PL| POLSAT JIM JAM" tvg-logo="http://103.176.90.92/images/880206.png" group-title="PL| DLA DZIECI" tvg-name="PL| POLSAT JIM JAM",PL| POLSAT JIM JAM
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880206&extension=ts&play_token=ZRx8TbHpzm
+#EXTINF:-1 tvg-id="PL| DISNEY CHANNEL HD" tvg-logo="http://103.176.90.92/images/880285.png" group-title="PL| DLA DZIECI" tvg-name="PL| DISNEY CHANNEL HD",PL| DISNEY CHANNEL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880285&extension=ts&play_token=XsKNM66Ya8
+#EXTINF:-1 tvg-id="PL| DISNEY JUNIOR" tvg-logo="http://103.176.90.92/images/880219.png" group-title="PL| DLA DZIECI" tvg-name="PL| DISNEY JUNIOR",PL| DISNEY JUNIOR
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880219&extension=ts&play_token=I4mDoiXGiA
+#EXTINF:-1 tvg-id="PL| DISNEY XD" tvg-logo="http://103.176.90.92/images/880218.png" group-title="PL| DLA DZIECI" tvg-name="PL| DISNEY XD",PL| DISNEY XD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880218&extension=ts&play_token=RUrbEBHZYM
+#EXTINF:-1 tvg-id="PL| BOOMERANG FHD" tvg-logo="http://103.176.90.92/images/880443.png" group-title="PL| DLA DZIECI" tvg-name="PL| BOOMERANG FHD",PL| BOOMERANG FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880443&extension=ts&play_token=QXLybPMSlp
+#EXTINF:-1 tvg-id="PL| BOOMERANG HD" tvg-logo="http://103.176.90.92/images/880303.png" group-title="PL| DLA DZIECI" tvg-name="PL| BOOMERANG HD",PL| BOOMERANG HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880303&extension=ts&play_token=gouHGmXLtU
+#EXTINF:-1 tvg-id="PL| TELETOON+ FHD" tvg-logo="http://103.176.90.92/images/880390.png" group-title="PL| DLA DZIECI" tvg-name="PL| TELETOON+ FHD",PL| TELETOON+ FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880390&extension=ts&play_token=wXWrFGRxNR
+#EXTINF:-1 tvg-id="PL| TELETOON+ HD" tvg-logo="http://103.176.90.92/images/880250.png" group-title="PL| DLA DZIECI" tvg-name="PL| TELETOON+ HD",PL| TELETOON+ HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880250&extension=ts&play_token=iv48XZsOsq
+#EXTINF:-1 tvg-id="PL| MINIMINI FHD" tvg-logo="http://103.176.90.92/images/880414.png" group-title="PL| DLA DZIECI" tvg-name="PL| MINIMINI FHD",PL| MINIMINI FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880414&extension=ts&play_token=BpsS4s5113
+#EXTINF:-1 tvg-id="PL| MINIMINI HD" tvg-logo="http://103.176.90.92/images/880274.png" group-title="PL| DLA DZIECI" tvg-name="PL| MINIMINI HD",PL| MINIMINI HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880274&extension=ts&play_token=0GSwZn2nzW
+#EXTINF:-1 tvg-id="PL| CARTOON NETWORK FHD" tvg-logo="http://103.176.90.92/images/880432.png" group-title="PL| DLA DZIECI" tvg-name="PL| CARTOON NETWORK FHD",PL| CARTOON NETWORK FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880432&extension=ts&play_token=Wlpn54yZbk
+#EXTINF:-1 tvg-id="PL| CARTOON NETWORK HD" tvg-logo="http://103.176.90.92/images/880292.png" group-title="PL| DLA DZIECI" tvg-name="PL| CARTOON NETWORK HD",PL| CARTOON NETWORK HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880292&extension=ts&play_token=zuD8AgE8ei
+#EXTINF:-1 tvg-id="##### PL DOKUMENTALNE #####" tvg-logo="" group-title="PL| DOKUMENTALNE" tvg-name="##### PL DOKUMENTALNE #####",##### PL DOKUMENTALNE #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288919&extension=ts&play_token=cTWTt9qeuR
+#EXTINF:-1 tvg-id="PL| LOVE NATURE 4K+" tvg-logo="http://103.176.90.92/images/1131804.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| LOVE NATURE 4K+",PL| LOVE NATURE 4K+
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1131804&extension=ts&play_token=VLADxZCVzn
+#EXTINF:-1 tvg-id="PL| TRAVEL CHANNEL FHD" tvg-logo="http://103.176.90.92/images/880445.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| TRAVEL CHANNEL FHD",PL| TRAVEL CHANNEL FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880445&extension=ts&play_token=8MCt2m7T9K
+#EXTINF:-1 tvg-id="PL| TRAVEL CHANNEL HD" tvg-logo="http://103.176.90.92/images/880305.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| TRAVEL CHANNEL HD",PL| TRAVEL CHANNEL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880305&extension=ts&play_token=0oukLYNOkE
+#EXTINF:-1 tvg-id="PL| ANIMAL PLANET FHD" tvg-logo="http://103.176.90.92/images/880437.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| ANIMAL PLANET FHD",PL| ANIMAL PLANET FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880437&extension=ts&play_token=xbzKXoqJZZ
+#EXTINF:-1 tvg-id="PL| ANIMAL PLANET HD" tvg-logo="http://103.176.90.92/images/880297.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| ANIMAL PLANET HD",PL| ANIMAL PLANET HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880297&extension=ts&play_token=Tp5YgbQYYS
+#EXTINF:-1 tvg-id="PL| ADVENTURE FHD" tvg-logo="http://103.176.90.92/images/880434.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| ADVENTURE FHD",PL| ADVENTURE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880434&extension=ts&play_token=lYUZL9qlTt
+#EXTINF:-1 tvg-id="PL| ADVENTURE HD" tvg-logo="http://103.176.90.92/images/880294.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| ADVENTURE HD",PL| ADVENTURE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880294&extension=ts&play_token=dYgcV2z3re
+#EXTINF:-1 tvg-id="PL| BBC BRIT FHD" tvg-logo="http://103.176.90.92/images/880450.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| BBC BRIT FHD",PL| BBC BRIT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880450&extension=ts&play_token=6CxADSvT8W
+#EXTINF:-1 tvg-id="PL| BBC BRIT HD" tvg-logo="http://103.176.90.92/images/880310.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| BBC BRIT HD",PL| BBC BRIT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880310&extension=ts&play_token=FQpZ6b5wFK
+#EXTINF:-1 tvg-id="PL| BBC EARTH FHD" tvg-logo="http://103.176.90.92/images/880436.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| BBC EARTH FHD",PL| BBC EARTH FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880436&extension=ts&play_token=Y26f4aIpHz
+#EXTINF:-1 tvg-id="PL| BBC EARTH HD" tvg-logo="http://103.176.90.92/images/880296.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| BBC EARTH HD",PL| BBC EARTH HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880296&extension=ts&play_token=J7T8uK07iY
+#EXTINF:-1 tvg-id="PL| BBC FIRST HD" tvg-logo="http://103.176.90.92/images/880309.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| BBC FIRST HD",PL| BBC FIRST HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880309&extension=ts&play_token=AtU4S2GelZ
+#EXTINF:-1 tvg-id="PL| BBC FIRST FHD" tvg-logo="http://103.176.90.92/images/880449.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| BBC FIRST FHD",PL| BBC FIRST FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880449&extension=ts&play_token=CjUuK5jJsw
+#EXTINF:-1 tvg-id="PL| BBC LIFESTYLE FHD" tvg-logo="http://103.176.90.92/images/880435.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| BBC LIFESTYLE FHD",PL| BBC LIFESTYLE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880435&extension=ts&play_token=vl6dEt7m5T
+#EXTINF:-1 tvg-id="PL| BBC LIFESTYLE HD" tvg-logo="http://103.176.90.92/images/880295.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| BBC LIFESTYLE HD",PL| BBC LIFESTYLE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880295&extension=ts&play_token=LNBPdyIjrh
+#EXTINF:-1 tvg-id="PL| CBS REALITY FHD" tvg-logo="http://103.176.90.92/images/880430.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| CBS REALITY FHD",PL| CBS REALITY FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880430&extension=ts&play_token=0lPqFu1wpd
+#EXTINF:-1 tvg-id="PL| CBS REALITY HD" tvg-logo="http://103.176.90.92/images/880290.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| CBS REALITY HD",PL| CBS REALITY HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880290&extension=ts&play_token=NQhO3Wz838
+#EXTINF:-1 tvg-id="PL| CANAL+ DOKUMENT FHD" tvg-logo="http://103.176.90.92/images/880442.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| CANAL+ DOKUMENT FHD",PL| CANAL+ DOKUMENT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880442&extension=ts&play_token=S1thCDyTGU
+#EXTINF:-1 tvg-id="PL| CANAL+ DOKUMENT HD" tvg-logo="http://103.176.90.92/images/880302.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| CANAL+ DOKUMENT HD",PL| CANAL+ DOKUMENT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880302&extension=ts&play_token=YiZGofR6CI
+#EXTINF:-1 tvg-id="PL| DISCOVERY FHD" tvg-logo="http://103.176.90.92/images/880428.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DISCOVERY FHD",PL| DISCOVERY FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880428&extension=ts&play_token=SJ79WoYq2o
+#EXTINF:-1 tvg-id="PL| DISCOVERY HD" tvg-logo="http://103.176.90.92/images/880288.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DISCOVERY HD",PL| DISCOVERY HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880288&extension=ts&play_token=bjy76TeHIr
+#EXTINF:-1 tvg-id="PL| DISCOVERY SCIENCE FHD" tvg-logo="http://103.176.90.92/images/880426.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DISCOVERY SCIENCE FHD",PL| DISCOVERY SCIENCE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880426&extension=ts&play_token=ua1yJ83uVt
+#EXTINF:-1 tvg-id="PL| DISCOVERY SCIENCE HD" tvg-logo="http://103.176.90.92/images/880286.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DISCOVERY SCIENCE HD",PL| DISCOVERY SCIENCE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880286&extension=ts&play_token=ZhTI7V1fxK
+#EXTINF:-1 tvg-id="PL| DISCOVERY LIFE FHD" tvg-logo="http://103.176.90.92/images/880427.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DISCOVERY LIFE FHD",PL| DISCOVERY LIFE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880427&extension=ts&play_token=sgvzG8oOEV
+#EXTINF:-1 tvg-id="PL| DISCOVERY LIFE HD" tvg-logo="http://103.176.90.92/images/880287.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DISCOVERY LIFE HD",PL| DISCOVERY LIFE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880287&extension=ts&play_token=DKC1vuB1IS
+#EXTINF:-1 tvg-id="PL| DISCOVERY HISTORIA FHD" tvg-logo="http://103.176.90.92/images/1530077.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DISCOVERY HISTORIA FHD",PL| DISCOVERY HISTORIA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1530077&extension=ts&play_token=WZA08pBJyl
+#EXTINF:-1 tvg-id="PL| DISCOVERY HISTORIA HD" tvg-logo="http://103.176.90.92/images/880228.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DISCOVERY HISTORIA HD",PL| DISCOVERY HISTORIA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880228&extension=ts&play_token=Qg18wZYCQB
+#EXTINF:-1 tvg-id="PL| NATIONAL GEOGRAPHIC FHD" tvg-logo="http://103.176.90.92/images/880438.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| NATIONAL GEOGRAPHIC FHD",PL| NATIONAL GEOGRAPHIC FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880438&extension=ts&play_token=pkuXoDOB6i
+#EXTINF:-1 tvg-id="PL| NATIONAL GEOGRAPHIC HD" tvg-logo="http://103.176.90.92/images/880298.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| NATIONAL GEOGRAPHIC HD",PL| NATIONAL GEOGRAPHIC HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880298&extension=ts&play_token=6uzRWYApVn
+#EXTINF:-1 tvg-id="PL| NAT GEO WILD FHD" tvg-logo="http://103.176.90.92/images/880439.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| NAT GEO WILD FHD",PL| NAT GEO WILD FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880439&extension=ts&play_token=ySg1rB5N27
+#EXTINF:-1 tvg-id="PL| NAT GEO WILD HD" tvg-logo="http://103.176.90.92/images/880299.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| NAT GEO WILD HD",PL| NAT GEO WILD HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880299&extension=ts&play_token=hyINnRXpNx
+#EXTINF:-1 tvg-id="PL| NAT GEO PEOPLE FHD" tvg-logo="http://103.176.90.92/images/880440.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| NAT GEO PEOPLE FHD",PL| NAT GEO PEOPLE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880440&extension=ts&play_token=Taxd3XCK8P
+#EXTINF:-1 tvg-id="PL| NAT GEO PEOPLE HD" tvg-logo="http://103.176.90.92/images/880300.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| NAT GEO PEOPLE HD",PL| NAT GEO PEOPLE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880300&extension=ts&play_token=MD034jisSn
+#EXTINF:-1 tvg-id="PL| ID FHD" tvg-logo="http://103.176.90.92/images/880416.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| ID FHD",PL| ID FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880416&extension=ts&play_token=eJVU4Bw0Xj
+#EXTINF:-1 tvg-id="PL| ID HD" tvg-logo="http://103.176.90.92/images/880276.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| ID HD",PL| ID HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880276&extension=ts&play_token=HC16HIgVWK
+#EXTINF:-1 tvg-id="PL| CRIME AND INVESTIGATION FHD" tvg-logo="http://103.176.90.92/images/880429.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| CRIME AND INVESTIGATION FHD",PL| CRIME AND INVESTIGATION FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880429&extension=ts&play_token=zewYx3U4yE
+#EXTINF:-1 tvg-id="PL| CRIME AND INVESTIGATION HD" tvg-logo="http://103.176.90.92/images/880289.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| CRIME AND INVESTIGATION HD",PL| CRIME AND INVESTIGATION HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880289&extension=ts&play_token=xfxeqgkyi8
+#EXTINF:-1 tvg-id="PL| DTX FHD" tvg-logo="http://103.176.90.92/images/880423.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DTX FHD",PL| DTX FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880423&extension=ts&play_token=5JMMdCeWMy
+#EXTINF:-1 tvg-id="PL| DTX HD" tvg-logo="http://103.176.90.92/images/880283.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| DTX HD",PL| DTX HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880283&extension=ts&play_token=PvyHKDMcvq
+#EXTINF:-1 tvg-id="PL| HISTORY FHD" tvg-logo="http://103.176.90.92/images/880384.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| HISTORY FHD",PL| HISTORY FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880384&extension=ts&play_token=MxMMuEoeHl
+#EXTINF:-1 tvg-id="PL| HISTORY HD" tvg-logo="http://103.176.90.92/images/880244.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| HISTORY HD",PL| HISTORY HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880244&extension=ts&play_token=V1tNMkZUCW
+#EXTINF:-1 tvg-id="PL| H2 FHD" tvg-logo="http://103.176.90.92/images/880418.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| H2 FHD",PL| H2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880418&extension=ts&play_token=W24X9MTZfG
+#EXTINF:-1 tvg-id="PL| H2 HD" tvg-logo="http://103.176.90.92/images/880278.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| H2 HD",PL| H2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880278&extension=ts&play_token=42VrcFtR5O
+#EXTINF:-1 tvg-id="PL| PLANETE+ FHD" tvg-logo="http://103.176.90.92/images/880405.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| PLANETE+ FHD",PL| PLANETE+ FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880405&extension=ts&play_token=GR0csIcfx9
+#EXTINF:-1 tvg-id="PL| PLANETE+ HD" tvg-logo="http://103.176.90.92/images/880265.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| PLANETE+ HD",PL| PLANETE+ HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880265&extension=ts&play_token=uXIqALnp4C
+#EXTINF:-1 tvg-id="PL| POLSAT DOKU FHD" tvg-logo="http://103.176.90.92/images/880402.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| POLSAT DOKU FHD",PL| POLSAT DOKU FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880402&extension=ts&play_token=VqQX4p1oyY
+#EXTINF:-1 tvg-id="PL| POLSAT DOKU HD" tvg-logo="http://103.176.90.92/images/880262.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| POLSAT DOKU HD",PL| POLSAT DOKU HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880262&extension=ts&play_token=4EuSi0xk2J
+#EXTINF:-1 tvg-id="PL| POLSAT VIASAT HISTORY FHD" tvg-logo="http://103.176.90.92/images/880397.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| POLSAT VIASAT HISTORY FHD",PL| POLSAT VIASAT HISTORY FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880397&extension=ts&play_token=gULWkX6sBy
+#EXTINF:-1 tvg-id="PL| POLSAT VIASAT HISTORY HD" tvg-logo="http://103.176.90.92/images/880257.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| POLSAT VIASAT HISTORY HD",PL| POLSAT VIASAT HISTORY HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880257&extension=ts&play_token=HsoSm2MxYO
+#EXTINF:-1 tvg-id="PL| POLSAT VIASAT EXPLORE FHD" tvg-logo="http://103.176.90.92/images/880398.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| POLSAT VIASAT EXPLORE FHD",PL| POLSAT VIASAT EXPLORE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880398&extension=ts&play_token=0CUe2hcOY1
+#EXTINF:-1 tvg-id="PL| POLSAT VIASAT EXPLORE HD" tvg-logo="http://103.176.90.92/images/880258.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| POLSAT VIASAT EXPLORE HD",PL| POLSAT VIASAT EXPLORE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880258&extension=ts&play_token=ANO1u5SpGf
+#EXTINF:-1 tvg-id="PL| POLSAT VIASAT NATURE FHD" tvg-logo="http://103.176.90.92/images/880396.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| POLSAT VIASAT NATURE FHD",PL| POLSAT VIASAT NATURE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880396&extension=ts&play_token=GjRn0xrZ6w
+#EXTINF:-1 tvg-id="PL| POLSAT VIASAT NATURE HD" tvg-logo="http://103.176.90.92/images/880256.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| POLSAT VIASAT NATURE HD",PL| POLSAT VIASAT NATURE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880256&extension=ts&play_token=1z65MmB8Lv
+#EXTINF:-1 tvg-id="PL| FOKUS TV FHD" tvg-logo="http://103.176.90.92/images/880482.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| FOKUS TV FHD",PL| FOKUS TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880482&extension=ts&play_token=3t6oKOyhsS
+#EXTINF:-1 tvg-id="PL| FOKUS TV HD" tvg-logo="http://103.176.90.92/images/880342.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| FOKUS TV HD",PL| FOKUS TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880342&extension=ts&play_token=h2COQSuvk6
+#EXTINF:-1 tvg-id="PL| STUDIOMED TV FHD" tvg-logo="http://103.176.90.92/images/880393.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| STUDIOMED TV FHD",PL| STUDIOMED TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880393&extension=ts&play_token=08g6Q8xWQr
+#EXTINF:-1 tvg-id="PL| STUDIOMED TV HD" tvg-logo="http://103.176.90.92/images/880253.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| STUDIOMED TV HD",PL| STUDIOMED TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880253&extension=ts&play_token=rRBU7CAx6j
+#EXTINF:-1 tvg-id="PL| TVP DOKUMENT FHD" tvg-logo="http://103.176.90.92/images/880388.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| TVP DOKUMENT FHD",PL| TVP DOKUMENT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880388&extension=ts&play_token=eruoHbqDJ6
+#EXTINF:-1 tvg-id="PL| TVP DOKUMENT HD" tvg-logo="http://103.176.90.92/images/880248.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| TVP DOKUMENT HD",PL| TVP DOKUMENT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880248&extension=ts&play_token=gLvgEiW9lR
+#EXTINF:-1 tvg-id="PL| TVP HISTORIA" tvg-logo="http://103.176.90.92/images/880238.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| TVP HISTORIA",PL| TVP HISTORIA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880238&extension=ts&play_token=tGgcUjEnIf
+#EXTINF:-1 tvg-id="PL| TVP HISTORIA 2 HD" tvg-logo="http://103.176.90.92/images/1121743.png" group-title="PL| DOKUMENTALNE" tvg-name="PL| TVP HISTORIA 2 HD",PL| TVP HISTORIA 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121743&extension=ts&play_token=GrIp6QLwpH
+#EXTINF:-1 tvg-id="##### PL SPORTOWE #####" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLAND.png" group-title="PL| SPORTOWE" tvg-name="##### PL SPORTOWE #####",##### PL SPORTOWE #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288918&extension=ts&play_token=PUzqV3rnzY
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 1 4K/UHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS1.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 1 4K/UHD",PL| ELEVEN SPORTS 1 4K/UHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1498959&extension=ts&play_token=BgPPgNKjSy
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 1 4K+" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS1.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 1 4K+",PL| ELEVEN SPORTS 1 4K+
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=905665&extension=ts&play_token=U0j2f1IKIa
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 1 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS1.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 1 FHD",PL| ELEVEN SPORTS 1 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880457&extension=ts&play_token=YX0K7h3Pv4
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 1 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS1.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 1 HD",PL| ELEVEN SPORTS 1 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880317&extension=ts&play_token=SkFAfzcaWP
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 2 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS2.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 2 FHD",PL| ELEVEN SPORTS 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880456&extension=ts&play_token=wDoorF6Zlo
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 2 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS2.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 2 HD",PL| ELEVEN SPORTS 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880316&extension=ts&play_token=2YZV6OCmrO
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 3 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS3.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 3 FHD",PL| ELEVEN SPORTS 3 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880455&extension=ts&play_token=8vzc0TOpzk
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 3 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS3.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 3 HD",PL| ELEVEN SPORTS 3 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880315&extension=ts&play_token=pVgrRVTsYD
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 4 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS4.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 4 FHD",PL| ELEVEN SPORTS 4 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880454&extension=ts&play_token=1cZXa6dULe
+#EXTINF:-1 tvg-id="PL| ELEVEN SPORTS 4 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/ELEVENSPORTS4.png" group-title="PL| SPORTOWE" tvg-name="PL| ELEVEN SPORTS 4 HD",PL| ELEVEN SPORTS 4 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880314&extension=ts&play_token=VHfovyvR2o
+#EXTINF:-1 tvg-id="PL| EUROSPORT 1 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/EUROSPORT1.png" group-title="PL| SPORTOWE" tvg-name="PL| EUROSPORT 1 FHD",PL| EUROSPORT 1 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880453&extension=ts&play_token=yVMyfW9rHN
+#EXTINF:-1 tvg-id="PL| EUROSPORT 1 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/EUROSPORT1.png" group-title="PL| SPORTOWE" tvg-name="PL| EUROSPORT 1 HD",PL| EUROSPORT 1 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880313&extension=ts&play_token=EnRNZHPScQ
+#EXTINF:-1 tvg-id="PL| EUROSPORT 2 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/EUROSPORT2.png" group-title="PL| SPORTOWE" tvg-name="PL| EUROSPORT 2 FHD",PL| EUROSPORT 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880452&extension=ts&play_token=SQckaMQJqy
+#EXTINF:-1 tvg-id="PL| EUROSPORT 2 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/EUROSPORT2.png" group-title="PL| SPORTOWE" tvg-name="PL| EUROSPORT 2 HD",PL| EUROSPORT 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880312&extension=ts&play_token=pqlpCq6QwS
+#EXTINF:-1 tvg-id="PL| CANAL+ 360 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUS360.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ 360 FHD",PL| CANAL+ 360 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880500&extension=ts&play_token=5iRrH3A2iI
+#EXTINF:-1 tvg-id="PL| CANAL+ 360 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUS360.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ 360 HD",PL| CANAL+ 360 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880360&extension=ts&play_token=AIcqSjyeJ9
+#EXTINF:-1 tvg-id="PL| CANAL+ NOW FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSNOW.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ NOW FHD",PL| CANAL+ NOW FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880499&extension=ts&play_token=F19HaIBqcN
+#EXTINF:-1 tvg-id="PL| CANAL+ NOW HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSNOW.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ NOW HD",PL| CANAL+ NOW HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880359&extension=ts&play_token=WxaCjGLWNT
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT FHD",PL| CANAL+ SPORT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880461&extension=ts&play_token=oUBqjbnj9W
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT HD",PL| CANAL+ SPORT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880321&extension=ts&play_token=hkqDevDmke
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT 2 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT2.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT 2 FHD",PL| CANAL+ SPORT 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880460&extension=ts&play_token=WL91r1dGQV
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT 2 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT2.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT 2 HD",PL| CANAL+ SPORT 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880320&extension=ts&play_token=nXFMOCFHTF
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT 3 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT3.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT 3 FHD",PL| CANAL+ SPORT 3 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880459&extension=ts&play_token=xj9tmHSBtY
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT 3 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT3.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT 3 HD",PL| CANAL+ SPORT 3 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880319&extension=ts&play_token=l9BkVXYJ00
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT 4 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT4.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT 4 FHD",PL| CANAL+ SPORT 4 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880458&extension=ts&play_token=NuMUz5TY7S
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT 4 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT4.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT 4 HD",PL| CANAL+ SPORT 4 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880318&extension=ts&play_token=LH4TangPkk
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT 5 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT5.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT 5 FHD",PL| CANAL+ SPORT 5 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880406&extension=ts&play_token=LDOOiwKgsq
+#EXTINF:-1 tvg-id="PL| CANAL+ SPORT 5 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/CANALPLUSSPORT5.png" group-title="PL| SPORTOWE" tvg-name="PL| CANAL+ SPORT 5 HD",PL| CANAL+ SPORT 5 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880266&extension=ts&play_token=WPDKnSD1mc
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT 1 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORT1.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT 1 FHD",PL| POLSAT SPORT 1 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880471&extension=ts&play_token=CqQ2vsiYJT
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT 1 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORT1.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT 1 HD",PL| POLSAT SPORT 1 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880331&extension=ts&play_token=U9LtAh1vPZ
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT 2 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORT2.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT 2 FHD",PL| POLSAT SPORT 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880470&extension=ts&play_token=LZvGYtBg06
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT 2 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORT2.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT 2 HD",PL| POLSAT SPORT 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880330&extension=ts&play_token=tZZWNGzned
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT 3 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORT3.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT 3 FHD",PL| POLSAT SPORT 3 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880468&extension=ts&play_token=NIIgXVuMdG
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT 3 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORT3.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT 3 HD",PL| POLSAT SPORT 3 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880328&extension=ts&play_token=6Z2C5qw7BV
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 1 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM1.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 1 FHD",PL| POLSAT SPORT PREMIUM 1 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880467&extension=ts&play_token=vCJp2rbu1B
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 1 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM1.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 1 HD",PL| POLSAT SPORT PREMIUM 1 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880327&extension=ts&play_token=HVDlz0o23z
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 2 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM2.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 2 FHD",PL| POLSAT SPORT PREMIUM 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880466&extension=ts&play_token=DcIAkuJoKt
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 2 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM2.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 2 HD",PL| POLSAT SPORT PREMIUM 2 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880326&extension=ts&play_token=lDkE0rIjYI
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 3 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM3.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 3 FHD",PL| POLSAT SPORT PREMIUM 3 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880465&extension=ts&play_token=FwKlU2LZCd
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 3 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM3.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 3 HD",PL| POLSAT SPORT PREMIUM 3 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880325&extension=ts&play_token=WdIiwmpSPL
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 4 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM4.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 4 FHD",PL| POLSAT SPORT PREMIUM 4 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880464&extension=ts&play_token=SyJC9OZhSH
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 4 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM4.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 4 HD",PL| POLSAT SPORT PREMIUM 4 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880324&extension=ts&play_token=pqAORUYvFQ
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 5 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM5.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 5 FHD",PL| POLSAT SPORT PREMIUM 5 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880463&extension=ts&play_token=Qxkxyjmd27
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 5 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM5.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 5 HD",PL| POLSAT SPORT PREMIUM 5 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880323&extension=ts&play_token=HUYcI3x99Q
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 6 FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM6.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 6 FHD",PL| POLSAT SPORT PREMIUM 6 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880462&extension=ts&play_token=9PQZS3tzXP
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT PREMIUM 6 HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTPREMIUM6.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT PREMIUM 6 HD",PL| POLSAT SPORT PREMIUM 6 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880322&extension=ts&play_token=Gg8peXrFxO
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT FIGHT FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTFIGHT.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT FIGHT FHD",PL| POLSAT SPORT FIGHT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880469&extension=ts&play_token=cS29SHrlbk
+#EXTINF:-1 tvg-id="PL| POLSAT SPORT FIGHT HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/POLSATSPORTFIGHT.png" group-title="PL| SPORTOWE" tvg-name="PL| POLSAT SPORT FIGHT HD",PL| POLSAT SPORT FIGHT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880329&extension=ts&play_token=8UcvOzyD6k
+#EXTINF:-1 tvg-id="PL| TVP SPORT FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/TVPSPORT.png" group-title="PL| SPORTOWE" tvg-name="PL| TVP SPORT FHD",PL| TVP SPORT FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880502&extension=ts&play_token=N9tOsPfMf6
+#EXTINF:-1 tvg-id="PL| TVP SPORT HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/TVPSPORT.png" group-title="PL| SPORTOWE" tvg-name="PL| TVP SPORT HD",PL| TVP SPORT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880362&extension=ts&play_token=cvPJW7tDGG
+#EXTINF:-1 tvg-id="PL| SPORTKLUB FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/sportklub.png" group-title="PL| SPORTOWE" tvg-name="PL| SPORTKLUB FHD",PL| SPORTKLUB FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880447&extension=ts&play_token=RrxHj346ze
+#EXTINF:-1 tvg-id="PL| SPORTKLUB HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/sportklub.png" group-title="PL| SPORTOWE" tvg-name="PL| SPORTKLUB HD",PL| SPORTKLUB HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880307&extension=ts&play_token=msfc7n72OC
+#EXTINF:-1 tvg-id="PL| FIGHTKLUB FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/FIGHTKLUB.png" group-title="PL| SPORTOWE" tvg-name="PL| FIGHTKLUB FHD",PL| FIGHTKLUB FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880420&extension=ts&play_token=y9dQ1gdZ0i
+#EXTINF:-1 tvg-id="PL| FIGHTKLUB HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/FIGHTKLUB.png" group-title="PL| SPORTOWE" tvg-name="PL| FIGHTKLUB HD",PL| FIGHTKLUB HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880280&extension=ts&play_token=upjZdZm31e
+#EXTINF:-1 tvg-id="PL| FIGHTBOX FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/FIGHTBOX.png" group-title="PL| SPORTOWE" tvg-name="PL| FIGHTBOX FHD",PL| FIGHTBOX FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880446&extension=ts&play_token=ki3dERIKQP
+#EXTINF:-1 tvg-id="PL| FIGHTBOX HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/FIGHTBOX.png" group-title="PL| SPORTOWE" tvg-name="PL| FIGHTBOX HD",PL| FIGHTBOX HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880306&extension=ts&play_token=18CuQFVDGY
+#EXTINF:-1 tvg-id="PL| PRIME FIGHT HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/PRIMEFIGHT.png" group-title="PL| SPORTOWE" tvg-name="PL| PRIME FIGHT HD",PL| PRIME FIGHT HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121749&extension=ts&play_token=UR3eDnxo4t
+#EXTINF:-1 tvg-id="PL| EXTREME SPORTS FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/EXTREMESPORTS.png" group-title="PL| SPORTOWE" tvg-name="PL| EXTREME SPORTS FHD",PL| EXTREME SPORTS FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880448&extension=ts&play_token=mIPHryrp3B
+#EXTINF:-1 tvg-id="PL| EXTREME SPORTS HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/EXTREMESPORTS.png" group-title="PL| SPORTOWE" tvg-name="PL| EXTREME SPORTS HD",PL| EXTREME SPORTS HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880308&extension=ts&play_token=fCiuZZbwtK
+#EXTINF:-1 tvg-id="PL| GOLF CHANNEL FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/GOLFCHANNEL.png" group-title="PL| SPORTOWE" tvg-name="PL| GOLF CHANNEL FHD",PL| GOLF CHANNEL FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880419&extension=ts&play_token=lkh0NjNqd2
+#EXTINF:-1 tvg-id="PL| GOLF CHANNEL HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/GOLFCHANNEL.png" group-title="PL| SPORTOWE" tvg-name="PL| GOLF CHANNEL HD",PL| GOLF CHANNEL HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880279&extension=ts&play_token=3loqLUFcpc
+#EXTINF:-1 tvg-id="PL| MOTOWIZJA FHD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/MOTOWIZJA.png" group-title="PL| SPORTOWE" tvg-name="PL| MOTOWIZJA FHD",PL| MOTOWIZJA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880413&extension=ts&play_token=jpjX4hF1U9
+#EXTINF:-1 tvg-id="PL| MOTOWIZJA HD" tvg-logo="http://51.158.145.100/picons/logos/POLANDNEW/MOTOWIZJA.png" group-title="PL| SPORTOWE" tvg-name="PL| MOTOWIZJA HD",PL| MOTOWIZJA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880273&extension=ts&play_token=2lKKxGAxya
+#EXTINF:-1 tvg-id="#### EURO SPORT OLYMPICS ####" tvg-logo="" group-title="PL| EUROSPORTS" tvg-name="#### EURO SPORT OLYMPICS ####",#### EURO SPORT OLYMPICS ####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602004&extension=ts&play_token=UpO6WOc8s3
+#EXTINF:-1 tvg-id="PL| EUROSPORT UHD" tvg-logo="http://103.176.90.92/images/1602078.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT UHD",PL| EUROSPORT UHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602078&extension=ts&play_token=TCzvaBbpPd
+#EXTINF:-1 tvg-id="PL| EUROSPORT 1 FHD" tvg-logo="http://103.176.90.92/images/1602005.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 1 FHD",PL| EUROSPORT 1 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602005&extension=ts&play_token=KHx1AMAK9a
+#EXTINF:-1 tvg-id="PL| EUROSPORT 2 FHD" tvg-logo="http://103.176.90.92/images/1602006.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 2 FHD",PL| EUROSPORT 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602006&extension=ts&play_token=02Pjw9SSv3
+#EXTINF:-1 tvg-id="PL| EUROSPORT 3 FHD" tvg-logo="http://103.176.90.92/images/1602007.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 3 FHD",PL| EUROSPORT 3 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602007&extension=ts&play_token=jN2036i6nu
+#EXTINF:-1 tvg-id="PL| EUROSPORT 4 FHD" tvg-logo="http://103.176.90.92/images/1602008.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 4 FHD",PL| EUROSPORT 4 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602008&extension=ts&play_token=ODdaskJ0Mh
+#EXTINF:-1 tvg-id="PL| EUROSPORT 5 FHD" tvg-logo="http://103.176.90.95/images/1602009.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 5 FHD",PL| EUROSPORT 5 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602009&extension=ts&play_token=AhlnM9AlC2
+#EXTINF:-1 tvg-id="PL| EUROSPORT 6 FHD" tvg-logo="http://103.176.90.95/images/1602010.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 6 FHD",PL| EUROSPORT 6 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602010&extension=ts&play_token=U4WIIUZjGQ
+#EXTINF:-1 tvg-id="PL| EUROSPORT 7 FHD" tvg-logo="http://103.176.90.95/images/1602011.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 7 FHD",PL| EUROSPORT 7 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602011&extension=ts&play_token=iv5mkyPiwf
+#EXTINF:-1 tvg-id="PL| EUROSPORT 8 FHD" tvg-logo="http://103.176.90.95/images/1602012.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 8 FHD",PL| EUROSPORT 8 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602012&extension=ts&play_token=H62i0wTTnb
+#EXTINF:-1 tvg-id="PL| EUROSPORT 9 FHD" tvg-logo="http://103.176.90.95/images/1602013.png" group-title="PL| EUROSPORTS" tvg-name="PL| EUROSPORT 9 FHD",PL| EUROSPORT 9 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1602013&extension=ts&play_token=MJw3mJ3opj
+#EXTINF:-1 tvg-id="##### PL INFORMACYJNE #####" tvg-logo="" group-title="PL| INFORMACYJNE" tvg-name="##### PL INFORMACYJNE #####",##### PL INFORMACYJNE #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288917&extension=ts&play_token=3F8b9A79Tr
+#EXTINF:-1 tvg-id="PL| TVN24 FHD" tvg-logo="http://103.176.90.92/images/880512.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVN24 FHD",PL| TVN24 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880512&extension=ts&play_token=LY2T2SnsrJ
+#EXTINF:-1 tvg-id="PL| TVN24 HD" tvg-logo="http://103.176.90.92/images/880372.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVN24 HD",PL| TVN24 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880372&extension=ts&play_token=m8oUkJaw04
+#EXTINF:-1 tvg-id="PL| TVN 24" tvg-logo="http://103.176.90.92/images/897018.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVN 24",PL| TVN 24
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=897018&extension=ts&play_token=OvX9IdGXA8
+#EXTINF:-1 tvg-id="PL| TVN24 BIS FHD" tvg-logo="http://103.176.90.92/images/880513.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVN24 BIS FHD",PL| TVN24 BIS FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880513&extension=ts&play_token=EO4om2vmc6
+#EXTINF:-1 tvg-id="PL| TVN24 BIS HD" tvg-logo="http://103.176.90.92/images/880373.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVN24 BIS HD",PL| TVN24 BIS HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880373&extension=ts&play_token=0cnY5OfHEI
+#EXTINF:-1 tvg-id="PL| TVP INFO FHD" tvg-logo="http://103.176.90.92/images/880503.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVP INFO FHD",PL| TVP INFO FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880503&extension=ts&play_token=xX9WSGPgbP
+#EXTINF:-1 tvg-id="PL| TVP WORLD HD" tvg-logo="http://103.176.90.92/images/1121739.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVP WORLD HD",PL| TVP WORLD HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121739&extension=ts&play_token=xjrMsUBmA7
+#EXTINF:-1 tvg-id="PL| TVP INFO HD" tvg-logo="http://103.176.90.92/images/880363.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVP INFO HD",PL| TVP INFO HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880363&extension=ts&play_token=VR0lxbjl0z
+#EXTINF:-1 tvg-id="PL| TVP POLONIA FHD" tvg-logo="http://103.176.90.92/images/880382.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TVP POLONIA FHD",PL| TVP POLONIA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880382&extension=ts&play_token=WgkCWeqKU6
+#EXTINF:-1 tvg-id="PL| WYDARZENIA 24" tvg-logo="http://51.158.145.100/picons/logos/logos/1977093.png" group-title="PL| INFORMACYJNE" tvg-name="PL| WYDARZENIA 24",PL| WYDARZENIA 24
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1977093&extension=ts&play_token=Iaz2ccxujZ
+#EXTINF:-1 tvg-id="PL| POLSAT NEWS FHD" tvg-logo="http://103.176.90.92/images/880441.png" group-title="PL| INFORMACYJNE" tvg-name="PL| POLSAT NEWS FHD",PL| POLSAT NEWS FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880441&extension=ts&play_token=kWxwDvVVqo
+#EXTINF:-1 tvg-id="PL| POLSAT NEWS HD" tvg-logo="http://103.176.90.92/images/880301.png" group-title="PL| INFORMACYJNE" tvg-name="PL| POLSAT NEWS HD",PL| POLSAT NEWS HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880301&extension=ts&play_token=aT1MQdl77d
+#EXTINF:-1 tvg-id="PL| POLSAT NEWS 2" tvg-logo="http://103.176.90.92/images/880227.png" group-title="PL| INFORMACYJNE" tvg-name="PL| POLSAT NEWS 2",PL| POLSAT NEWS 2
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880227&extension=ts&play_token=20wBAFWrwe
+#EXTINF:-1 tvg-id="PL| BIZNES24 FHD" tvg-logo="http://103.176.90.92/images/880444.png" group-title="PL| INFORMACYJNE" tvg-name="PL| BIZNES24 FHD",PL| BIZNES24 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880444&extension=ts&play_token=eq3jMhfpJO
+#EXTINF:-1 tvg-id="PL| BIZNES24 HD" tvg-logo="http://103.176.90.92/images/880304.png" group-title="PL| INFORMACYJNE" tvg-name="PL| BIZNES24 HD",PL| BIZNES24 HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880304&extension=ts&play_token=Ulp6RZYlHR
+#EXTINF:-1 tvg-id="PL| WPOLSCE" tvg-logo="http://103.176.90.92/images/880191.png" group-title="PL| INFORMACYJNE" tvg-name="PL| WPOLSCE",PL| WPOLSCE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880191&extension=ts&play_token=iITkqABr5u
+#EXTINF:-1 tvg-id="PL| TV REPUBLIKA" tvg-logo="http://103.176.90.92/images/880203.png" group-title="PL| INFORMACYJNE" tvg-name="PL| TV REPUBLIKA",PL| TV REPUBLIKA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880203&extension=ts&play_token=EKMMUMR5ms
+#EXTINF:-1 tvg-id="PL| POLSAT NEWS POLITYKA FHD" tvg-logo="http://103.176.90.92/images/880391.png" group-title="PL| INFORMACYJNE" tvg-name="PL| POLSAT NEWS POLITYKA FHD",PL| POLSAT NEWS POLITYKA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880391&extension=ts&play_token=bu0G3UAQ01
+#EXTINF:-1 tvg-id="PL| POLSAT NEWS POLITYKA HD" tvg-logo="http://103.176.90.92/images/880251.png" group-title="PL| INFORMACYJNE" tvg-name="PL| POLSAT NEWS POLITYKA HD",PL| POLSAT NEWS POLITYKA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880251&extension=ts&play_token=aEFgl8Rul2
+#EXTINF:-1 tvg-id="##### PL MUZYCZNE #####" tvg-logo="" group-title="PL| MUZYCZNE" tvg-name="##### PL MUZYCZNE #####",##### PL MUZYCZNE #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288916&extension=ts&play_token=HB02nITT57
+#EXTINF:-1 tvg-id="PL| ESKA TV" tvg-logo="http://103.176.90.92/images/880216.png" group-title="PL| MUZYCZNE" tvg-name="PL| ESKA TV",PL| ESKA TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880216&extension=ts&play_token=V4B52r4RbF
+#EXTINF:-1 tvg-id="PL| ESKA TV EXTRA" tvg-logo="http://103.176.90.92/images/880215.png" group-title="PL| MUZYCZNE" tvg-name="PL| ESKA TV EXTRA",PL| ESKA TV EXTRA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880215&extension=ts&play_token=9BY6ArQc86
+#EXTINF:-1 tvg-id="PL| ESKA ROCK TV" tvg-logo="http://103.176.90.92/images/880217.png" group-title="PL| MUZYCZNE" tvg-name="PL| ESKA ROCK TV",PL| ESKA ROCK TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880217&extension=ts&play_token=Anj4BeAYDL
+#EXTINF:-1 tvg-id="PL| 4FUN.TV" tvg-logo="http://103.176.90.92/images/880220.png" group-title="PL| MUZYCZNE" tvg-name="PL| 4FUN.TV",PL| 4FUN.TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880220&extension=ts&play_token=fuFOothw2t
+#EXTINF:-1 tvg-id="PL| 4FUN DANCE" tvg-logo="http://103.176.90.92/images/880222.png" group-title="PL| MUZYCZNE" tvg-name="PL| 4FUN DANCE",PL| 4FUN DANCE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880222&extension=ts&play_token=PCWSa1RNVP
+#EXTINF:-1 tvg-id="PL| 4FUN GOLD HITS" tvg-logo="http://103.176.90.92/images/880221.png" group-title="PL| MUZYCZNE" tvg-name="PL| 4FUN GOLD HITS",PL| 4FUN GOLD HITS
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880221&extension=ts&play_token=2Yi7Re3vht
+#EXTINF:-1 tvg-id="PL| STARS.TV" tvg-logo="http://103.176.90.92/images/880204.png" group-title="PL| MUZYCZNE" tvg-name="PL| STARS.TV",PL| STARS.TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880204&extension=ts&play_token=lb0DGmR3aj
+#EXTINF:-1 tvg-id="PL| NUTA TV" tvg-logo="http://103.176.90.92/images/880207.png" group-title="PL| MUZYCZNE" tvg-name="PL| NUTA TV",PL| NUTA TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880207&extension=ts&play_token=hgZDqJStrn
+#EXTINF:-1 tvg-id="PL| MUSIC BOX POLSKA" tvg-logo="http://103.176.90.92/images/880199.png" group-title="PL| MUZYCZNE" tvg-name="PL| MUSIC BOX POLSKA",PL| MUSIC BOX POLSKA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880199&extension=ts&play_token=uZCFU4B5zu
+#EXTINF:-1 tvg-id="PL| MIXTAPE HD" tvg-logo="http://103.176.90.92/images/1121760.png" group-title="PL| MUZYCZNE" tvg-name="PL| MIXTAPE HD",PL| MIXTAPE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121760&extension=ts&play_token=0lxyZZRgHx
+#EXTINF:-1 tvg-id="PL| 360 TUNEBOX HD" tvg-logo="http://103.176.90.92/images/1121759.png" group-title="PL| MUZYCZNE" tvg-name="PL| 360 TUNEBOX HD",PL| 360 TUNEBOX HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121759&extension=ts&play_token=ar9FVstWra
+#EXTINF:-1 tvg-id="PL| KINO POLSKA MUZYKA" tvg-logo="http://103.176.90.92/images/880213.png" group-title="PL| MUZYCZNE" tvg-name="PL| KINO POLSKA MUZYKA",PL| KINO POLSKA MUZYKA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880213&extension=ts&play_token=whbOfNpWBe
+#EXTINF:-1 tvg-id="PL| POLSAT MUSIC FHD" tvg-logo="http://103.176.90.92/images/880400.png" group-title="PL| MUZYCZNE" tvg-name="PL| POLSAT MUSIC FHD",PL| POLSAT MUSIC FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880400&extension=ts&play_token=wbb4IfRFsW
+#EXTINF:-1 tvg-id="PL| POLSAT MUSIC HD" tvg-logo="http://103.176.90.92/images/880260.png" group-title="PL| MUZYCZNE" tvg-name="PL| POLSAT MUSIC HD",PL| POLSAT MUSIC HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880260&extension=ts&play_token=gd7evb3Dbc
+#EXTINF:-1 tvg-id="PL| MTV LIVE FHD" tvg-logo="http://103.176.90.92/images/880409.png" group-title="PL| MUZYCZNE" tvg-name="PL| MTV LIVE FHD",PL| MTV LIVE FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880409&extension=ts&play_token=e4Vgz2M9of
+#EXTINF:-1 tvg-id="PL| MTV LIVE HD" tvg-logo="http://103.176.90.92/images/880269.png" group-title="PL| MUZYCZNE" tvg-name="PL| MTV LIVE HD",PL| MTV LIVE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880269&extension=ts&play_token=OWMzBs9ZYB
+#EXTINF:-1 tvg-id="PL| MTV POLSKA FHD" tvg-logo="http://103.176.90.92/images/880408.png" group-title="PL| MUZYCZNE" tvg-name="PL| MTV POLSKA FHD",PL| MTV POLSKA FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880408&extension=ts&play_token=c3OkuPO1Xl
+#EXTINF:-1 tvg-id="PL| MTV POLSKA HD" tvg-logo="http://103.176.90.92/images/880268.png" group-title="PL| MUZYCZNE" tvg-name="PL| MTV POLSKA HD",PL| MTV POLSKA HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880268&extension=ts&play_token=HpqO2W8xQm
+#EXTINF:-1 tvg-id="PL| MTV 00S" tvg-logo="http://103.176.90.92/images/880200.png" group-title="PL| MUZYCZNE" tvg-name="PL| MTV 00S",PL| MTV 00S
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880200&extension=ts&play_token=YAlofEskuD
+#EXTINF:-1 tvg-id="PL| MTV 80S HD" tvg-logo="http://103.176.90.92/images/880208.png" group-title="PL| MUZYCZNE" tvg-name="PL| MTV 80S HD",PL| MTV 80S HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880208&extension=ts&play_token=iDm41SLb2j
+#EXTINF:-1 tvg-id="PL| VOX MUSIC TV" tvg-logo="http://103.176.90.92/images/880198.png" group-title="PL| MUZYCZNE" tvg-name="PL| VOX MUSIC TV",PL| VOX MUSIC TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880198&extension=ts&play_token=JyigQ6pHgU
+#EXTINF:-1 tvg-id="PL| POWER TV" tvg-logo="http://103.176.90.92/images/880205.png" group-title="PL| MUZYCZNE" tvg-name="PL| POWER TV",PL| POWER TV
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880205&extension=ts&play_token=OLSv5CWY0I
+#EXTINF:-1 tvg-id="PL| DISCO POLO MUSIC HD" tvg-logo="http://103.176.90.92/images/1121755.png" group-title="PL| MUZYCZNE" tvg-name="PL| DISCO POLO MUSIC HD",PL| DISCO POLO MUSIC HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121755&extension=ts&play_token=cleTkephEL
+#EXTINF:-1 tvg-id="PL| DISCO POLO MUSIC" tvg-logo="http://103.176.90.92/images/880223.png" group-title="PL| MUZYCZNE" tvg-name="PL| DISCO POLO MUSIC",PL| DISCO POLO MUSIC
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880223&extension=ts&play_token=509TrEpQwx
+#EXTINF:-1 tvg-id="PL| POLO TV FHD" tvg-logo="http://103.176.90.92/images/880383.png" group-title="PL| MUZYCZNE" tvg-name="PL| POLO TV FHD",PL| POLO TV FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880383&extension=ts&play_token=HjDEsKX1lY
+#EXTINF:-1 tvg-id="PL| POLO TV HD" tvg-logo="http://103.176.90.92/images/880243.png" group-title="PL| MUZYCZNE" tvg-name="PL| POLO TV HD",PL| POLO TV HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=880243&extension=ts&play_token=2hcSBpw5Cq
+#EXTINF:-1 tvg-id="PL| JAZZ HD" tvg-logo="http://103.176.90.92/images/1121754.png" group-title="PL| MUZYCZNE" tvg-name="PL| JAZZ HD",PL| JAZZ HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121754&extension=ts&play_token=YIsXgcvitV
+#EXTINF:-1 tvg-id="PL| MEZZO HD" tvg-logo="http://103.176.90.92/images/1121752.png" group-title="PL| MUZYCZNE" tvg-name="PL| MEZZO HD",PL| MEZZO HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121752&extension=ts&play_token=51OgEaG8FE
+#EXTINF:-1 tvg-id="PL| MEZZO LIVE HD" tvg-logo="http://103.176.90.92/images/1121753.png" group-title="PL| MUZYCZNE" tvg-name="PL| MEZZO LIVE HD",PL| MEZZO LIVE HD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1121753&extension=ts&play_token=TaDAblvUhc
+#EXTINF:-1 tvg-id="##### PL REGIONALNE #####" tvg-logo="" group-title="PL| REGIONALNE" tvg-name="##### PL REGIONALNE #####",##### PL REGIONALNE #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288915&extension=ts&play_token=eZ6mVl3KAa
+#EXTINF:-1 tvg-id="PL| TVP3 BIALYSTOK" tvg-logo="http://103.176.90.92/images/936815.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 BIALYSTOK",PL| TVP3 BIALYSTOK
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936815&extension=ts&play_token=ocZICLDKqO
+#EXTINF:-1 tvg-id="PL| TVP3 BYDGOSZCZ" tvg-logo="http://103.176.90.92/images/936816.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 BYDGOSZCZ",PL| TVP3 BYDGOSZCZ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936816&extension=ts&play_token=Aufi8xmFWT
+#EXTINF:-1 tvg-id="PL| TVP3 GDANSK" tvg-logo="http://103.176.90.92/images/936817.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 GDANSK",PL| TVP3 GDANSK
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936817&extension=ts&play_token=h1osjJcxLI
+#EXTINF:-1 tvg-id="PL| TVP3 GORZOW" tvg-logo="http://103.176.90.92/images/936818.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 GORZOW",PL| TVP3 GORZOW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936818&extension=ts&play_token=kKBV50oMJb
+#EXTINF:-1 tvg-id="PL| TVP3 KATOWICE" tvg-logo="http://103.176.90.92/images/936819.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 KATOWICE",PL| TVP3 KATOWICE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936819&extension=ts&play_token=ym5VNomFNN
+#EXTINF:-1 tvg-id="PL| TVP3 KIELCE" tvg-logo="http://103.176.90.92/images/936820.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 KIELCE",PL| TVP3 KIELCE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936820&extension=ts&play_token=9BDL53Ggpj
+#EXTINF:-1 tvg-id="PL| TVP3 KRAKOW" tvg-logo="http://103.176.90.92/images/936821.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 KRAKOW",PL| TVP3 KRAKOW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936821&extension=ts&play_token=nLwri3gIf0
+#EXTINF:-1 tvg-id="PL| TVP3 LUBLIN" tvg-logo="http://103.176.90.92/images/936834.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 LUBLIN",PL| TVP3 LUBLIN
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936834&extension=ts&play_token=K5htHOrUqP
+#EXTINF:-1 tvg-id="PL| TVP3 LODZ" tvg-logo="http://103.176.90.92/images/936835.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 LODZ",PL| TVP3 LODZ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936835&extension=ts&play_token=FTYyZFXw0u
+#EXTINF:-1 tvg-id="PL| TVP3 OLSZTYN" tvg-logo="http://103.176.90.92/images/936836.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 OLSZTYN",PL| TVP3 OLSZTYN
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936836&extension=ts&play_token=0CVuP4nbBm
+#EXTINF:-1 tvg-id="PL| TVP3 OPOLE" tvg-logo="http://103.176.90.92/images/936837.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 OPOLE",PL| TVP3 OPOLE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936837&extension=ts&play_token=kirKaaFBlc
+#EXTINF:-1 tvg-id="PL| TVP3 POZNAN" tvg-logo="http://103.176.90.92/images/936838.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 POZNAN",PL| TVP3 POZNAN
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936838&extension=ts&play_token=Qg1OE9BR4y
+#EXTINF:-1 tvg-id="PL| TVP3 RZESZOW" tvg-logo="http://103.176.90.92/images/936839.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 RZESZOW",PL| TVP3 RZESZOW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936839&extension=ts&play_token=l82SaxoKas
+#EXTINF:-1 tvg-id="PL| TVP3 SZCZECIN" tvg-logo="http://103.176.90.92/images/936948.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 SZCZECIN",PL| TVP3 SZCZECIN
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936948&extension=ts&play_token=HWtTfVHeWd
+#EXTINF:-1 tvg-id="PL| TVP3 WARSZAWA" tvg-logo="http://103.176.90.92/images/936950.png" group-title="PL| REGIONALNE" tvg-name="PL| TVP3 WARSZAWA",PL| TVP3 WARSZAWA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=936950&extension=ts&play_token=jqWtwykm40
+#EXTINF:-1 tvg-id="##### PL WALKI PPV #####" tvg-logo="" group-title="PL| WALKI PPV" tvg-name="##### PL WALKI PPV #####",##### PL WALKI PPV #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1288912&extension=ts&play_token=sCikc6uFmS
+#EXTINF:-1 tvg-id="PL| HIGH LEAGUE 6" tvg-logo="http://103.176.90.92/images/1142450.png" group-title="PL| WALKI PPV" tvg-name="PL| HIGH LEAGUE 6",PL| HIGH LEAGUE 6
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1142450&extension=ts&play_token=zcEgSC4g1G
+#EXTINF:-1 tvg-id="PL| HIGH LEAGUE 6 BACKUP 1" tvg-logo="http://103.176.90.92/images/1142451.png" group-title="PL| WALKI PPV" tvg-name="PL| HIGH LEAGUE 6 BACKUP 1",PL| HIGH LEAGUE 6 BACKUP 1
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1142451&extension=ts&play_token=NvdjRgCzkb
+#EXTINF:-1 tvg-id="PL| HIGH LEAGUE 6 BACKUP 2" tvg-logo="http://103.176.90.92/images/1142452.png" group-title="PL| WALKI PPV" tvg-name="PL| HIGH LEAGUE 6 BACKUP 2",PL| HIGH LEAGUE 6 BACKUP 2
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1142452&extension=ts&play_token=VZthUK81OY
+#EXTINF:-1 tvg-id="PL| KSW" tvg-logo="http://103.176.90.92/images/1289021.png" group-title="PL| WALKI PPV" tvg-name="PL| KSW",PL| KSW
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289021&extension=ts&play_token=AQTdJOqxbd
+#EXTINF:-1 tvg-id="PL| FAME MMA" tvg-logo="http://103.176.90.92/images/1289023.png" group-title="PL| WALKI PPV" tvg-name="PL| FAME MMA",PL| FAME MMA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289023&extension=ts&play_token=RqQKrQzBL3
+#EXTINF:-1 tvg-id="PL| PRIME MMA" tvg-logo="http://103.176.90.92/images/1289024.png" group-title="PL| WALKI PPV" tvg-name="PL| PRIME MMA",PL| PRIME MMA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289024&extension=ts&play_token=jcvOjmhgPQ
+#EXTINF:-1 tvg-id="PL| HIGH LEAGUE" tvg-logo="http://103.176.90.92/images/1289026.png" group-title="PL| WALKI PPV" tvg-name="PL| HIGH LEAGUE",PL| HIGH LEAGUE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289026&extension=ts&play_token=VCe5U4syWh
+#EXTINF:-1 tvg-id="PL| FEN MMA" tvg-logo="http://103.176.90.92/images/1289022.png" group-title="PL| WALKI PPV" tvg-name="PL| FEN MMA",PL| FEN MMA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289022&extension=ts&play_token=PUSpOeEaGg
+#EXTINF:-1 tvg-id="PL| THE WAR" tvg-logo="http://103.176.90.92/images/1289029.png" group-title="PL| WALKI PPV" tvg-name="PL| THE WAR",PL| THE WAR
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289029&extension=ts&play_token=dDB3mR99gS
+#EXTINF:-1 tvg-id="PL| OKTAGON MMA" tvg-logo="http://103.176.90.92/images/1289028.png" group-title="PL| WALKI PPV" tvg-name="PL| OKTAGON MMA",PL| OKTAGON MMA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289028&extension=ts&play_token=abcu65iZCF
+#EXTINF:-1 tvg-id="PL| WOTORE" tvg-logo="http://103.176.90.92/images/1289027.png" group-title="PL| WALKI PPV" tvg-name="PL| WOTORE",PL| WOTORE
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289027&extension=ts&play_token=5LgPnRvqgJ
+#EXTINF:-1 tvg-id="PL| GROMDA" tvg-logo="http://103.176.90.92/images/1289025.png" group-title="PL| WALKI PPV" tvg-name="PL| GROMDA",PL| GROMDA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1289025&extension=ts&play_token=5Ynar9YYMh
+#EXTINF:-1 tvg-id="PL| CLOUT MMA" tvg-logo="http://103.176.90.92/images/1311423.png" group-title="PL| WALKI PPV" tvg-name="PL| CLOUT MMA",PL| CLOUT MMA
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1311423&extension=ts&play_token=QjMuNmIdsl
+#EXTINF:-1 tvg-id="PL| WALKI 1 (LIVE EVENT ONLY)" tvg-logo="http://103.176.90.92/images/1293996.png" group-title="PL| WALKI PPV" tvg-name="PL| WALKI 1 (LIVE EVENT ONLY)",PL| WALKI 1 (LIVE EVENT ONLY)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1293996&extension=ts&play_token=4Ma447Vdm5
+#EXTINF:-1 tvg-id="PL| WALKI 2 (LIVE EVENT ONLY)" tvg-logo="http://103.176.90.92/images/1293995.png" group-title="PL| WALKI PPV" tvg-name="PL| WALKI 2 (LIVE EVENT ONLY)",PL| WALKI 2 (LIVE EVENT ONLY)
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1293995&extension=ts&play_token=ZZFffiOVg4
+#EXTINF:-1 tvg-id="##### CANAL+ ONLINE SPORT ᴿᴬᵂ #####" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916111.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="##### CANAL+ ONLINE SPORT ᴿᴬᵂ #####",##### CANAL+ ONLINE SPORT ᴿᴬᵂ #####
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916111&extension=ts&play_token=QfeGeGkVvz
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ 360 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916110.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ 360 ᴿᴬᵂ",PLAY+| CANAL+ 360 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916110&extension=ts&play_token=trIkbFPnsC
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 1 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916109.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 1 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 1 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916109&extension=ts&play_token=BO3lTMUq0C
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 2 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916108.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 2 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 2 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916108&extension=ts&play_token=H3ayfymwmS
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 3 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916107.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 3 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 3 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916107&extension=ts&play_token=Nf0DUshKSf
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 4 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916106.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 4 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 4 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916106&extension=ts&play_token=YFGoOI3GY0
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 5 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916105.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 5 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 5 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916105&extension=ts&play_token=cRWqqAoUI1
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 6 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916104.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 6 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 6 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916104&extension=ts&play_token=ASRa969Lto
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 7 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916103.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 7 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 7 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916103&extension=ts&play_token=hJXo3rvf34
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 8 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916102.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 8 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 8 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916102&extension=ts&play_token=PjYxOQlMjb
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ EXTRA 9 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916101.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ EXTRA 9 ᴿᴬᵂ",PLAY+| CANAL+ EXTRA 9 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916101&extension=ts&play_token=z3PfCctM21
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ SPORT 2 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916100.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ SPORT 2 ᴿᴬᵂ",PLAY+| CANAL+ SPORT 2 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916100&extension=ts&play_token=rO7v0Z5qCL
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ SPORT 3 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916099.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ SPORT 3 ᴿᴬᵂ",PLAY+| CANAL+ SPORT 3 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916099&extension=ts&play_token=QjiQmBkXj5
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ SPORT 4 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916098.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ SPORT 4 ᴿᴬᵂ",PLAY+| CANAL+ SPORT 4 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916098&extension=ts&play_token=1JuZjaZf2q
+#EXTINF:-1 tvg-id="PLAY+| CANAL+ SPORT 5 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916097.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL+ SPORT 5 ᴿᴬᵂ",PLAY+| CANAL+ SPORT 5 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916097&extension=ts&play_token=fJUlAykLOD
+#EXTINF:-1 tvg-id="PLAY+| CANAL SPORT ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916096.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| CANAL SPORT ᴿᴬᵂ",PLAY+| CANAL SPORT ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916096&extension=ts&play_token=xYjboIrnSC
+#EXTINF:-1 tvg-id="PLAY+| ELEVEN SPORTS 1 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916095.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| ELEVEN SPORTS 1 ᴿᴬᵂ",PLAY+| ELEVEN SPORTS 1 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916095&extension=ts&play_token=jVk2uMkUrV
+#EXTINF:-1 tvg-id="PLAY+| ELEVEN SPORTS 2 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916094.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| ELEVEN SPORTS 2 ᴿᴬᵂ",PLAY+| ELEVEN SPORTS 2 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916094&extension=ts&play_token=1S8GiFyjRe
+#EXTINF:-1 tvg-id="PLAY+| ELEVEN SPORTS 3 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916093.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| ELEVEN SPORTS 3 ᴿᴬᵂ",PLAY+| ELEVEN SPORTS 3 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916093&extension=ts&play_token=2BqIu2cdkb
+#EXTINF:-1 tvg-id="PLAY+| ELEVEN SPORTS 4 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916092.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| ELEVEN SPORTS 4 ᴿᴬᵂ",PLAY+| ELEVEN SPORTS 4 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916092&extension=ts&play_token=hd91zUuHsZ
+#EXTINF:-1 tvg-id="PLAY+| EVENT 1 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916091.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| EVENT 1 ᴿᴬᵂ",PLAY+| EVENT 1 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916091&extension=ts&play_token=h5RQTfsMmw
+#EXTINF:-1 tvg-id="PLAY+| EVENT 2 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916090.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| EVENT 2 ᴿᴬᵂ",PLAY+| EVENT 2 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916090&extension=ts&play_token=LKrZaxbaTv
+#EXTINF:-1 tvg-id="PLAY+| EVENT 3 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916089.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| EVENT 3 ᴿᴬᵂ",PLAY+| EVENT 3 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916089&extension=ts&play_token=8S5u8FiO0W
+#EXTINF:-1 tvg-id="PLAY+| EVENT 4 ᴿᴬᵂ" tvg-logo="http://51.158.145.100/picons/logos/POLAND/1916088.png" group-title="PL| CANAL+ ONLINE SPORT ᴿᴬᵂ" tvg-name="PLAY+| EVENT 4 ᴿᴬᵂ",PLAY+| EVENT 4 ᴿᴬᵂ
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1916088&extension=ts&play_token=LD9LDvOh2Q
+#EXTINF:-1 tvg-id="####### MAX PPV #######" tvg-logo="" group-title="PL| MAX PPV" tvg-name="####### MAX PPV #######",####### MAX PPV #######
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640751&extension=ts&play_token=lP3lwW4KDL
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 1" tvg-logo="http://103.176.90.92/images/1640750.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 1",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 1
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640750&extension=ts&play_token=5GbhB0KUZ0
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 2" tvg-logo="http://103.176.90.92/images/1640749.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 2",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 2
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640749&extension=ts&play_token=akbdURRSbB
+#EXTINF:-1 tvg-id="LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | GRUPA MARQUEE | Thu 04 Jun 16:15 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 3" tvg-logo="http://103.176.90.92/images/1640748.png" group-title="PL| MAX PPV" tvg-name="LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | GRUPA MARQUEE | Thu 04 Jun 16:15 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 3",LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | GRUPA MARQUEE | Thu 04 Jun 16:15 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 3
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640748&extension=ts&play_token=o8mmtBJXOd
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 4" tvg-logo="http://103.176.90.92/images/1640747.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 4",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 4
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640747&extension=ts&play_token=xayPBlpQZg
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 5" tvg-logo="http://103.176.90.92/images/1640746.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 5",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 5
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640746&extension=ts&play_token=8P223Vfmsa
+#EXTINF:-1 tvg-id="LIVE | CIURNELLI/SLOBODA · MACKENZIE/REISACH | Thu 04 Jun 18:28 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 6" tvg-logo="http://103.176.90.92/images/1640745.png" group-title="PL| MAX PPV" tvg-name="LIVE | CIURNELLI/SLOBODA · MACKENZIE/REISACH | Thu 04 Jun 18:28 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 6",LIVE | CIURNELLI/SLOBODA · MACKENZIE/REISACH | Thu 04 Jun 18:28 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 6
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640745&extension=ts&play_token=9ay2XzSrxF
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 7" tvg-logo="http://103.176.90.92/images/1640744.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 7",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 7
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640744&extension=ts&play_token=Od9EUPwzz8
+#EXTINF:-1 tvg-id="LIVE | N. BAENA / T. CHAVEZ · K. HANCE / J. KENNEDY | Thu 04 Jun 19:37 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 8" tvg-logo="http://103.176.90.92/images/1640743.png" group-title="PL| MAX PPV" tvg-name="LIVE | N. BAENA / T. CHAVEZ · K. HANCE / J. KENNEDY | Thu 04 Jun 19:37 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 8",LIVE | N. BAENA / T. CHAVEZ · K. HANCE / J. KENNEDY | Thu 04 Jun 19:37 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 8
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640743&extension=ts&play_token=C49n6r0Kfr
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 9" tvg-logo="http://103.176.90.92/images/1640742.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 9",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 9
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640742&extension=ts&play_token=n5GVQRIdOt
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 10" tvg-logo="http://103.176.90.92/images/1640741.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 10",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 10
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640741&extension=ts&play_token=Dg7D1zokGX
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 11" tvg-logo="http://103.176.90.92/images/1640740.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 11",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 11
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640740&extension=ts&play_token=QEL0UN5sAB
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 12" tvg-logo="http://103.176.90.92/images/1640739.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 12",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 12
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640739&extension=ts&play_token=oFuhFhTheS
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 13" tvg-logo="http://103.176.90.92/images/1640738.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 13",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 13
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640738&extension=ts&play_token=wFztunly3Z
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 14" tvg-logo="http://103.176.90.92/images/1640737.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 14",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 14
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640737&extension=ts&play_token=mXKo2uVGCk
+#EXTINF:-1 tvg-id="LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | WYRÓŻNIONE GRUPY | Thu 04 Jun 13:45 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 15" tvg-logo="http://103.176.90.92/images/1640736.png" group-title="PL| MAX PPV" tvg-name="LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | WYRÓŻNIONE GRUPY | Thu 04 Jun 13:45 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 15",LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | WYRÓŻNIONE GRUPY | Thu 04 Jun 13:45 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 15
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640736&extension=ts&play_token=ZjW48cCcVQ
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 16" tvg-logo="http://103.176.90.92/images/1640735.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 16",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 16
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640735&extension=ts&play_token=hm8FLHi0J0
+#EXTINF:-1 tvg-id="LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | Thu 04 Jun 20:00 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 17" tvg-logo="http://103.176.90.92/images/1640734.png" group-title="PL| MAX PPV" tvg-name="LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | Thu 04 Jun 20:00 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 17",LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | Thu 04 Jun 20:00 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 17
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640734&extension=ts&play_token=i9UsbpaYsW
+#EXTINF:-1 tvg-id="LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | WYBRANE GRUPY/DOŁKI | Thu 04 Jun 14:30 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 18" tvg-logo="http://103.176.90.92/images/1640733.png" group-title="PL| MAX PPV" tvg-name="LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | WYBRANE GRUPY/DOŁKI | Thu 04 Jun 14:30 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 18",LIVE | THE MEMORIAL TOURNAMENT | 1. DZIEŃ | WYBRANE GRUPY/DOŁKI | Thu 04 Jun 14:30 CEST (PL) | 8K EXCLUSIVE | PL: MAX PPV 18
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640733&extension=ts&play_token=bJkfcz0UzR
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 19" tvg-logo="http://103.176.90.92/images/1640732.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 19",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 19
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640732&extension=ts&play_token=PvgNGHNawh
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 20" tvg-logo="http://103.176.90.92/images/1640731.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 20",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 20
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640731&extension=ts&play_token=anVmfhJa9k
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 21" tvg-logo="http://103.176.90.92/images/1640730.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 21",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 21
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640730&extension=ts&play_token=UTMCxWJPPO
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 22" tvg-logo="http://103.176.90.92/images/1640729.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 22",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 22
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640729&extension=ts&play_token=sYaBSbuX1D
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 23" tvg-logo="http://103.176.90.92/images/1640728.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 23",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 23
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640728&extension=ts&play_token=zXVQbkPUNw
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 24" tvg-logo="http://103.176.90.92/images/1640727.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 24",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 24
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640727&extension=ts&play_token=LlvAcbYkRB
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 25" tvg-logo="http://103.176.90.92/images/1640726.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 25",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 25
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640726&extension=ts&play_token=2rNPWw5Td3
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 26" tvg-logo="http://103.176.90.92/images/1640725.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 26",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 26
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640725&extension=ts&play_token=NJt0ztbdWv
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 27" tvg-logo="http://103.176.90.92/images/1640724.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 27",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 27
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640724&extension=ts&play_token=mHCb9FPQ8D
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 28" tvg-logo="http://103.176.90.92/images/1640723.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 28",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 28
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640723&extension=ts&play_token=p5jUDZOR2w
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 29" tvg-logo="http://103.176.90.92/images/1640722.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 29",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 29
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640722&extension=ts&play_token=1eA9MkgstN
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 30" tvg-logo="http://103.176.90.92/images/1640721.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 30",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 30
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640721&extension=ts&play_token=xWaP2OdLzP
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 31" tvg-logo="http://103.176.90.92/images/1640720.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 31",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 31
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640720&extension=ts&play_token=im9Ymh4AZA
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 32" tvg-logo="http://103.176.90.92/images/1640719.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 32",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 32
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640719&extension=ts&play_token=bFOVPZkfmo
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 33" tvg-logo="http://103.176.90.92/images/1640718.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 33",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 33
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640718&extension=ts&play_token=eQqzqtZ8L7
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 34" tvg-logo="http://103.176.90.92/images/1640717.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 34",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 34
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640717&extension=ts&play_token=rDpdCnE1CF
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 35" tvg-logo="http://103.176.90.92/images/1640716.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 35",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 35
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640716&extension=ts&play_token=UMZlxGLNFs
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 36" tvg-logo="http://103.176.90.92/images/1640715.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 36",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 36
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640715&extension=ts&play_token=xZ8DiaZ0wI
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 37" tvg-logo="http://103.176.90.92/images/1640714.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 37",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 37
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640714&extension=ts&play_token=nzAkSRaM84
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 38" tvg-logo="http://103.176.90.92/images/1640713.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 38",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 38
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640713&extension=ts&play_token=ItdSCyvXMv
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 39" tvg-logo="http://103.176.90.92/images/1640712.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 39",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 39
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640712&extension=ts&play_token=U23iXQoibA
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 40" tvg-logo="http://103.176.90.92/images/1640711.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 40",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 40
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640711&extension=ts&play_token=cvXfyoMZh4
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 41" tvg-logo="http://103.176.90.92/images/1640710.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 41",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 41
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640710&extension=ts&play_token=BesidYhnPJ
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 42" tvg-logo="http://103.176.90.92/images/1640709.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 42",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 42
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640709&extension=ts&play_token=9Okl4GI5zW
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 43" tvg-logo="http://103.176.90.92/images/1640708.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 43",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 43
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640708&extension=ts&play_token=tAxo1xMeMt
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 44" tvg-logo="http://103.176.90.92/images/1640707.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 44",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 44
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640707&extension=ts&play_token=omLr8ZbFHP
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 45" tvg-logo="http://103.176.90.92/images/1640706.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 45",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 45
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640706&extension=ts&play_token=ZzT6xUxHdc
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 46" tvg-logo="http://103.176.90.92/images/1640705.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 46",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 46
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640705&extension=ts&play_token=6T0dLoec8n
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 47" tvg-logo="http://103.176.90.92/images/1640704.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 47",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 47
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640704&extension=ts&play_token=Bsx4qdVnvr
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 48" tvg-logo="http://103.176.90.92/images/1640703.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 48",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 48
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640703&extension=ts&play_token=72fxNUaJcL
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 49" tvg-logo="http://103.176.90.92/images/1640702.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 49",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 49
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640702&extension=ts&play_token=OfkVlZiczX
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 50" tvg-logo="http://103.176.90.92/images/1640701.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 50",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 50
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640701&extension=ts&play_token=zuX99FDBwd
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 51" tvg-logo="http://103.176.90.92/images/1640700.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 51",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 51
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640700&extension=ts&play_token=bkDRER0ebi
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 52" tvg-logo="http://103.176.90.92/images/1640699.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 52",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 52
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640699&extension=ts&play_token=an5IB56zPB
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 53" tvg-logo="http://103.176.90.92/images/1640698.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 53",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 53
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640698&extension=ts&play_token=CifUjZcZpc
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 54" tvg-logo="http://103.176.90.92/images/1640697.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 54",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 54
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640697&extension=ts&play_token=y1RWsp7WCJ
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 55" tvg-logo="http://103.176.90.92/images/1640696.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 55",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 55
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640696&extension=ts&play_token=DgzzaR1tXf
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 56" tvg-logo="http://103.176.90.92/images/1640695.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 56",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 56
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640695&extension=ts&play_token=xvobQE6NqN
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 57" tvg-logo="http://103.176.90.92/images/1640694.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 57",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 57
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640694&extension=ts&play_token=Te0rMQfP4z
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 58" tvg-logo="http://picons.cmshulk.com/picons/hbomax.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 58",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 58
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640693&extension=ts&play_token=9av49zKkXd
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 59" tvg-logo="http://103.176.90.92/images/1640692.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 59",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 59
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640692&extension=ts&play_token=QeyZJEacqs
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 60" tvg-logo="http://103.176.90.92/images/1640691.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 60",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 60
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640691&extension=ts&play_token=cqxSnHjJ3w
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 61" tvg-logo="http://103.176.90.92/images/1640690.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 61",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 61
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640690&extension=ts&play_token=Hi7dTo3DzI
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 62" tvg-logo="http://103.176.90.92/images/1640689.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 62",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 62
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640689&extension=ts&play_token=5kp84Xo6vw
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 63" tvg-logo="http://103.176.90.92/images/1640688.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 63",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 63
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640688&extension=ts&play_token=xqjkChy1X8
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 64" tvg-logo="http://103.176.90.92/images/1640687.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 64",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 64
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640687&extension=ts&play_token=T0ceNbI8mI
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 65" tvg-logo="http://103.176.90.92/images/1640686.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 65",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 65
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640686&extension=ts&play_token=y4s10ZWawX
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 66" tvg-logo="http://103.176.90.92/images/1640685.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 66",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 66
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640685&extension=ts&play_token=ErEMOy8Gj5
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 67" tvg-logo="http://103.176.90.92/images/1640684.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 67",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 67
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640684&extension=ts&play_token=VGAiO7zB12
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 68" tvg-logo="http://103.176.90.92/images/1640683.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 68",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 68
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640683&extension=ts&play_token=TkLenb6ieD
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 69" tvg-logo="http://103.176.90.92/images/1640682.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 69",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 69
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640682&extension=ts&play_token=gQ7JMTYbvN
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 70" tvg-logo="http://103.176.90.92/images/1640681.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 70",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 70
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640681&extension=ts&play_token=cYnh0kKiKm
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 71" tvg-logo="http://103.176.90.92/images/1640680.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 71",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 71
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640680&extension=ts&play_token=JjOOBOQrfz
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 72" tvg-logo="http://103.176.90.92/images/1640679.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 72",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 72
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640679&extension=ts&play_token=urX4vw55jJ
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 73" tvg-logo="http://103.176.90.92/images/1640678.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 73",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 73
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640678&extension=ts&play_token=OnFKZRbvZf
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 74" tvg-logo="http://103.176.90.92/images/1640677.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 74",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 74
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640677&extension=ts&play_token=2cUt4PdjAz
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 75" tvg-logo="http://103.176.90.92/images/1640676.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 75",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 75
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640676&extension=ts&play_token=2efM6L7Col
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 76" tvg-logo="http://103.176.90.92/images/1640675.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 76",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 76
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640675&extension=ts&play_token=8WwFiJ5Xon
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 77" tvg-logo="http://103.176.90.92/images/1640674.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 77",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 77
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640674&extension=ts&play_token=Cs9MKBV4j3
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 78" tvg-logo="http://103.176.90.92/images/1640673.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 78",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 78
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640673&extension=ts&play_token=5cqCR9NmBO
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 79" tvg-logo="http://103.176.90.92/images/1640672.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 79",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 79
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640672&extension=ts&play_token=kHescGqIMD
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 80" tvg-logo="http://103.176.90.92/images/1640671.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 80",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 80
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640671&extension=ts&play_token=EheWNBE5Qq
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 81" tvg-logo="http://103.176.90.92/images/1640670.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 81",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 81
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640670&extension=ts&play_token=WnTXOM9fft
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 82" tvg-logo="http://103.176.90.92/images/1640669.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 82",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 82
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640669&extension=ts&play_token=rNp5XWkMFj
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 83" tvg-logo="http://103.176.90.92/images/1640668.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 83",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 83
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640668&extension=ts&play_token=LsWAavyVww
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 84" tvg-logo="http://103.176.90.92/images/1640667.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 84",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 84
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640667&extension=ts&play_token=dapuJo8z9j
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 85" tvg-logo="http://103.176.90.92/images/1640666.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 85",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 85
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640666&extension=ts&play_token=MuIrPRbqlr
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 86" tvg-logo="http://103.176.90.92/images/1640665.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 86",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 86
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640665&extension=ts&play_token=985oBbjH8n
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 87" tvg-logo="http://103.176.90.92/images/1640664.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 87",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 87
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640664&extension=ts&play_token=PKQxHh8qgy
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 88" tvg-logo="http://103.176.90.92/images/1640663.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 88",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 88
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640663&extension=ts&play_token=8B1GxAT5fi
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 89" tvg-logo="http://103.176.90.92/images/1640662.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 89",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 89
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640662&extension=ts&play_token=Itr2N1NvZP
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 90" tvg-logo="http://103.176.90.92/images/1640661.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 90",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 90
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640661&extension=ts&play_token=1SkkdAEaRy
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 91" tvg-logo="http://103.176.90.92/images/1640660.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 91",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 91
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640660&extension=ts&play_token=gwV5PyyHJg
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 92" tvg-logo="http://103.176.90.92/images/1640659.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 92",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 92
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640659&extension=ts&play_token=SABDWj033P
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 93" tvg-logo="http://103.176.90.92/images/1640658.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 93",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 93
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640658&extension=ts&play_token=B8BmZ6ZDgh
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 94" tvg-logo="http://103.176.90.92/images/1640657.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 94",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 94
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640657&extension=ts&play_token=rZ9RfcUcz7
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 95" tvg-logo="http://103.176.90.92/images/1640656.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 95",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 95
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640656&extension=ts&play_token=jWA5fAIzgo
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 96" tvg-logo="http://103.176.90.92/images/1640655.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 96",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 96
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640655&extension=ts&play_token=MyEJCe4cFb
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 97" tvg-logo="http://103.176.90.92/images/1640654.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 97",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 97
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640654&extension=ts&play_token=yFqFNiommG
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 98" tvg-logo="http://103.176.90.92/images/1640653.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 98",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 98
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640653&extension=ts&play_token=SE2z1Erb6N
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 99" tvg-logo="http://103.176.90.92/images/1640652.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 99",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 99
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640652&extension=ts&play_token=ZqxrgEOUsc
+#EXTINF:-1 tvg-id="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 100" tvg-logo="http://103.176.90.92/images/1640651.png" group-title="PL| MAX PPV" tvg-name="— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 100",— NO EVENT STREAMING · | 8K EXCLUSIVE | PL: MAX PPV 100
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1640651&extension=ts&play_token=k2WnbrMCRP
+#EXTINF:-1 tvg-id="###### PL RADIO ######" tvg-logo="" group-title="PL| MUZYCZNE" tvg-name="###### PL RADIO ######",###### PL RADIO ######
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=882113&extension=ts&play_token=d7WvcJuWlr
+#EXTINF:-1 tvg-id="PREMIER LEAGUE PL—STUDION: CHELSEA · WEST HAM | Sat 31 Jan 18:00 | 8K EXCLUSIVE | SE: VIAPLAY PPV 31" tvg-logo="http://51.158.145.100/picons/logos/PPV/VIAPLAY.png" group-title="SWEDEN VIAPLAY PPV VIP" tvg-name="PREMIER LEAGUE PL—STUDION: CHELSEA · WEST HAM | Sat 31 Jan 18:00 | 8K EXCLUSIVE | SE: VIAPLAY PPV 31",PREMIER LEAGUE PL—STUDION: CHELSEA · WEST HAM | Sat 31 Jan 18:00 | 8K EXCLUSIVE | SE: VIAPLAY PPV 31
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=2016248&extension=ts&play_token=ZmD0QC4Sax
+#EXTINF:-1 tvg-id="NOR| V SPORT PL FHD" tvg-logo="http://51.158.145.100/picons/logos/norway/VSPORTPL.png" group-title="NORWAY SPORT HD & HEVC" tvg-name="NOR| V SPORT PL FHD",NOR| V SPORT PL FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1001366&extension=ts&play_token=u1VHcM7KcH
+#EXTINF:-1 tvg-id="NOR| V SPORT PL 1 FHD" tvg-logo="http://51.158.145.100/picons/logos/norway/VSPORTPL1.png" group-title="NORWAY SPORT HD & HEVC" tvg-name="NOR| V SPORT PL 1 FHD",NOR| V SPORT PL 1 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1001365&extension=ts&play_token=fG5tlq0bhy
+#EXTINF:-1 tvg-id="NOR| V SPORT PL 2 FHD" tvg-logo="http://51.158.145.100/picons/logos/norway/VSPORTPL2.png" group-title="NORWAY SPORT HD & HEVC" tvg-name="NOR| V SPORT PL 2 FHD",NOR| V SPORT PL 2 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1001364&extension=ts&play_token=3W0fhlrHd2
+#EXTINF:-1 tvg-id="NOR| V SPORT PL 3 FHD" tvg-logo="http://51.158.145.100/picons/logos/norway/VSPORTPL3.png" group-title="NORWAY SPORT HD & HEVC" tvg-name="NOR| V SPORT PL 3 FHD",NOR| V SPORT PL 3 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1001363&extension=ts&play_token=p3nHOPaZrC
+#EXTINF:-1 tvg-id="NOR| V SPORT PL 4 FHD" tvg-logo="http://51.158.145.100/picons/logos/norway/VSPORTPL.png" group-title="NORWAY SPORT HD & HEVC" tvg-name="NOR| V SPORT PL 4 FHD",NOR| V SPORT PL 4 FHD
+http://line.p-powers.live:80/play/live.php?mac=00:1A:79:9C:14:6D&stream=1001362&extension=ts&play_token=upddsIhx2g
+`;
 
 // Obsługa wczytywania pliku z dysku (jeśli ktoś nadal będzie chciał wgrać własny)
 input.addEventListener("change", e => {
